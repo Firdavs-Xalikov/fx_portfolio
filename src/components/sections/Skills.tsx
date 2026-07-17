@@ -1,0 +1,146 @@
+import GlassCard from "../ui/GlassCard";
+import { Code2, Cpu, Wrench, Globe } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
+
+interface SkillItem {
+  name: string;
+  level?: string;
+}
+
+interface SkillCategory {
+  title: string;
+  description: string;
+  icon: any;
+  skills: SkillItem[];
+  accentColor: string;
+}
+
+export default function Skills() {
+  const { t, language } = useLanguage();
+
+  const categories: SkillCategory[] = [
+    {
+      title: t("skills_prog_title"),
+      description: t("skills_prog_desc"),
+      icon: Code2,
+      accentColor: "rgba(59, 130, 246, 0.15)",
+      skills: [
+        { name: "HTML" },
+        { name: "CSS" },
+        { name: "JavaScript" },
+        { name: "React" },
+        { name: "Tailwind CSS" },
+        { name: "Node.js" },
+      ],
+    },
+    {
+      title: t("skills_tech_title"),
+      description: t("skills_tech_desc"),
+      icon: Cpu,
+      accentColor: "rgba(6, 182, 212, 0.15)",
+      skills: [
+        { name: "Artificial Intelligence tools" },
+        { name: "AI-assisted development" },
+        { name: "Prompt engineering" },
+        { name: "Learning modern technologies" },
+      ],
+    },
+    {
+      title: t("skills_lang_title"),
+      description: t("skills_lang_desc"),
+      icon: Globe,
+      accentColor: "rgba(59, 130, 246, 0.12)",
+      skills: [
+        { name: language === "uz" ? "O'zbekcha (Ona tili)" : language === "ru" ? "Узбекский (Родной)" : "Uzbek (Native)" },
+        { name: language === "uz" ? "Ruscha (Erkin)" : language === "ru" ? "Русский (Свободно)" : "Russian (Fluent)" },
+        { name: language === "uz" ? "Inglizcha (IELTS 6.5)" : language === "ru" ? "Английский (IELTS 6.5)" : "English (IELTS 6.5)" },
+      ],
+    },
+    {
+      title: t("skills_other_title"),
+      description: t("skills_other_desc"),
+      icon: Wrench,
+      accentColor: "rgba(226, 232, 240, 0.15)",
+      skills: [
+        { name: language === "uz" ? "Muammoni hal qilish" : language === "ru" ? "Решение задач" : "Problem solving" },
+        { name: language === "uz" ? "Muloqot" : language === "ru" ? "Коммуникация" : "Communication" },
+        { name: language === "uz" ? "Logistika" : language === "ru" ? "Логистика" : "Logistics" },
+        { name: language === "uz" ? "Mustaqil o'rganish" : language === "ru" ? "Самообучение" : "Self-learning" },
+      ],
+    },
+  ];
+
+  return (
+    <section id="skills" className="py-28 px-6 bg-black relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none z-0" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-16">
+          <span className="text-xs uppercase tracking-widest text-blue-400 font-semibold block mb-2">
+            {t("skills_tag")}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+            {t("skills_title")}
+          </h2>
+          <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
+            {t("skills_subtitle")}
+          </p>
+        </div>
+
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {categories.map((category, idx) => {
+            const Icon = category.icon;
+            
+            return (
+              <GlassCard
+                key={`${language}-${idx}`}
+                className="p-8 flex flex-col justify-between"
+                glowColor={category.accentColor}
+                delay={idx * 0.1}
+              >
+                <div>
+                  {/* Category Header */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <h3 className="text-xl font-bold font-display text-white">
+                      {category.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs text-slate-400 mb-8 font-light leading-relaxed min-h-[48px]">
+                    {category.description}
+                  </p>
+
+                  {/* Skill Badges */}
+                  <div className="flex flex-wrap gap-2.5">
+                    {category.skills.map((skill, sIdx) => (
+                      <div
+                        key={sIdx}
+                        className="px-3.5 py-2 rounded-xl text-xs font-light text-slate-300 border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/10 hover:text-white transition-all cursor-default"
+                      >
+                        {skill.name}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom detail footer */}
+                <div className="mt-12 pt-6 border-t border-slate-900 flex items-center justify-between text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
+                  <span>{t("skills_domain")}</span>
+                  <span className="text-blue-400/80">{t("skills_active")}</span>
+                </div>
+              </GlassCard>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+}
