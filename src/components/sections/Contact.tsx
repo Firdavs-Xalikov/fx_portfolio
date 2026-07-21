@@ -55,7 +55,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-28 md:py-36 px-6 bg-[#12161F]">
+    <section id="contact" className="py-28 md:py-36 px-6 bg-[#0B0F18]">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
@@ -84,7 +84,7 @@ export default function Contact() {
                     <span className="font-mono text-[10px] uppercase font-bold text-[#2E8B74] tracking-wider">
                       {option.name}
                     </span>
-                    <div className="w-8 h-8 border border-[#232838] bg-[#12161F] flex items-center justify-center">
+                    <div className="w-8 h-8 border border-[#1B2130] bg-[#0B0F18] flex items-center justify-center">
                       <Icon className="w-4 h-4 text-[#2E8B74]" aria-hidden="true" />
                     </div>
                   </div>
@@ -93,7 +93,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs border-t border-[#232838] pt-4">
+                <div className="flex items-center justify-between text-xs border-t border-[#1B2130] pt-4">
                   <span className="font-mono text-[10px] text-[#8B92A0] uppercase font-semibold">{t("contact_status")}</span>
                   <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-[#2E8B74] group-hover:underline">
                     <span>{option.actionLabel}</span>
@@ -111,7 +111,7 @@ export default function Contact() {
                   aria-label={`Copy email address ${option.value}`}
                   className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
                 >
-                  <GlassCard className="h-48 group cursor-pointer !bg-[#0A0E14]">
+                  <GlassCard className="h-48 group cursor-pointer !bg-[#05070C]">
                     {CardContent}
                   </GlassCard>
                 </button>
@@ -127,7 +127,7 @@ export default function Contact() {
                 aria-label={`Open ${option.name} link: ${option.value}`}
                 className="block hover:no-underline cursor-pointer"
               >
-                <GlassCard className="h-48 group !bg-[#0A0E14]">
+                <GlassCard className="h-48 group !bg-[#05070C]">
                   {CardContent}
                 </GlassCard>
               </a>
@@ -136,7 +136,7 @@ export default function Contact() {
         </div>
 
         {/* Footer citation */}
-        <div className="mt-24 pt-8 border-t border-[#232838] text-center font-mono">
+        <div className="mt-24 pt-8 border-t border-[#1B2130] text-center font-mono">
           <p className="text-xs text-[#8B92A0] font-normal tracking-wide">
             Designed &amp; Engineered with Swiss-Apple Dark Minimalism.
           </p>

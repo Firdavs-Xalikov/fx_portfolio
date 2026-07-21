@@ -21,7 +21,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 bg-[#0A0E14] border-b border-[#232838]">
+    <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 bg-[#05070C] border-b border-[#1B2130]">
       <div className="relative z-10 max-w-4xl text-center flex flex-col items-center">
         {/* Role Statement in Monospace */}
         <motion.div
@@ -73,7 +73,7 @@ export default function Hero() {
           <button
             onClick={handleScrollToAchievements}
             aria-label="Scroll down to View Achievements section"
-            className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#2E8B74] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-[#232838] transition-colors cursor-pointer"
+            className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#2E8B74] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-[#1B2130] transition-colors cursor-pointer"
           >
             <span>{t("hero_btn_achievements")}</span>
             <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
@@ -82,7 +82,7 @@ export default function Hero() {
           <button
             onClick={handleScrollToContact}
             aria-label="Scroll down to Connect with Me contact section"
-            className="flex items-center justify-center gap-2 px-8 py-4 bg-[#12161F] border border-[#232838] text-[#EDEDE7] hover:border-[#2E8B74] font-mono text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0B0F18] border border-[#1B2130] text-[#EDEDE7] hover:border-[#2E8B74] font-mono text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
           >
             <MessageSquare className="w-4 h-4 text-[#2E8B74]" aria-hidden="true" />
             <span>{t("hero_btn_contact")}</span>
@@ -93,7 +93,7 @@ export default function Hero() {
       {/* Subtle Scroll Hint */}
       <div className="mt-16 flex flex-col items-center gap-2 font-mono text-[10px] text-[#8B92A0] uppercase tracking-widest">
         <span>{t("hero_scroll")}</span>
-        <div className="w-[1px] h-6 bg-[#232838]" />
+        <div className="w-[1px] h-6 bg-[#1B2130]" />
       </div>
     </section>
   );

@@ -79,14 +79,14 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#0A0E14]/90 backdrop-blur-md border-b border-[#232838]">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#05070C]/90 backdrop-blur-md border-b border-[#1B2130]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo / Brand */}
           <div 
             onClick={() => scrollTo("hero")}
             className="flex items-center gap-3 cursor-pointer group shrink-0"
           >
-            <div className="font-mono font-bold text-xs text-[#EDEDE7] px-2 py-1 border border-[#232838] transition-colors group-hover:border-[#2E8B74] group-hover:text-[#2E8B74]">
+            <div className="font-mono font-bold text-xs text-[#EDEDE7] px-2 py-1 border border-[#1B2130] transition-colors group-hover:border-[#2E8B74] group-hover:text-[#2E8B74]">
               FX
             </div>
             <span className="font-display font-semibold text-sm tracking-tight text-[#EDEDE7] hidden sm:inline">
@@ -123,7 +123,7 @@ export default function Navbar() {
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 aria-label={`Select Language. Current language: ${currentLang.label}`}
                 aria-expanded={langDropdownOpen}
-                className="flex items-center gap-2 px-3 py-1.5 border border-[#232838] bg-[#12161F] text-[#EDEDE7] font-mono text-xs hover:border-[#2E8B74] transition-colors cursor-pointer"
+                className="flex items-center gap-2 px-3 py-1.5 border border-[#1B2130] bg-[#0B0F18] text-[#EDEDE7] font-mono text-xs hover:border-[#2E8B74] transition-colors cursor-pointer"
               >
                 <span className="text-sm leading-none">{currentLang.flag}</span>
                 <span className="uppercase font-semibold">{currentLang.code}</span>
@@ -132,7 +132,7 @@ export default function Navbar() {
 
               {/* Dropdown Menu */}
               {langDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-44 border border-[#232838] bg-[#12161F] shadow-xl overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
+                <div className="absolute right-0 top-full mt-2 w-44 border border-[#1B2130] bg-[#0B0F18] shadow-xl overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
                   {LANG_OPTIONS.map((opt) => (
                     <button
                       key={opt.code}
@@ -140,8 +140,8 @@ export default function Navbar() {
                       aria-label={`Switch language to ${opt.label}`}
                       className={`w-full flex items-center gap-3 px-4 py-2.5 font-mono text-xs transition-colors cursor-pointer ${
                         language === opt.code
-                          ? "bg-[#0A0E14] text-[#2E8B74] font-bold"
-                          : "text-[#EDEDE7] hover:bg-[#0A0E14]"
+                          ? "bg-[#05070C] text-[#2E8B74] font-bold"
+                          : "text-[#EDEDE7] hover:bg-[#05070C]"
                       }`}
                     >
                       <span className="text-base leading-none">{opt.flag}</span>
@@ -158,7 +158,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
-                className="p-1.5 border border-[#232838] text-[#EDEDE7] hover:border-[#2E8B74] bg-[#12161F] cursor-pointer"
+                className="p-1.5 border border-[#1B2130] text-[#EDEDE7] hover:border-[#2E8B74] bg-[#0B0F18] cursor-pointer"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -169,7 +169,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-[#0A0E14] flex flex-col justify-center px-8 py-20 lg:hidden">
+        <div className="fixed inset-0 z-30 bg-[#05070C] flex flex-col justify-center px-8 py-20 lg:hidden">
           <div className="flex flex-col gap-6 text-center">
             {NAV_LINKS.map((link) => {
               const isLinkActive = activeSection === link.id;
@@ -194,7 +194,7 @@ export default function Navbar() {
                     className={`flex items-center gap-2 px-3 py-2 border font-mono text-xs transition-all cursor-pointer ${
                       language === opt.code
                         ? "border-[#2E8B74] bg-[#2E8B74] text-white font-bold"
-                        : "border-[#232838] bg-[#12161F] text-[#8B92A0] hover:text-[#EDEDE7]"
+                        : "border-[#1B2130] bg-[#0B0F18] text-[#8B92A0] hover:text-[#EDEDE7]"
                     }`}
                   >
                     <span>{opt.flag}</span>

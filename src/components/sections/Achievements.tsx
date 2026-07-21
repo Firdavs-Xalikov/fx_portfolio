@@ -33,7 +33,7 @@ export default function Achievements() {
   const achievements = t("achievements_list") as Achievement[];
 
   return (
-    <section id="achievements" className="py-28 md:py-36 px-6 bg-[#12161F] border-b border-[#232838]">
+    <section id="achievements" className="py-28 md:py-36 px-6 bg-[#0B0F18] border-b border-[#1B2130]">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
@@ -59,15 +59,15 @@ export default function Achievements() {
             return (
               <GlassCard
                 key={`${language}-${idx}`}
-                className="p-8 flex flex-col justify-between !bg-[#0A0E14]"
+                className="p-8 flex flex-col justify-between !bg-[#05070C]"
               >
                 <div>
                   {/* Badge & Year Header */}
                   <div className="flex items-center justify-between mb-8">
-                    <div className="w-10 h-10 border border-[#232838] bg-[#12161F] flex items-center justify-center">
+                    <div className="w-10 h-10 border border-[#1B2130] bg-[#0B0F18] flex items-center justify-center">
                       <Icon className="w-5 h-5 text-[#2E8B74]" />
                     </div>
-                    <span className="font-mono text-xs text-[#8B92A0] font-semibold border border-[#232838] px-2.5 py-0.5">
+                    <span className="font-mono text-xs text-[#8B92A0] font-semibold border border-[#1B2130] px-2.5 py-0.5">
                       {item.year}
                     </span>
                   </div>
@@ -98,7 +98,7 @@ export default function Achievements() {
                 </div>
 
                 {/* Footer validation tag */}
-                <div className="pt-4 border-t border-[#232838] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-wider">
+                <div className="pt-4 border-t border-[#1B2130] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-wider">
                   <span className="flex items-center gap-1.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${
                       isChampagneHighlighted ? "bg-[#C9A227]" : "bg-[#2E8B74]"

@@ -2,11 +2,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-abyss: #0A0E14;
-  --color-midnight: #12161F;
+  --color-abyss: #05070C;
+  --color-midnight: #0B0F18;
   --color-pearl: #EDEDE7;
   --color-slate: #8B92A0;
-  --color-hairline: #232838;
+  --color-hairline: #1B2130;
   --color-emerald: #2E8B74;
   --color-champagne: #C9A227;
   
@@ -16,11 +16,11 @@
 }
 
 :root {
-  --abyss: #0A0E14;
-  --midnight: #12161F;
+  --abyss: #05070C;
+  --midnight: #0B0F18;
   --pearl: #EDEDE7;
   --slate: #8B92A0;
-  --hairline: #232838;
+  --hairline: #1B2130;
   --emerald: #2E8B74;
   --champagne: #C9A227;
 }

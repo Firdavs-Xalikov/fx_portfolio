@@ -14,7 +14,7 @@ export default function GlassCard({
 }: GlassCardProps) {
   return (
     <div
-      className={`bg-[#12161F] border border-[#232838] p-6 transition-colors duration-200 hover:border-[#2E8B74] ${className}`}
+      className={`bg-[#0B0F18] border border-[#1B2130] p-6 transition-colors duration-200 hover:border-[#2E8B74] ${className}`}
     >
       {children}
     </div>

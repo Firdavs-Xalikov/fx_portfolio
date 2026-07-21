@@ -30,7 +30,7 @@ export default function App() {
       initial={shouldReduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
-      className="relative bg-[#0A0E14] text-[#EDEDE7] min-h-screen selection:bg-[#2E8B74]/30 selection:text-[#EDEDE7] overflow-x-hidden font-sans antialiased"
+      className="relative bg-[#05070C] text-[#EDEDE7] min-h-screen selection:bg-[#2E8B74]/30 selection:text-[#EDEDE7] overflow-x-hidden font-sans antialiased"
     >
       {/* Accessible skip link */}
       <a href="#main-content" className="sr-only focus:not-sr-only">

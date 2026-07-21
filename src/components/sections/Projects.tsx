@@ -18,10 +18,10 @@ function ProjectImage({ project }: { project: ProjectItem }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative group overflow-hidden bg-[#0A0E14] border-b border-[#232838] aspect-[16/9] max-h-[480px] w-full">
+    <div className="relative group overflow-hidden bg-[#05070C] border-b border-[#1B2130] aspect-[16/9] max-h-[480px] w-full">
       {/* Skeleton loader placeholder */}
       {!loaded && (
-        <div className="absolute inset-0 bg-[#12161F]/60 animate-pulse flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#0B0F18]/60 animate-pulse flex items-center justify-center">
           <div className="w-8 h-8 rounded-full border-2 border-[#2E8B74]/20 border-t-[#2E8B74] animate-spin" />
         </div>
       )}
@@ -40,9 +40,9 @@ function ProjectImage({ project }: { project: ProjectItem }) {
       </picture>
 
       {/* Minimal Live badge overlaid on image */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 bg-[#0A0E14]/90 border border-[#232838] z-10">
+      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 bg-[#05070C]/90 border border-[#1B2130] z-10">
         <span className="w-2 h-2 rounded-full bg-[#2E8B74] animate-pulse" />
-        <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#2E8E74]">
+        <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#2E8B74]">
           LIVE PRODUCTION
         </span>
       </div>
@@ -56,7 +56,7 @@ export default function Projects() {
   const projects = t("projects_list") as ProjectItem[];
 
   return (
-    <section id="projects" className="py-28 md:py-36 px-6 bg-[#0A0E14] border-b border-[#232838]">
+    <section id="projects" className="py-28 md:py-36 px-6 bg-[#05070C] border-b border-[#1B2130]">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="mb-20">
@@ -97,7 +97,7 @@ export default function Projects() {
                   {project.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="font-mono text-xs border border-[#232838] bg-[#0A0E14] text-[#8B92A0] px-2.5 py-1"
+                      className="font-mono text-xs border border-[#1B2130] bg-[#05070C] text-[#8B92A0] px-2.5 py-1"
                     >
                       {tag}
                     </span>
@@ -105,13 +105,13 @@ export default function Projects() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-4 pt-6 border-t border-[#232838]">
+                <div className="flex items-center gap-4 pt-6 border-t border-[#1B2130]">
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit live website for ${project.title}`}
-                    className="flex items-center gap-2 px-6 py-3 bg-[#2E8B74] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-[#232838] transition-colors cursor-pointer"
+                    className="flex items-center gap-2 px-6 py-3 bg-[#2E8B74] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-[#1B2130] transition-colors cursor-pointer"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     <span>{t("projects_visit")}</span>
@@ -122,7 +122,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View GitHub repository for ${project.title}`}
-                      className="flex items-center gap-2 px-6 py-3 bg-[#12161F] border border-[#232838] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:border-[#2E8B74] hover:text-[#2E8B74] transition-all cursor-pointer"
+                      className="flex items-center gap-2 px-6 py-3 bg-[#0B0F18] border border-[#1B2130] text-[#EDEDE7] font-mono text-xs font-semibold uppercase tracking-wider hover:border-[#2E8B74] hover:text-[#2E8B74] transition-all cursor-pointer"
                     >
                       <GitHubIcon className="w-4 h-4" aria-hidden="true" />
                       <span>GitHub</span>

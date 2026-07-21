@@ -23,7 +23,7 @@ export default function FutureGoals() {
   ];
 
   return (
-    <section id="goals" className="py-28 md:py-36 px-6 bg-[#0A0E14] border-b border-[#232838]">
+    <section id="goals" className="py-28 md:py-36 px-6 bg-[#05070C] border-b border-[#1B2130]">
       <div className="max-w-[720px] mx-auto text-center">
         
         {/* Section tag */}
@@ -47,10 +47,10 @@ export default function FutureGoals() {
             return (
               <div 
                 key={`${language}-${idx}`}
-                className="p-6 bg-[#12161F] border border-[#232838] flex flex-col justify-between"
+                className="p-6 bg-[#0B0F18] border border-[#1B2130] flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-8 h-8 border border-[#232838] bg-[#0A0E14] flex items-center justify-center mb-4">
+                  <div className="w-8 h-8 border border-[#1B2130] bg-[#05070C] flex items-center justify-center mb-4">
                     <Icon className="w-4 h-4 text-[#2E8B74]" />
                   </div>
                   <h3 className="font-display text-base font-bold text-[#EDEDE7] mb-2">

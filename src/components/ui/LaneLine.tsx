@@ -59,8 +59,8 @@ export default function LaneLine() {
         className="fixed left-4 md:left-8 top-0 bottom-0 z-30 hidden lg:block pointer-events-none"
         aria-hidden="true"
       >
-        {/* Background Track Rule in Hairline (#232838) */}
-        <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#232838]" />
+        {/* Background Track Rule in Hairline (#1B2130) */}
+        <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#1B2130]" />
 
         {/* Active Emerald Fill Line (#2E8B74) with soft low-opacity glow */}
         <div
@@ -110,7 +110,7 @@ export default function LaneLine() {
 
       {/* Mobile Top Scroll Bar */}
       <div
-        className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-[#232838] lg:hidden"
+        className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-[#1B2130] lg:hidden"
         aria-hidden="true"
       >
         <div

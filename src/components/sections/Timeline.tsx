@@ -61,7 +61,7 @@ export default function Timeline() {
   return (
     <section
       id="journey"
-      className="py-28 md:py-36 px-6 bg-[#0A0E14] border-b border-[#232838] relative"
+      className="py-28 md:py-36 px-6 bg-[#05070C] border-b border-[#1B2130] relative"
       ref={containerRef}
     >
       <div className="max-w-6xl mx-auto">
@@ -92,7 +92,7 @@ export default function Timeline() {
                 className={`font-mono text-xs uppercase px-3.5 py-1.5 border transition-all cursor-pointer ${
                   selectedCategory === cat.id
                     ? "bg-[#2E8B74] text-white border-[#2E8B74] font-bold"
-                    : "bg-[#12161F] text-[#8B92A0] border-[#232838] hover:border-[#2E8B74] hover:text-[#EDEDE7]"
+                    : "bg-[#0B0F18] text-[#8B92A0] border-[#1B2130] hover:border-[#2E8B74] hover:text-[#EDEDE7]"
                 }`}
               >
                 {cat.label}
@@ -105,7 +105,7 @@ export default function Timeline() {
         <div className="relative mt-12">
           
           {/* Central Track Rule (Lane Line Motif) */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-[#232838] -translate-x-[0.5px] hidden md:block" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-[#1B2130] -translate-x-[0.5px] hidden md:block" />
           
           {/* Emerald Active Progress Overlay Line */}
           <motion.div 
@@ -127,7 +127,7 @@ export default function Timeline() {
                   }`}
                 >
                   {/* Turn Marker Node on Spine */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#0A0E14] border-2 border-[#2E8B74] flex items-center justify-center z-20 shrink-0">
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#05070C] border-2 border-[#2E8B74] flex items-center justify-center z-20 shrink-0">
                     <Icon className="w-3.5 h-3.5 text-[#2E8B74]" />
                   </div>
 
@@ -145,7 +145,7 @@ export default function Timeline() {
                     isEven ? "md:pr-16" : "md:pl-16"
                   }`}>
                     <GlassCard className="p-6 md:p-8">
-                      <span className="inline-block font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 border border-[#232838] bg-[#0A0E14] text-[#2E8B74] mb-4">
+                      <span className="inline-block font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 border border-[#1B2130] bg-[#05070C] text-[#2E8B74] mb-4">
                         {event.category === "it" ? "IT / Development" : event.category}
                       </span>
                       
@@ -157,7 +157,7 @@ export default function Timeline() {
                         {event.description}
                       </p>
 
-                      <ul className="space-y-2 border-t border-[#232838] pt-4">
+                      <ul className="space-y-2 border-t border-[#1B2130] pt-4">
                         {event.details.map((detail, dIdx) => (
                           <li key={dIdx} className="text-xs text-[#8B92A0] flex items-start gap-2 leading-relaxed">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#2E8B74] mt-1.5 shrink-0" />

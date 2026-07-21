@@ -15,7 +15,7 @@ export default function Skills() {
   }));
 
   return (
-    <section id="skills" className="py-28 md:py-36 px-6 bg-[#12161F] border-b border-[#232838]">
+    <section id="skills" className="py-28 md:py-36 px-6 bg-[#0B0F18] border-b border-[#1B2130]">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
@@ -44,7 +44,7 @@ export default function Skills() {
                 <div>
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 border border-[#232838] bg-[#0A0E14] flex items-center justify-center shrink-0">
+                    <div className="w-9 h-9 border border-[#1B2130] bg-[#05070C] flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4 text-[#2E8B74]" />
                     </div>
                     <h3 className="font-display text-lg font-bold text-[#EDEDE7]">
@@ -61,7 +61,7 @@ export default function Skills() {
                     {category.skills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className="font-mono text-xs border border-[#232838] bg-[#0A0E14] text-[#EDEDE7] px-2.5 py-1"
+                        className="font-mono text-xs border border-[#1B2130] bg-[#05070C] text-[#EDEDE7] px-2.5 py-1"
                       >
                         {skill.name}
                       </span>
@@ -70,7 +70,7 @@ export default function Skills() {
                 </div>
 
                 {/* Bottom detail footer */}
-                <div className="mt-10 pt-4 border-t border-[#232838] flex items-center justify-between font-mono text-[10px] text-[#8B92A0] uppercase font-bold tracking-wider">
+                <div className="mt-10 pt-4 border-t border-[#1B2130] flex items-center justify-between font-mono text-[10px] text-[#8B92A0] uppercase font-bold tracking-wider">
                   <span>{t("skills_domain")}</span>
                   <span className="text-[#2E8B74]">{t("skills_active")}</span>
                 </div>
