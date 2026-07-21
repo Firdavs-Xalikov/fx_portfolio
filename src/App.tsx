@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import Ambient3D from "./components/ui/Ambient3D";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
 import LaneLine from "./components/ui/LaneLine";
@@ -38,13 +39,16 @@ export default function App() {
         Skip to main content
       </a>
 
+      {/* Subtle Three.js 3D Ambient Particle Layer */}
+      <Ambient3D />
+
       {/* Tactile 3.5% SVG Noise Texture Overlay */}
       <GrainOverlay />
 
       {/* Signature Jewel Emerald Lane Line progress marker */}
       <LaneLine />
 
-      {/* Cursor follower disabled in minimal-luxury */}
+      {/* Re-themed Jewel Emerald / Gold Cursor Glow */}
       <CursorGlow />
 
       {/* Sticky minimalist navigation header */}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
 import { Mail, Check, Copy, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../../context/useLanguage";
@@ -9,6 +11,7 @@ import InstagramIcon from "../icons/InstagramIcon";
 
 export default function Contact() {
   const { t, language } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
   const emailAddress = "firdavs.xalikovv@gmail.com";
 
@@ -54,12 +57,39 @@ export default function Contact() {
     },
   ];
 
+  // Staggered reveal variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <section id="contact" className="py-28 md:py-36 px-6 bg-midnight-gradient">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-20"
+        >
           <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
             {t("contact_tag")}
           </span>
@@ -69,10 +99,16 @@ export default function Contact() {
           <p className="text-[#9198A5] max-w-md mx-auto font-normal text-base">
             {t("contact_subtitle")}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Contact Cards Grid with Staggered Scroll Entrance */}
+        <motion.div
+          variants={shouldReduceMotion ? undefined : containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           {contactOptions.map((option, idx) => {
             const Icon = option.icon;
             const ActionIcon = option.actionIcon;
@@ -84,7 +120,7 @@ export default function Contact() {
                     <span className="font-mono text-[10px] uppercase font-bold text-[#2FAF83] tracking-[0.12em]">
                       {option.name}
                     </span>
-                    <div className="w-8 h-8 border border-[rgba(251,245,183,0.08)] bg-[#05070C] flex items-center justify-center">
+                    <div className="w-8 h-8 border border-[rgba(251,245,183,0.08)] bg-[#05070C] flex items-center justify-center group-hover:border-[#2FAF83] transition-colors">
                       <Icon className="w-4 h-4 text-[#2FAF83]" aria-hidden="true" />
                     </div>
                   </div>
@@ -105,35 +141,37 @@ export default function Contact() {
 
             if (option.isCopy) {
               return (
-                <button
-                  key={`${language}-${idx}`}
-                  onClick={option.action}
-                  aria-label={`Copy email address ${option.value}`}
-                  className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
-                >
-                  <GlassCard className="h-48 group cursor-pointer">
-                    {CardContent}
-                  </GlassCard>
-                </button>
+                <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
+                  <button
+                    onClick={option.action}
+                    aria-label={`Copy email address ${option.value}`}
+                    className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
+                  >
+                    <GlassCard className="h-48 group cursor-pointer">
+                      {CardContent}
+                    </GlassCard>
+                  </button>
+                </motion.div>
               );
             }
 
             return (
-              <a
-                key={`${language}-${idx}`}
-                href={option.link}
-                target={option.link !== "#" ? "_blank" : "_self"}
-                rel="noopener noreferrer"
-                aria-label={`Open ${option.name} link: ${option.value}`}
-                className="block hover:no-underline cursor-pointer"
-              >
-                <GlassCard className="h-48 group">
-                  {CardContent}
-                </GlassCard>
-              </a>
+              <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
+                <a
+                  href={option.link}
+                  target={option.link !== "#" ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${option.name} link: ${option.value}`}
+                  className="block hover:no-underline cursor-pointer"
+                >
+                  <GlassCard className="h-48 group">
+                    {CardContent}
+                  </GlassCard>
+                </a>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Footer citation */}
         <div className="mt-24 pt-8 border-t border-[rgba(251,245,183,0.08)] text-center font-mono">

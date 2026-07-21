@@ -1,4 +1,5 @@
 import { motion, useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useRef, useState } from "react";
 import { 
   BookOpen, 
@@ -58,6 +59,27 @@ export default function Timeline() {
 
   const progressTransform = useTransform(scaleY, [0.15, 0.85], ["0%", "100%"]);
 
+  // Staggered reveal variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <section
       id="journey"
@@ -67,7 +89,13 @@ export default function Timeline() {
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6"
+        >
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
               {t("journey_tag")}
@@ -99,7 +127,7 @@ export default function Timeline() {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Lane-Line-as-Spine Container */}
         <div className="relative mt-12">
@@ -113,15 +141,22 @@ export default function Timeline() {
             className="absolute left-4 md:left-1/2 top-0 w-[2px] bg-jewel-emerald -translate-x-[1px] hidden md:block emerald-bioluminescent-glow"
           />
 
-          {/* Timeline Events List */}
-          <div className="space-y-12">
+          {/* Timeline Events List with Staggered Scroll Entrance */}
+          <motion.div
+            variants={shouldReduceMotion ? undefined : containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className="space-y-12"
+          >
             {filteredEvents.map((event, idx) => {
               const Icon = iconMap[event.iconName] || BookOpen;
               const isEven = idx % 2 === 0;
 
               return (
-                <div 
+                <motion.div 
                   key={`${language}-${idx}`}
+                  variants={shouldReduceMotion ? undefined : itemVariants}
                   className={`flex flex-col md:flex-row items-start md:items-center relative w-full ${
                     isEven ? "md:flex-row-reverse" : ""
                   }`}
@@ -167,10 +202,10 @@ export default function Timeline() {
                       </ul>
                     </GlassCard>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
       </div>
