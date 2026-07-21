@@ -9,8 +9,9 @@ export default function CursorGlow({ color = "rgba(59, 130, 246, 0.08)" }: Curso
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-    if (isMobile) return;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isTouch || isReducedMotion) return;
 
     setVisible(true);
 

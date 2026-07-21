@@ -1,19 +1,62 @@
+import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import GlassCard from "../ui/GlassCard";
 import { useLanguage } from "../../context/LanguageContext";
 import GitHubIcon from "../icons/GitHubIcon";
 
+interface ProjectItem {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  imageWebp?: string;
+  link: string;
+  github?: string;
+}
+
+function ProjectImage({ project }: { project: ProjectItem }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative group overflow-hidden bg-slate-900/60 aspect-[16/9] max-h-[480px] w-full">
+      {/* Skeleton loader placeholder */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-slate-800/60 animate-pulse flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
+        </div>
+      )}
+
+      <picture>
+        {project.imageWebp && <source srcSet={project.imageWebp} type="image/webp" />}
+        <img
+          src={project.image}
+          alt={`Screenshot preview of ${project.title}`}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-[1.03] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      </picture>
+
+      {/* Bottom fade gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+
+      {/* Live badge overlaid on image */}
+      <div className="absolute top-5 left-5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 z-10">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold">
+          Live
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const { t, language } = useLanguage();
 
-  const projects = t("projects_list") as {
-    title: string;
-    description: string;
-    tags: string[];
-    image: string;
-    link: string;
-    github?: string;
-  }[];
+  const projects = t("projects_list") as ProjectItem[];
 
   return (
     <section id="projects" className="py-28 px-6 bg-black relative overflow-hidden">
@@ -43,24 +86,7 @@ export default function Projects() {
               className="p-0 overflow-hidden"
               glowColor="rgba(59, 130, 246, 0.1)"
             >
-              {/* Full-width Image Banner */}
-              <div className="relative group overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-auto max-h-[480px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-                {/* Bottom fade gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
-                
-                {/* Live badge overlaid on image */}
-                <div className="absolute top-5 left-5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold">
-                    {t("projects_live")}
-                  </span>
-                </div>
-              </div>
+              <ProjectImage project={project} />
 
               {/* Project Info */}
               <div className="p-8 md:p-10">
@@ -92,9 +118,10 @@ export default function Projects() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit live website for ${project.title}`}
                     className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-medium text-sm hover:bg-slate-200 transition-colors cursor-pointer"
                   >
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     <span>{t("projects_visit")}</span>
                   </a>
                   {project.github && (
@@ -102,9 +129,10 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`View GitHub repository for ${project.title}`}
                       className="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium text-sm hover:border-slate-400 hover:text-white bg-white/5 transition-all cursor-pointer"
                     >
-                      <GitHubIcon className="w-4 h-4" />
+                      <GitHubIcon className="w-4 h-4" aria-hidden="true" />
                       <span>GitHub</span>
                     </a>
                   )}

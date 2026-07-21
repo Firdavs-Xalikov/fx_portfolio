@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from "framer-motion";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
 import Hero from "./components/sections/Hero";
@@ -10,8 +11,15 @@ import FutureGoals from "./components/sections/FutureGoals";
 import Contact from "./components/sections/Contact";
 
 export default function App() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="relative bg-black min-h-screen selection:bg-blue-500/20 selection:text-blue-300 overflow-hidden font-sans antialiased">
+    <motion.div
+      initial={shouldReduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
+      className="relative bg-black min-h-screen selection:bg-blue-500/20 selection:text-blue-300 overflow-hidden font-sans antialiased"
+    >
       {/* Interactive cursor follower background glow */}
       <CursorGlow />
 
@@ -22,7 +30,7 @@ export default function App() {
       <Navbar />
 
       {/* Page Sections */}
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <div id="hero">
           <Hero />
         </div>
@@ -55,6 +63,6 @@ export default function App() {
           <Contact />
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
