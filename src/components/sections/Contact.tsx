@@ -55,18 +55,18 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-28 md:py-36 px-6 bg-[#0B0F18]">
+    <section id="contact" className="py-28 md:py-36 px-6 bg-midnight-gradient">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
         <div className="text-center mb-20">
-          <span className="font-mono text-xs uppercase tracking-widest text-[#2E8B74] font-bold block mb-3">
+          <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
             {t("contact_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EDEDE7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#F5F1E8] tracking-tight mb-4">
             {t("contact_title")}
           </h2>
-          <p className="text-[#8B92A0] max-w-md mx-auto font-normal text-base">
+          <p className="text-[#9198A5] max-w-md mx-auto font-normal text-base">
             {t("contact_subtitle")}
           </p>
         </div>
@@ -81,21 +81,21 @@ export default function Contact() {
               <div className="flex flex-col justify-between h-full p-8">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-[10px] uppercase font-bold text-[#2E8B74] tracking-wider">
+                    <span className="font-mono text-[10px] uppercase font-bold text-[#2FAF83] tracking-[0.12em]">
                       {option.name}
                     </span>
-                    <div className="w-8 h-8 border border-[#1B2130] bg-[#0B0F18] flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-[#2E8B74]" aria-hidden="true" />
+                    <div className="w-8 h-8 border border-[rgba(251,245,183,0.08)] bg-[#05070C] flex items-center justify-center">
+                      <Icon className="w-4 h-4 text-[#2FAF83]" aria-hidden="true" />
                     </div>
                   </div>
-                  <div className="font-display text-lg font-bold text-[#EDEDE7] break-all mb-8">
+                  <div className="font-display text-lg font-bold text-[#F5F1E8] break-all mb-8">
                     {option.value}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs border-t border-[#1B2130] pt-4">
-                  <span className="font-mono text-[10px] text-[#8B92A0] uppercase font-semibold">{t("contact_status")}</span>
-                  <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-[#2E8B74] group-hover:underline">
+                <div className="flex items-center justify-between text-xs border-t border-[rgba(251,245,183,0.08)] pt-4">
+                  <span className="font-mono text-[10px] text-[#9198A5] uppercase font-semibold tracking-[0.12em]">{t("contact_status")}</span>
+                  <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-[#2FAF83] group-hover:underline tracking-[0.08em]">
                     <span>{option.actionLabel}</span>
                     <ActionIcon className="w-3.5 h-3.5" aria-hidden="true" />
                   </div>
@@ -111,7 +111,7 @@ export default function Contact() {
                   aria-label={`Copy email address ${option.value}`}
                   className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
                 >
-                  <GlassCard className="h-48 group cursor-pointer !bg-[#05070C]">
+                  <GlassCard className="h-48 group cursor-pointer">
                     {CardContent}
                   </GlassCard>
                 </button>
@@ -127,7 +127,7 @@ export default function Contact() {
                 aria-label={`Open ${option.name} link: ${option.value}`}
                 className="block hover:no-underline cursor-pointer"
               >
-                <GlassCard className="h-48 group !bg-[#05070C]">
+                <GlassCard className="h-48 group">
                   {CardContent}
                 </GlassCard>
               </a>
@@ -136,11 +136,11 @@ export default function Contact() {
         </div>
 
         {/* Footer citation */}
-        <div className="mt-24 pt-8 border-t border-[#1B2130] text-center font-mono">
-          <p className="text-xs text-[#8B92A0] font-normal tracking-wide">
-            Designed &amp; Engineered with Swiss-Apple Dark Minimalism.
+        <div className="mt-24 pt-8 border-t border-[rgba(251,245,183,0.08)] text-center font-mono">
+          <p className="text-xs text-[#9198A5] font-normal tracking-[0.08em]">
+            Designed &amp; Engineered with Swiss-Apple Luxury Aesthetics.
           </p>
-          <p className="text-[10px] text-[#8B92A0] font-normal mt-1">
+          <p className="text-[10px] text-[#9198A5] font-normal mt-1 tracking-[0.08em]">
             &copy; {new Date().getFullYear()} {t("contact_footer_copy")}
           </p>
         </div>

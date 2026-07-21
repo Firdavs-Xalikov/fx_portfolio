@@ -33,18 +33,18 @@ export default function Achievements() {
   const achievements = t("achievements_list") as Achievement[];
 
   return (
-    <section id="achievements" className="py-28 md:py-36 px-6 bg-[#0B0F18] border-b border-[#1B2130]">
+    <section id="achievements" className="py-28 md:py-36 px-6 bg-midnight-gradient border-b border-[rgba(251,245,183,0.08)]">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="mb-20">
-          <span className="font-mono text-xs uppercase tracking-widest text-[#2E8B74] font-bold block mb-3">
+          <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
             {t("achievements_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EDEDE7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#F5F1E8] tracking-tight mb-4">
             {t("achievements_title")}
           </h2>
-          <p className="text-[#8B92A0] max-w-xl font-normal text-base">
+          <p className="text-[#9198A5] max-w-xl font-normal text-base">
             {t("achievements_subtitle")}
           </p>
         </div>
@@ -53,61 +53,60 @@ export default function Achievements() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((item, idx) => {
             const Icon = iconMap[item.iconName] || Award;
-            // Sparingly highlight 1-2 key credentials with Champagne gold tag (#C9A227)
-            const isChampagneHighlighted = idx === 0 || idx === 3;
+            const isGoldHighlighted = idx === 0 || idx === 3;
             
             return (
               <GlassCard
                 key={`${language}-${idx}`}
-                className="p-8 flex flex-col justify-between !bg-[#05070C]"
+                className="p-8 flex flex-col justify-between"
               >
                 <div>
                   {/* Badge & Year Header */}
                   <div className="flex items-center justify-between mb-8">
-                    <div className="w-10 h-10 border border-[#1B2130] bg-[#0B0F18] flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-[#2E8B74]" />
+                    <div className="w-10 h-10 border border-[rgba(251,245,183,0.08)] bg-[#05070C] flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#2FAF83]" />
                     </div>
-                    <span className="font-mono text-xs text-[#8B92A0] font-semibold border border-[#1B2130] px-2.5 py-0.5">
+                    <span className="font-mono text-xs text-[#9198A5] font-semibold border border-[rgba(251,245,183,0.08)] px-2.5 py-0.5 tracking-[0.08em]">
                       {item.year}
                     </span>
                   </div>
 
-                  {/* Primary Metric Callout */}
+                  {/* Primary Metric Callout with Metallic Gold Text-Fill */}
                   <div className="mb-6">
-                    <div className={`font-display text-3xl font-extrabold tracking-tight text-[#EDEDE7] ${
-                      isChampagneHighlighted ? "border-b-2 border-[#C9A227] inline-block pb-1" : ""
+                    <div className={`font-display text-3xl font-extrabold tracking-tight ${
+                      isGoldHighlighted ? "text-gold-gradient inline-block pb-1" : "text-[#F5F1E8]"
                     }`}>
                       {item.metric}
                     </div>
                     {item.subMetric && (
-                      <div className="font-mono text-xs text-[#8B92A0] font-medium mt-2">
+                      <div className="font-mono text-xs text-[#9198A5] font-medium mt-2 tracking-[0.06em]">
                         {item.subMetric}
                       </div>
                     )}
                   </div>
 
                   {/* Achievement Title */}
-                  <h3 className="font-display text-lg font-bold text-[#EDEDE7] mb-3">
+                  <h3 className="font-display text-lg font-bold text-[#F5F1E8] mb-3">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-xs text-[#8B92A0] font-normal leading-relaxed mb-8">
+                  <p className="text-xs text-[#9198A5] font-normal leading-relaxed mb-8">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Footer validation tag */}
-                <div className="pt-4 border-t border-[#1B2130] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-wider">
+                <div className="pt-4 border-t border-[rgba(251,245,183,0.08)] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-[0.12em]">
                   <span className="flex items-center gap-1.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${
-                      isChampagneHighlighted ? "bg-[#C9A227]" : "bg-[#2E8B74]"
+                      isGoldHighlighted ? "bg-[#BF9B30]" : "bg-[#2FAF83]"
                     }`} />
-                    <span className={isChampagneHighlighted ? "text-[#C9A227]" : "text-[#2E8B74]"}>
+                    <span className={isGoldHighlighted ? "text-gold-gradient font-bold" : "text-[#2FAF83]"}>
                       {t("achievements_verified")}
                     </span>
                   </span>
-                  <span className="text-[#8B92A0]">{t("achievements_label")}</span>
+                  <span className="text-[#9198A5]">{t("achievements_label")}</span>
                 </div>
               </GlassCard>
             );
