@@ -29,51 +29,68 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.35, ease: "easeOut" },
     },
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 border-b border-[rgba(251,245,183,0.08)]">
+    <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 border-b border-[#1C3B42]">
       <motion.div
         variants={shouldReduceMotion ? undefined : containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 max-w-4xl text-center flex flex-col items-center"
       >
-        {/* Eyebrow Role Statement in Monospace with 0.12em tracking */}
+        {/* Eyebrow Role Statement in Monospace with Split-Timer score badge */}
         <motion.div
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="mb-8 font-mono text-xs md:text-sm tracking-[0.12em] text-[#2FAF83] font-semibold uppercase"
+          className="mb-8 font-digital text-xs md:text-sm tracking-[0.12em] text-[#00C2D1] font-bold uppercase inline-flex items-center gap-2 px-4 py-1.5 border border-[#1C3B42] bg-[#0F2830]"
         >
-          STUDENT · FRONTEND DEVELOPER · CS &amp; AI
+          <span className="w-2 h-2 rounded-full bg-[#00C2D1] glow-chlorine" />
+          <span>STUDENT · FRONTEND DEVELOPER · CS &amp; AI</span>
         </motion.div>
 
-        {/* Hero Name with SplitText Character/Word Animation & Gold Gradient Text-Fill */}
+        {/* Hero Name with SplitText Character/Word Animation */}
         <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-8">
           <SplitText
             text={t("hero_title")}
             as="h1"
             mode="words"
-            className="font-display font-semibold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gold-gradient tracking-tighter leading-none"
+            className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EAF6F6] tracking-tighter leading-none"
           />
+        </motion.div>
+
+        {/* Scoreboard Split-Stat Badges */}
+        <motion.div
+          variants={shouldReduceMotion ? undefined : itemVariants}
+          className="flex flex-wrap justify-center gap-4 mb-8 font-digital text-xs uppercase tracking-[0.12em]"
+        >
+          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
+            SWIM DISCIPLINE <span className="text-[#00C2D1] font-bold ml-1">06 YEARS</span>
+          </div>
+          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
+            LANGUAGES <span className="text-[#00C2D1] font-bold ml-1">03 ACTIVE</span>
+          </div>
+          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
+            FOCUS <span className="text-[#00C2D1] font-bold ml-1">REACT &amp; AI</span>
+          </div>
         </motion.div>
 
         {/* Subtitle / Discipline Statement */}
         <motion.p
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="text-base sm:text-xl text-[#9198A5] max-w-2xl font-normal leading-relaxed mb-10"
+          className="text-base sm:text-xl text-[#6B8F94] max-w-2xl font-normal leading-relaxed mb-10"
         >
           Carrying 6 years of competitive swimming discipline into software engineering — building scalable web applications with structural precision and focus.
         </motion.p>
@@ -81,7 +98,7 @@ export default function Hero() {
         {/* Motto Citation */}
         <motion.p
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="font-mono text-xs tracking-[0.08em] text-[#9198A5] max-w-lg mb-12 italic"
+          className="font-mono text-xs tracking-[0.08em] text-[#6B8F94] max-w-lg mb-12 italic"
         >
           "{t("hero_intro")}"
         </motion.p>
@@ -95,7 +112,7 @@ export default function Hero() {
             onClick={handleScrollToAchievements}
             ariaLabel="Scroll down to View Achievements section"
           >
-            <div className="group flex items-center justify-center gap-2 px-8 py-4 bg-jewel-emerald text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_15px_rgba(47,175,131,0.2)]">
+            <div className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#00C2D1] text-[#0A2027] font-digital text-xs font-bold uppercase tracking-[0.12em] hover:bg-[#EAF6F6] transition-colors cursor-pointer glow-chlorine">
               <span>{t("hero_btn_achievements")}</span>
               <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
             </div>
@@ -105,8 +122,8 @@ export default function Hero() {
             onClick={handleScrollToContact}
             ariaLabel="Scroll down to Connect with Me contact section"
           >
-            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0A0F19] border border-[rgba(251,245,183,0.15)] text-[#F5F1E8] hover:border-[#2FAF83] font-mono text-xs font-semibold uppercase tracking-[0.12em] transition-colors cursor-pointer">
-              <MessageSquare className="w-4 h-4 text-[#2FAF83]" aria-hidden="true" />
+            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0F2830] border border-[#1C3B42] text-[#EAF6F6] hover:border-[#00C2D1] font-digital text-xs font-bold uppercase tracking-[0.12em] transition-colors cursor-pointer">
+              <MessageSquare className="w-4 h-4 text-[#00C2D1]" aria-hidden="true" />
               <span>{t("hero_btn_contact")}</span>
             </div>
           </MagneticButton>
@@ -114,9 +131,9 @@ export default function Hero() {
       </motion.div>
 
       {/* Subtle Scroll Hint */}
-      <div className="mt-16 flex flex-col items-center gap-2 font-mono text-[10px] text-[#9198A5] uppercase tracking-[0.12em]">
+      <div className="mt-16 flex flex-col items-center gap-2 font-digital text-[10px] text-[#6B8F94] uppercase tracking-[0.12em]">
         <span>{t("hero_scroll")}</span>
-        <div className="w-[1px] h-6 bg-[rgba(251,245,183,0.12)]" />
+        <div className="w-[1px] h-6 bg-[#1C3B42]" />
       </div>
     </section>
   );

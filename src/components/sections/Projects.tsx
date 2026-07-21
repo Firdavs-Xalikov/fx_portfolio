@@ -22,11 +22,11 @@ function ProjectImage({ project }: { project: ProjectItem }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative group overflow-hidden bg-[#05070C] border-b border-[rgba(251,245,183,0.08)] aspect-[16/9] max-h-[480px] w-full">
+    <div className="relative group overflow-hidden bg-[#0A2027] border-b border-[#1C3B42] aspect-[16/9] max-h-[480px] w-full">
       {/* Skeleton loader placeholder */}
       {!loaded && (
-        <div className="absolute inset-0 bg-[#0A0F19]/60 animate-pulse flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-[#2FAF83]/20 border-t-[#2FAF83] animate-spin" />
+        <div className="absolute inset-0 bg-[#0F2830]/60 animate-pulse flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-[#00C2D1]/20 border-t-[#00C2D1] animate-spin" />
         </div>
       )}
 
@@ -37,16 +37,16 @@ function ProjectImage({ project }: { project: ProjectItem }) {
           alt={`Screenshot preview of ${project.title}`}
           loading="lazy"
           onLoad={() => setLoaded(true)}
-          className={`w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02] ${
+          className={`w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />
       </picture>
 
       {/* Minimal Live badge overlaid on image */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 bg-[#05070C]/90 border border-[rgba(251,245,183,0.08)] z-10">
-        <span className="w-2 h-2 rounded-full bg-[#2FAF83] animate-pulse" />
-        <span className="font-mono text-[10px] uppercase font-bold tracking-[0.12em] text-[#2FAF83]">
+      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 bg-[#0A2027]/90 border border-[#1C3B42] z-10">
+        <span className="w-2 h-2 rounded-full bg-[#00C2D1] animate-pulse" />
+        <span className="font-digital text-[10px] uppercase font-bold tracking-[0.12em] text-[#00C2D1]">
           LIVE PRODUCTION
         </span>
       </div>
@@ -67,39 +67,39 @@ export default function Projects() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.35, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="projects" className="py-28 md:py-36 px-6 border-b border-[rgba(251,245,183,0.08)]">
+    <section id="projects" className="py-28 md:py-36 px-6 border-b border-[#1C3B42]">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.35 }}
           className="mb-20"
         >
-          <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
+          <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-3">
             {t("projects_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#F5F1E8] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EAF6F6] tracking-tight mb-4">
             {t("projects_title")}
           </h2>
-          <p className="text-[#9198A5] max-w-xl font-normal text-base">
+          <p className="text-[#6B8F94] max-w-xl font-normal text-base">
             {t("projects_subtitle")}
           </p>
         </motion.div>
@@ -125,16 +125,16 @@ export default function Projects() {
                   {/* Project Info */}
                   <div className="p-8 md:p-10">
                     {/* Title */}
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-[#F5F1E8] tracking-tight mb-4">
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-[#EAF6F6] tracking-tight mb-4">
                       {project.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-base text-[#9198A5] font-normal leading-relaxed mb-6 max-w-3xl">
+                    <p className="text-base text-[#6B8F94] font-normal leading-relaxed mb-6 max-w-3xl">
                       {project.description}
                     </p>
 
-                    {/* Mono Tech Tag Chips with Micro-Interactions */}
+                    {/* Digital Tech Tag Chips */}
                     <div className="flex flex-wrap gap-2 mb-8">
                       {project.tags.map((tag, tIdx) => (
                         <motion.span
@@ -144,12 +144,12 @@ export default function Projects() {
                               ? undefined
                               : {
                                   y: -2,
-                                  borderColor: "rgba(251, 245, 183, 0.25)",
-                                  backgroundColor: "#0D131F",
+                                  borderColor: "#00C2D1",
+                                  backgroundColor: "#0A2027",
                                 }
                           }
-                          transition={{ duration: 0.2 }}
-                          className="font-mono text-xs border border-[rgba(251,245,183,0.08)] bg-[#05070C] text-[#9198A5] px-2.5 py-1 tracking-[0.06em] cursor-default transition-colors"
+                          transition={{ duration: 0.15 }}
+                          className="font-digital text-xs border border-[#1C3B42] bg-[#0A2027] text-[#6B8F94] px-2.5 py-1 tracking-[0.06em] cursor-default transition-colors"
                         >
                           {tag}
                         </motion.span>
@@ -157,13 +157,13 @@ export default function Projects() {
                     </div>
 
                     {/* Action Buttons with Magnetic Pull */}
-                    <div className="flex items-center gap-4 pt-6 border-t border-[rgba(251,245,183,0.08)]">
+                    <div className="flex items-center gap-4 pt-6 border-t border-[#1C3B42]">
                       <MagneticButton ariaLabel={`Visit live website for ${project.title}`}>
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-jewel-emerald text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_12px_rgba(47,175,131,0.2)]"
+                          className="flex items-center gap-2 px-6 py-3 bg-[#00C2D1] text-[#0A2027] font-digital text-xs font-bold uppercase tracking-[0.12em] hover:bg-[#EAF6F6] transition-colors cursor-pointer glow-chlorine"
                         >
                           <ExternalLink className="w-4 h-4" aria-hidden="true" />
                           <span>{t("projects_visit")}</span>
@@ -176,7 +176,7 @@ export default function Projects() {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-[#0A0F19] border border-[rgba(251,245,183,0.15)] text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:border-[#2FAF83] hover:text-[#2FAF83] transition-all cursor-pointer"
+                            className="flex items-center gap-2 px-6 py-3 bg-[#0F2830] border border-[#1C3B42] text-[#EAF6F6] font-digital text-xs font-bold uppercase tracking-[0.12em] hover:border-[#00C2D1] hover:text-[#00C2D1] transition-all cursor-pointer"
                           >
                             <GitHubIcon className="w-4 h-4" aria-hidden="true" />
                             <span>GitHub</span>

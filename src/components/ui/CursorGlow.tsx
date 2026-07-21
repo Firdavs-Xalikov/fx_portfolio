@@ -6,7 +6,7 @@ interface CursorGlowProps {
 }
 
 export default function CursorGlow({
-  color = "radial-gradient(circle 280px at center, rgba(47,175,131,0.10) 0%, transparent 80%)"
+  color = "radial-gradient(circle 260px at center, rgba(0,194,209,0.08) 0%, transparent 80%)"
 }: CursorGlowProps) {
   const [isVisible, setIsVisible] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -19,7 +19,6 @@ export default function CursorGlow({
   const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Disable cursor glow on touch screens or if reduced motion is requested
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch || shouldReduceMotion) return;
 
@@ -52,7 +51,7 @@ export default function CursorGlow({
       }}
     >
       <motion.div
-        className="absolute w-[560px] h-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+        className="absolute w-[520px] h-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
         style={{
           left: smoothX,
           top: smoothY,

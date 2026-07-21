@@ -1,24 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-abyss: #05070C;
-  --color-midnight: #0B0F18;
-  --color-ivory: #F5F1E8;
-  --color-slate: #9198A5;
-  --color-hairline-gold: rgba(251, 245, 183, 0.08);
-  --color-hairline-gold-hover: rgba(251, 245, 183, 0.25);
+  --color-depth: #0A2027;
+  --color-depth-2: #0F2830;
+  --color-foam: #EAF6F6;
+  --color-mist: #6B8F94;
+  --color-hairline: #1C3B42;
+  --color-chlorine: #00C2D1;
+  --color-gold-medal: #D4A017;
   
-  --font-display: "Geist", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: "Geist", "Inter", -apple-system, sans-serif;
+  --font-sans: "Inter", -apple-system, sans-serif;
+  --font-digital: "Space Mono", monospace;
+  --font-mono: "Space Mono", monospace;
 }
 
 :root {
-  --ivory: #F5F1E8;
-  --slate: #9198A5;
-  --hairline-gold: rgba(251, 245, 183, 0.08);
-  --hairline-gold-hover: rgba(251, 245, 183, 0.25);
+  --depth: #0A2027;
+  --depth-2: #0F2830;
+  --foam: #EAF6F6;
+  --mist: #6B8F94;
+  --hairline: #1C3B42;
+  --chlorine: #00C2D1;
+  --gold-medal: #D4A017;
 }
 
 /* Custom Scrollbar */
@@ -26,35 +31,25 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #05070C;
+  background: #0A2027;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(251, 245, 183, 0.15);
-  border-radius: 3px;
+  background: #1C3B42;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1C8C63;
+  background: #00C2D1;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #05070C;
-  color: var(--ivory);
-}
-
-/* Ambient Background Motion */
-@keyframes backgroundDrift {
-  0% { background-position: 50% -10%; }
-  50% { background-position: 54% -5%; }
-  100% { background-position: 50% -10%; }
+  background-color: #0A2027;
+  color: var(--foam);
 }
 
 body {
-  background: radial-gradient(ellipse 120% 80% at 50% -10%, #0A1220 0%, #05070C 45%, #000000 100%);
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  animation: backgroundDrift 25s ease-in-out infinite;
-  color: var(--ivory);
+  background-color: #0A2027;
+  color: var(--foam);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -62,63 +57,37 @@ body {
   min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body {
-    animation: none;
-  }
+/* Digital Scoreboard LED Numeral Utility */
+.font-digital {
+  font-family: var(--font-digital);
+  letter-spacing: 0.08em;
 }
 
-/* Gold Shimmer Sweep Animation */
-@keyframes goldShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 200% 50%; }
+/* Chlorine Cyan Scoreboard Glow */
+.glow-chlorine {
+  box-shadow: 0 0 12px rgba(0, 194, 209, 0.35);
 }
 
-/* Metallic Gold Text Gradient */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #BF9B30 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: goldShimmer 8s ease-in-out infinite;
-  
-  @supports not (-webkit-background-clip: text) {
-    color: #BF9B30;
-  }
+.text-chlorine-glow {
+  color: #00C2D1;
+  text-shadow: 0 0 8px rgba(0, 194, 209, 0.4);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .text-gold-gradient {
-    animation: none;
-  }
+/* Split-Timer Section Divider */
+.split-divider {
+  border-top: 1px dashed rgba(0, 194, 209, 0.2);
 }
 
-/* Jewel Emerald Gradient */
-.bg-jewel-emerald {
-  background: linear-gradient(180deg, #0F5132 0%, #1C8C63 50%, #2FAF83 100%);
-}
-
-.emerald-bioluminescent-glow {
-  box-shadow: 0 0 12px 1px rgba(47, 175, 131, 0.35);
-}
-
-/* Midnight Section Gradient Surface */
-.bg-midnight-gradient {
-  background: linear-gradient(180deg, #0D131F 0%, #0A0F19 100%);
-}
-
-/* Flat Luxury Panel Container */
+/* Scoreboard Card Surface */
 .flat-panel {
-  background-color: #0A0F19;
-  border: 1px solid rgba(251, 245, 183, 0.08);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  background-color: #0F2830;
+  border: 1px solid #1C3B42;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .flat-panel:hover {
-  border-color: rgba(251, 245, 183, 0.25);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 194, 209, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Perspective rules for tilt card */
@@ -126,13 +95,9 @@ body {
   perspective: 1000px;
 }
 
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
 /* Accessibility Focus Rings */
 :focus-visible {
-  outline: 2px solid #2FAF83;
+  outline: 2px solid #00C2D1;
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -162,9 +127,8 @@ body {
   clip: auto;
   white-space: normal;
   z-index: 100;
-  background-color: #1C8C63;
-  color: #ffffff;
-  font-weight: 600;
+  background-color: #00C2D1;
+  color: #0A2027;
+  font-weight: 700;
   border-radius: 0.25rem;
-  box-shadow: 0 10px 25px -5px rgba(47, 175, 131, 0.4);
 }

@@ -1,11 +1,10 @@
 import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SmoothScroll from "./components/ui/SmoothScroll";
-import Ambient3D from "./components/ui/Ambient3D";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
 import LaneLine from "./components/ui/LaneLine";
-import GrainOverlay from "./components/ui/GrainOverlay";
+import SplitClock from "./components/ui/SplitClock";
 import Hero from "./components/sections/Hero";
 
 // Lazy load below-the-fold sections for optimal code-splitting & performance
@@ -20,7 +19,7 @@ const Contact = lazy(() => import("./components/sections/Contact"));
 function SectionFallback() {
   return (
     <div className="py-24 px-6 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
-      <div className="w-8 h-8 rounded-full border-2 border-[#2FAF83]/20 border-t-[#2FAF83] animate-spin" />
+      <div className="w-8 h-8 rounded-full border-2 border-[#00C2D1]/20 border-t-[#00C2D1] animate-spin" />
     </div>
   );
 }
@@ -33,24 +32,21 @@ export default function App() {
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
-        className="relative text-[#F5F1E8] min-h-screen selection:bg-[#2FAF83]/30 selection:text-[#F5F1E8] overflow-x-hidden font-sans antialiased"
+        transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeOut" }}
+        className="relative text-[#EAF6F6] min-h-screen selection:bg-[#00C2D1]/30 selection:text-[#EAF6F6] overflow-x-hidden font-sans antialiased bg-[#0A2027]"
       >
         {/* Accessible skip link */}
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to main content
         </a>
 
-        {/* Subtle Three.js 3D Ambient Particle Layer */}
-        <Ambient3D />
+        {/* Signature Swim Meet Split Clock Chronometer */}
+        <SplitClock />
 
-        {/* Tactile 3.5% SVG Noise Texture Overlay */}
-        <GrainOverlay />
-
-        {/* Signature Jewel Emerald Lane Line progress marker */}
+        {/* Lane Line Spine */}
         <LaneLine />
 
-        {/* Re-themed Jewel Emerald / Gold Cursor Glow */}
+        {/* Re-themed Chlorine Cyan Cursor Glow */}
         <CursorGlow />
 
         {/* Sticky minimalist navigation header */}

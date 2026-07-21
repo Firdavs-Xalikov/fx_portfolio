@@ -42,40 +42,40 @@ export default function Achievements() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.35, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="achievements" className="py-28 md:py-36 px-6 bg-midnight-gradient border-b border-[rgba(251,245,183,0.08)]">
+    <section id="achievements" className="py-28 md:py-36 px-6 border-b border-[#1C3B42]">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.35 }}
           className="mb-20"
         >
-          <span className="font-mono text-xs uppercase tracking-[0.12em] text-[#2FAF83] font-bold block mb-3">
+          <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-3">
             {t("achievements_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#F5F1E8] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EAF6F6] tracking-tight mb-4">
             {t("achievements_title")}
           </h2>
-          <p className="text-[#9198A5] max-w-xl font-normal text-base">
+          <p className="text-[#6B8F94] max-w-xl font-normal text-base">
             {t("achievements_subtitle")}
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ export default function Achievements() {
         >
           {achievements.map((item, idx) => {
             const Icon = iconMap[item.iconName] || Award;
-            const isGoldHighlighted = idx === 0 || idx === 3;
+            const isPbGold = idx === 0 || idx === 3;
             
             return (
               <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
@@ -99,53 +99,60 @@ export default function Achievements() {
                     {/* Badge & Year Header */}
                     <div className="flex items-center justify-between mb-8">
                       <motion.div
-                        whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        className="w-10 h-10 border border-[rgba(251,245,183,0.08)] bg-[#05070C] flex items-center justify-center group-hover:border-[#2FAF83] transition-colors"
+                        whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
+                        transition={{ duration: 0.15 }}
+                        className="w-10 h-10 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center group-hover:border-[#00C2D1] transition-colors"
                       >
-                        <Icon className="w-5 h-5 text-[#2FAF83]" />
+                        <Icon className="w-5 h-5 text-[#00C2D1]" />
                       </motion.div>
-                      <span className="font-mono text-xs text-[#9198A5] font-semibold border border-[rgba(251,245,183,0.08)] px-2.5 py-0.5 tracking-[0.08em]">
-                        {item.year}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {isPbGold && (
+                          <span className="font-digital text-[10px] font-bold text-[#D4A017] border border-[#D4A017]/40 bg-[#0A2027] px-2 py-0.5 tracking-[0.12em]">
+                            PB / GOLD MEDAL
+                          </span>
+                        )}
+                        <span className="font-digital text-xs text-[#6B8F94] font-semibold border border-[#1C3B42] px-2.5 py-0.5 tracking-[0.08em]">
+                          {item.year}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Primary Metric Callout with Count-Up and Gold Text-Fill */}
+                    {/* Primary Metric Callout with Count-Up in Digital LED Font */}
                     <div className="mb-6">
-                      <div className={`font-display text-3xl font-extrabold tracking-tight ${
-                        isGoldHighlighted ? "text-gold-gradient inline-block pb-1" : "text-[#F5F1E8]"
+                      <div className={`font-digital text-3xl font-extrabold tracking-tight ${
+                        isPbGold ? "text-[#D4A017] inline-block pb-1" : "text-[#00C2D1] text-chlorine-glow"
                       }`}>
                         <CountUp value={item.metric} />
                       </div>
                       {item.subMetric && (
-                        <div className="font-mono text-xs text-[#9198A5] font-medium mt-2 tracking-[0.06em]">
+                        <div className="font-digital text-xs text-[#6B8F94] font-medium mt-2 tracking-[0.06em]">
                           {item.subMetric}
                         </div>
                       )}
                     </div>
 
                     {/* Achievement Title */}
-                    <h3 className="font-display text-lg font-bold text-[#F5F1E8] mb-3">
+                    <h3 className="font-display text-lg font-bold text-[#EAF6F6] mb-3">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs text-[#9198A5] font-normal leading-relaxed mb-8">
+                    <p className="text-xs text-[#6B8F94] font-normal leading-relaxed mb-8">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Footer validation tag */}
-                  <div className="pt-4 border-t border-[rgba(251,245,183,0.08)] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-[0.12em]">
+                  <div className="pt-4 border-t border-[#1C3B42] flex items-center justify-between font-digital text-[10px] uppercase font-bold tracking-[0.12em]">
                     <span className="flex items-center gap-1.5">
                       <span className={`w-1.5 h-1.5 rounded-full ${
-                        isGoldHighlighted ? "bg-[#BF9B30]" : "bg-[#2FAF83]"
+                        isPbGold ? "bg-[#D4A017]" : "bg-[#00C2D1]"
                       }`} />
-                      <span className={isGoldHighlighted ? "text-gold-gradient font-bold" : "text-[#2FAF83]"}>
+                      <span className={isPbGold ? "text-[#D4A017] font-bold" : "text-[#00C2D1]"}>
                         {t("achievements_verified")}
                       </span>
                     </span>
-                    <span className="text-[#9198A5]">{t("achievements_label")}</span>
+                    <span className="text-[#6B8F94]">{t("achievements_label")}</span>
                   </div>
                 </GlassCard>
               </motion.div>

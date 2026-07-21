@@ -4,33 +4,27 @@ import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } fro
 interface GlassCardProps {
   children: ReactNode;
   className?: string;
-  glowColor?: string;
-  delay?: number;
   tiltStrength?: number;
 }
 
 export default function GlassCard({
   children,
   className = "",
-  tiltStrength = 10,
+  tiltStrength = 8,
 }: GlassCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  // Mouse position values inside the card (-0.5 to 0.5)
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Smooth springs for tilt angles
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
+  const mouseXSpring = useSpring(x, { stiffness: 180, damping: 22 });
+  const mouseYSpring = useSpring(y, { stiffness: 180, damping: 22 });
 
-  // Map mouse positions to 3D rotation angles
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [tiltStrength, -tiltStrength]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-tiltStrength, tiltStrength]);
 
-  // Spot glow cursor position inside card (percentage)
   const spotX = useTransform(mouseXSpring, [-0.5, 0.5], [0, 100]);
   const spotY = useTransform(mouseYSpring, [-0.5, 0.5], [0, 100]);
 
@@ -44,7 +38,6 @@ export default function GlassCard({
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    // Normalize coordinates from -0.5 to 0.5
     const xPct = mouseX / width - 0.5;
     const yPct = mouseY / height - 0.5;
 
@@ -77,24 +70,24 @@ export default function GlassCard({
               transformStyle: "preserve-3d",
             }
       }
-      className={`perspective-1000 relative bg-[#0A0F19] border border-[rgba(251,245,183,0.08)] p-6 transition-all duration-300 hover:border-[rgba(251,245,183,0.25)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.4)] ${className}`}
+      className={`perspective-1000 relative bg-[#0F2830] border border-[#1C3B42] p-6 transition-all duration-200 hover:border-[#00C2D1]/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] ${className}`}
     >
-      {/* Sheen sweep overlay: warm gold-tinted light reflection */}
+      {/* Sheen sweep overlay */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-500 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 overflow-hidden"
         style={{ opacity: isHovered ? 1 : 0 }}
       >
-        <div className="absolute -inset-[100%] bg-gradient-to-tr from-transparent via-[rgba(251,245,183,0.06)] to-transparent transform -rotate-45" />
+        <div className="absolute -inset-[100%] bg-gradient-to-tr from-transparent via-[rgba(234,246,246,0.04)] to-transparent transform -rotate-45" />
       </motion.div>
 
       {/* Spot glow radial spotlight following cursor */}
       {!shouldReduceMotion && isHovered && (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute -inset-px z-0 rounded-inherit opacity-100 transition-opacity duration-300"
+          className="pointer-events-none absolute -inset-px z-0 opacity-100 transition-opacity duration-200"
           style={{
-            background: `radial-gradient(400px circle at ${spotX.get()}% ${spotY.get()}%, rgba(47, 175, 131, 0.12), transparent 80%)`,
+            background: `radial-gradient(350px circle at ${spotX.get()}% ${spotY.get()}%, rgba(0, 194, 209, 0.12), transparent 80%)`,
           }}
         />
       )}
