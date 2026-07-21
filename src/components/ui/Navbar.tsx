@@ -79,17 +79,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#FAFAF7]/90 backdrop-blur-md border-b border-[#E4E3DF]">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#0A0E14]/90 backdrop-blur-md border-b border-[#232838]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo / Brand */}
           <div 
             onClick={() => scrollTo("hero")}
             className="flex items-center gap-3 cursor-pointer group shrink-0"
           >
-            <div className="font-mono font-bold text-xs text-[#14151A] px-2 py-1 border border-[#14151A] transition-colors group-hover:bg-[#14151A] group-hover:text-[#FAFAF7]">
+            <div className="font-mono font-bold text-xs text-[#EDEDE7] px-2 py-1 border border-[#232838] transition-colors group-hover:border-[#2E8B74] group-hover:text-[#2E8B74]">
               FX
             </div>
-            <span className="font-display font-semibold text-sm tracking-tight text-[#14151A] hidden sm:inline">
+            <span className="font-display font-semibold text-sm tracking-tight text-[#EDEDE7] hidden sm:inline">
               Firdavs Xalikov
             </span>
           </div>
@@ -103,12 +103,12 @@ export default function Navbar() {
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
                   className={`relative font-mono text-[11px] uppercase tracking-wider py-1 transition-colors cursor-pointer whitespace-nowrap ${
-                    isLinkActive ? "text-[#1F4E79] font-bold" : "text-[#6B6B70] hover:text-[#14151A]"
+                    isLinkActive ? "text-[#2E8B74] font-bold" : "text-[#8B92A0] hover:text-[#EDEDE7]"
                   }`}
                 >
                   {link.label}
                   {isLinkActive && (
-                    <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-[#1F4E79]" />
+                    <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-[#2E8B74]" />
                   )}
                 </button>
               );
@@ -123,16 +123,16 @@ export default function Navbar() {
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 aria-label={`Select Language. Current language: ${currentLang.label}`}
                 aria-expanded={langDropdownOpen}
-                className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E3DF] bg-white text-[#14151A] font-mono text-xs hover:border-[#14151A] transition-colors cursor-pointer"
+                className="flex items-center gap-2 px-3 py-1.5 border border-[#232838] bg-[#12161F] text-[#EDEDE7] font-mono text-xs hover:border-[#2E8B74] transition-colors cursor-pointer"
               >
                 <span className="text-sm leading-none">{currentLang.flag}</span>
                 <span className="uppercase font-semibold">{currentLang.code}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#6B6B70] transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#8B92A0] transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               {/* Dropdown Menu */}
               {langDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-44 border border-[#E4E3DF] bg-white shadow-lg overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
+                <div className="absolute right-0 top-full mt-2 w-44 border border-[#232838] bg-[#12161F] shadow-xl overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
                   {LANG_OPTIONS.map((opt) => (
                     <button
                       key={opt.code}
@@ -140,8 +140,8 @@ export default function Navbar() {
                       aria-label={`Switch language to ${opt.label}`}
                       className={`w-full flex items-center gap-3 px-4 py-2.5 font-mono text-xs transition-colors cursor-pointer ${
                         language === opt.code
-                          ? "bg-[#FAFAF7] text-[#1F4E79] font-bold"
-                          : "text-[#14151A] hover:bg-[#FAFAF7]"
+                          ? "bg-[#0A0E14] text-[#2E8B74] font-bold"
+                          : "text-[#EDEDE7] hover:bg-[#0A0E14]"
                       }`}
                     >
                       <span className="text-base leading-none">{opt.flag}</span>
@@ -158,7 +158,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
-                className="p-1.5 border border-[#E4E3DF] text-[#14151A] hover:border-[#14151A] bg-white cursor-pointer"
+                className="p-1.5 border border-[#232838] text-[#EDEDE7] hover:border-[#2E8B74] bg-[#12161F] cursor-pointer"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -169,7 +169,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-[#FAFAF7] flex flex-col justify-center px-8 py-20 lg:hidden">
+        <div className="fixed inset-0 z-30 bg-[#0A0E14] flex flex-col justify-center px-8 py-20 lg:hidden">
           <div className="flex flex-col gap-6 text-center">
             {NAV_LINKS.map((link) => {
               const isLinkActive = activeSection === link.id;
@@ -178,7 +178,7 @@ export default function Navbar() {
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
                   className={`font-display text-2xl font-bold tracking-tight transition-colors py-2 cursor-pointer ${
-                    isLinkActive ? "text-[#1F4E79]" : "text-[#6B6B70] hover:text-[#14151A]"
+                    isLinkActive ? "text-[#2E8B74]" : "text-[#8B92A0] hover:text-[#EDEDE7]"
                   }`}
                 >
                   {link.label}
@@ -193,8 +193,8 @@ export default function Navbar() {
                     onClick={() => setLanguage(opt.code)}
                     className={`flex items-center gap-2 px-3 py-2 border font-mono text-xs transition-all cursor-pointer ${
                       language === opt.code
-                        ? "border-[#1F4E79] bg-[#1F4E79] text-white font-bold"
-                        : "border-[#E4E3DF] bg-white text-[#6B6B70] hover:text-[#14151A]"
+                        ? "border-[#2E8B74] bg-[#2E8B74] text-white font-bold"
+                        : "border-[#232838] bg-[#12161F] text-[#8B92A0] hover:text-[#EDEDE7]"
                     }`}
                   >
                     <span>{opt.flag}</span>

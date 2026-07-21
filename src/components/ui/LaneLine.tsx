@@ -59,14 +59,15 @@ export default function LaneLine() {
         className="fixed left-4 md:left-8 top-0 bottom-0 z-30 hidden lg:block pointer-events-none"
         aria-hidden="true"
       >
-        {/* Background Track Rule */}
-        <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#E4E3DF]" />
+        {/* Background Track Rule in Hairline (#232838) */}
+        <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#232838]" />
 
-        {/* Active Sapphire Fill Line */}
+        {/* Active Emerald Fill Line (#2E8B74) with soft low-opacity glow */}
         <div
-          className="absolute top-0 left-[6.5px] w-[2px] bg-[#1F4E79]"
+          className="absolute top-0 left-[6.5px] w-[2px] bg-[#2E8B74]"
           style={{
             height: `${scrollPercent}%`,
+            boxShadow: shouldReduceMotion ? "none" : "0 0 8px rgba(46, 139, 116, 0.4)",
             transition: shouldReduceMotion ? "none" : "height 0.1s linear",
           }}
         />
@@ -86,8 +87,8 @@ export default function LaneLine() {
                 <div
                   className={`h-[2px] transition-all duration-300 ${
                     isActive
-                      ? "w-4 bg-[#1F4E79]"
-                      : "w-2 bg-[#6B6B70] group-hover:w-3 group-hover:bg-[#14151A]"
+                      ? "w-4 bg-[#2E8B74] shadow-[0_0_6px_rgba(46,139,116,0.5)]"
+                      : "w-2 bg-[#8B92A0] group-hover:w-3 group-hover:bg-[#EDEDE7]"
                   }`}
                 />
                 
@@ -95,8 +96,8 @@ export default function LaneLine() {
                 <span
                   className={`font-mono text-[11px] tracking-wider transition-all duration-200 ${
                     isActive
-                      ? "text-[#1F4E79] font-semibold opacity-100 translate-x-0"
-                      : "text-[#6B6B70] opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0"
+                      ? "text-[#2E8B74] font-semibold opacity-100 translate-x-0"
+                      : "text-[#8B92A0] opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0"
                   }`}
                 >
                   {sec.label}
@@ -109,13 +110,14 @@ export default function LaneLine() {
 
       {/* Mobile Top Scroll Bar */}
       <div
-        className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-[#E4E3DF] lg:hidden"
+        className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-[#232838] lg:hidden"
         aria-hidden="true"
       >
         <div
-          className="h-full bg-[#1F4E79]"
+          className="h-full bg-[#2E8B74]"
           style={{
             width: `${scrollPercent}%`,
+            boxShadow: shouldReduceMotion ? "none" : "0 0 6px rgba(46, 139, 116, 0.5)",
             transition: shouldReduceMotion ? "none" : "width 0.1s linear",
           }}
         />

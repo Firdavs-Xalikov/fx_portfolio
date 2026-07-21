@@ -2,11 +2,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-porcelain: #FAFAF7;
-  --color-ink: #14151A;
-  --color-graphite: #6B6B70;
-  --color-hairline: #E4E3DF;
-  --color-sapphire: #1F4E79;
+  --color-abyss: #0A0E14;
+  --color-midnight: #12161F;
+  --color-pearl: #EDEDE7;
+  --color-slate: #8B92A0;
+  --color-hairline: #232838;
+  --color-emerald: #2E8B74;
   --color-champagne: #C9A227;
   
   --font-display: "Geist", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -15,11 +16,12 @@
 }
 
 :root {
-  --porcelain: #FAFAF7;
-  --ink: #14151A;
-  --graphite: #6B6B70;
-  --hairline: #E4E3DF;
-  --sapphire: #1F4E79;
+  --abyss: #0A0E14;
+  --midnight: #12161F;
+  --pearl: #EDEDE7;
+  --slate: #8B92A0;
+  --hairline: #232838;
+  --emerald: #2E8B74;
   --champagne: #C9A227;
 }
 
@@ -28,25 +30,25 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--porcelain);
+  background: var(--abyss);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--hairline);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--graphite);
+  background: var(--emerald);
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--porcelain);
-  color: var(--ink);
+  background-color: var(--abyss);
+  color: var(--pearl);
 }
 
 body {
-  background-color: var(--porcelain);
-  color: var(--ink);
+  background-color: var(--abyss);
+  color: var(--pearl);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +57,7 @@ body {
 
 /* Accessibility Focus Rings */
 :focus-visible {
-  outline: 2px solid var(--sapphire);
+  outline: 2px solid var(--emerald);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -85,25 +87,25 @@ body {
   clip: auto;
   white-space: normal;
   z-index: 100;
-  background-color: var(--sapphire);
+  background-color: var(--emerald);
   color: #ffffff;
   font-weight: 600;
   border-radius: 0.25rem;
-  box-shadow: 0 10px 25px -5px rgba(31, 78, 121, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(46, 139, 116, 0.4);
 }
 
 /* Flat Panel Container */
 .flat-panel {
-  background-color: #ffffff;
+  background-color: var(--midnight);
   border: 1px solid var(--hairline);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .flat-panel:hover {
-  border-color: var(--sapphire);
+  border-color: var(--emerald);
 }
 
-/* Section Dividers */
+/* Section Hairline Dividers */
 .hairline-divider {
   border-bottom: 1px solid var(--hairline);
 }

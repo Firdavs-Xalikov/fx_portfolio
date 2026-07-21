@@ -17,7 +17,7 @@ const Contact = lazy(() => import("./components/sections/Contact"));
 function SectionFallback() {
   return (
     <div className="py-24 px-6 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
-      <div className="w-8 h-8 rounded-full border-2 border-[#1F4E79]/20 border-t-[#1F4E79] animate-spin" />
+      <div className="w-8 h-8 rounded-full border-2 border-[#2E8B74]/20 border-t-[#2E8B74] animate-spin" />
     </div>
   );
 }
@@ -30,14 +30,14 @@ export default function App() {
       initial={shouldReduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
-      className="relative bg-[#FAFAF7] text-[#14151A] min-h-screen selection:bg-[#1F4E79]/20 selection:text-[#1F4E79] overflow-x-hidden font-sans antialiased"
+      className="relative bg-[#0A0E14] text-[#EDEDE7] min-h-screen selection:bg-[#2E8B74]/30 selection:text-[#EDEDE7] overflow-x-hidden font-sans antialiased"
     >
       {/* Accessible skip link */}
       <a href="#main-content" className="sr-only focus:not-sr-only">
         Skip to main content
       </a>
 
-      {/* Signature Lane Line progress marker */}
+      {/* Signature Emerald Lane Line progress marker */}
       <LaneLine />
 
       {/* Cursor follower disabled in minimal-luxury */}
