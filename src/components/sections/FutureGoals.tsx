@@ -23,44 +23,43 @@ export default function FutureGoals() {
   ];
 
   return (
-    <section id="goals" className="py-28 px-6 bg-black relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none z-0" />
-
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
+    <section id="goals" className="py-28 md:py-36 px-6 bg-[#FAFAF7] border-b border-[#E4E3DF]">
+      <div className="max-w-[720px] mx-auto text-center">
         
-        {/* Top tag */}
-        <span className="text-xs uppercase tracking-widest text-blue-400 font-semibold block mb-6">
+        {/* Section tag */}
+        <span className="font-mono text-xs uppercase tracking-widest text-[#1F4E79] font-bold block mb-4">
           {t("goals_tag")}
         </span>
 
-        {/* Core quote statement */}
-        <h2 key={language} className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-white mb-12 leading-tight">
+        {/* Display quote statement */}
+        <h2 key={language} className="font-display text-2xl md:text-3xl font-semibold text-[#14151A] leading-relaxed tracking-tight mb-10">
           "{t("goals_quote")}"
         </h2>
 
-        {/* Visual divider */}
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full mb-16" />
+        {/* Hairline Divider */}
+        <div className="w-16 h-[1px] bg-[#1F4E79] mx-auto mb-12" />
 
         {/* Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
           {goalPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             
             return (
               <div 
                 key={`${language}-${idx}`}
-                className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors"
+                className="p-6 bg-white border border-[#E4E3DF] flex flex-col justify-between"
               >
-                <div className="w-10 h-10 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-blue-400" />
+                <div>
+                  <div className="w-8 h-8 border border-[#E4E3DF] bg-[#FAFAF7] flex items-center justify-center mb-4">
+                    <Icon className="w-4 h-4 text-[#1F4E79]" />
+                  </div>
+                  <h3 className="font-display text-base font-bold text-[#14151A] mb-2">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs text-[#6B6B70] leading-relaxed font-normal">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="text-base font-bold font-display text-white mb-2">
-                  {pillar.title}
-                </h3>
-                <p className="text-xs text-slate-400 font-light leading-relaxed">
-                  {pillar.description}
-                </p>
               </div>
             );
           })}

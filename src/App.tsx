@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
+import LaneLine from "./components/ui/LaneLine";
 import Hero from "./components/sections/Hero";
 
 // Lazy load below-the-fold sections for optimal code-splitting & performance
@@ -15,8 +16,8 @@ const Contact = lazy(() => import("./components/sections/Contact"));
 
 function SectionFallback() {
   return (
-    <div className="py-24 px-6 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
-      <div className="w-12 h-12 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
+    <div className="py-24 px-6 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
+      <div className="w-8 h-8 rounded-full border-2 border-[#1F4E79]/20 border-t-[#1F4E79] animate-spin" />
     </div>
   );
 }
@@ -28,25 +29,25 @@ export default function App() {
     <motion.div
       initial={shouldReduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
-      className="relative bg-black min-h-screen selection:bg-blue-500/20 selection:text-blue-300 overflow-hidden font-sans antialiased"
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
+      className="relative bg-[#FAFAF7] text-[#14151A] min-h-screen selection:bg-[#1F4E79]/20 selection:text-[#1F4E79] overflow-x-hidden font-sans antialiased"
     >
       {/* Accessible skip link */}
       <a href="#main-content" className="sr-only focus:not-sr-only">
         Skip to main content
       </a>
 
-      {/* Interactive cursor follower background glow */}
+      {/* Signature Lane Line progress marker */}
+      <LaneLine />
+
+      {/* Cursor follower disabled in minimal-luxury */}
       <CursorGlow />
 
-      {/* Grid overlay mesh background */}
-      <div className="absolute inset-0 grid-overlay opacity-30 pointer-events-none z-0" />
-
-      {/* Sticky glass-blur navigation header */}
+      {/* Sticky minimalist navigation header */}
       <Navbar />
 
       {/* Page Sections */}
-      <main id="main-content" className="relative z-10">
+      <main id="main-content" className="relative z-10 lg:pl-16">
         <div id="hero">
           <Hero />
         </div>

@@ -9,34 +9,30 @@ export default function Skills() {
     title: t(cat.titleKey),
     description: t(cat.descriptionKey),
     icon: cat.icon,
-    accentColor: cat.accentColor,
     skills: cat.skills.map((s) => ({
       name: s.name[language] || s.name["en"],
     })),
   }));
 
   return (
-    <section id="skills" className="py-28 px-6 bg-black relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none z-0" />
-
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="skills" className="py-28 md:py-36 px-6 bg-[#FAFAF7] border-b border-[#E4E3DF]">
+      <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
-        <div className="mb-16">
-          <span className="text-xs uppercase tracking-widest text-blue-400 font-semibold block mb-2">
+        <div className="mb-20">
+          <span className="font-mono text-xs uppercase tracking-widest text-[#1F4E79] font-bold block mb-3">
             {t("skills_tag")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#14151A] tracking-tight mb-4">
             {t("skills_title")}
           </h2>
-          <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
+          <p className="text-[#6B6B70] max-w-xl font-normal text-base">
             {t("skills_subtitle")}
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, idx) => {
             const Icon = category.icon;
             
@@ -44,41 +40,39 @@ export default function Skills() {
               <GlassCard
                 key={`${language}-${idx}`}
                 className="p-8 flex flex-col justify-between"
-                glowColor={category.accentColor}
-                delay={idx * 0.1}
               >
                 <div>
                   {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-blue-400" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 border border-[#E4E3DF] bg-[#FAFAF7] flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4 text-[#1F4E79]" />
                     </div>
-                    <h3 className="text-xl font-bold font-display text-white">
+                    <h3 className="font-display text-lg font-bold text-[#14151A]">
                       {category.title}
                     </h3>
                   </div>
 
-                  <p className="text-xs text-slate-400 mb-8 font-light leading-relaxed min-h-[48px]">
+                  <p className="text-xs text-[#6B6B70] mb-8 font-normal leading-relaxed min-h-[40px]">
                     {category.description}
                   </p>
 
-                  {/* Skill Badges */}
-                  <div className="flex flex-wrap gap-2.5">
+                  {/* Skill Chips in Mono */}
+                  <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, sIdx) => (
-                      <div
+                      <span
                         key={sIdx}
-                        className="px-3.5 py-2 rounded-xl text-xs font-light text-slate-300 border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/10 hover:text-white transition-all cursor-default"
+                        className="font-mono text-xs border border-[#E4E3DF] bg-[#FAFAF7] text-[#14151A] px-2.5 py-1"
                       >
                         {skill.name}
-                      </div>
+                      </span>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom detail footer */}
-                <div className="mt-12 pt-6 border-t border-slate-900 flex items-center justify-between text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
+                <div className="mt-10 pt-4 border-t border-[#E4E3DF] flex items-center justify-between font-mono text-[10px] text-[#6B6B70] uppercase font-bold tracking-wider">
                   <span>{t("skills_domain")}</span>
-                  <span className="text-blue-400/80">{t("skills_active")}</span>
+                  <span className="text-[#1F4E79]">{t("skills_active")}</span>
                 </div>
               </GlassCard>
             );

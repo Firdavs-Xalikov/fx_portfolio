@@ -33,85 +33,81 @@ export default function Achievements() {
   const achievements = t("achievements_list") as Achievement[];
 
   return (
-    <section id="achievements" className="py-28 px-6 bg-black relative overflow-hidden">
-      {/* Decorative gradients */}
-      <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/3 left-1/4 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none z-0" />
-
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="achievements" className="py-28 md:py-36 px-6 bg-[#FAFAF7] border-b border-[#E4E3DF]">
+      <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
-        <div className="mb-16">
-          <span className="text-xs uppercase tracking-widest text-blue-400 font-semibold block mb-2">
+        <div className="mb-20">
+          <span className="font-mono text-xs uppercase tracking-widest text-[#1F4E79] font-bold block mb-3">
             {t("achievements_tag")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#14151A] tracking-tight mb-4">
             {t("achievements_title")}
           </h2>
-          <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
+          <p className="text-[#6B6B70] max-w-xl font-normal text-base">
             {t("achievements_subtitle")}
           </p>
         </div>
 
         {/* Credentials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((item, idx) => {
             const Icon = iconMap[item.iconName] || Award;
+            // Sparingly highlight 1-2 key credentials with Champagne gold tag (#C9A227)
+            const isChampagneHighlighted = idx === 0 || idx === 3;
             
             return (
               <GlassCard
                 key={`${language}-${idx}`}
                 className="p-8 flex flex-col justify-between"
-                glowColor={
-                  item.category === "it" 
-                    ? "rgba(6, 182, 212, 0.12)" 
-                    : item.category === "athletics"
-                    ? "rgba(16, 185, 129, 0.12)"
-                    : "rgba(59, 130, 246, 0.12)"
-                }
-                delay={idx * 0.1}
               >
                 <div>
                   {/* Badge & Year Header */}
                   <div className="flex items-center justify-between mb-8">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-blue-400" />
+                    <div className="w-10 h-10 border border-[#E4E3DF] bg-[#FAFAF7] flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#1F4E79]" />
                     </div>
-                    <span className="text-xs font-semibold font-display text-slate-500 bg-slate-900/50 px-3 py-1 rounded-full border border-white/5">
+                    <span className="font-mono text-xs text-[#6B6B70] font-semibold border border-[#E4E3DF] px-2.5 py-0.5">
                       {item.year}
                     </span>
                   </div>
 
                   {/* Primary Metric Callout */}
                   <div className="mb-6">
-                    <div className="text-3xl font-extrabold tracking-tight font-display text-white">
+                    <div className={`font-display text-3xl font-extrabold tracking-tight text-[#14151A] ${
+                      isChampagneHighlighted ? "border-b-2 border-[#C9A227] inline-block pb-1" : ""
+                    }`}>
                       {item.metric}
                     </div>
                     {item.subMetric && (
-                      <div className="text-xs text-slate-400 font-light mt-1">
+                      <div className="font-mono text-xs text-[#6B6B70] font-medium mt-2">
                         {item.subMetric}
                       </div>
                     )}
                   </div>
 
                   {/* Achievement Title */}
-                  <h3 className="text-lg font-bold font-display text-white mb-3">
+                  <h3 className="font-display text-lg font-bold text-[#14151A] mb-3">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-400 font-light leading-relaxed mb-8">
+                  <p className="text-xs text-[#6B6B70] font-normal leading-relaxed mb-8">
                     {item.description}
                   </p>
                 </div>
 
-                {/* Footer validation */}
-                <div className="pt-6 border-t border-slate-900/80 flex items-center justify-between text-[9px] text-slate-500 uppercase tracking-widest font-semibold">
+                {/* Footer validation tag */}
+                <div className="pt-4 border-t border-[#E4E3DF] flex items-center justify-between font-mono text-[10px] uppercase font-bold tracking-wider">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                    {t("achievements_verified")}
+                    <span className={`w-1.5 h-1.5 rounded-full ${
+                      isChampagneHighlighted ? "bg-[#C9A227]" : "bg-[#1F4E79]"
+                    }`} />
+                    <span className={isChampagneHighlighted ? "text-[#C9A227]" : "text-[#1F4E79]"}>
+                      {t("achievements_verified")}
+                    </span>
                   </span>
-                  <span>{t("achievements_label")}</span>
+                  <span className="text-[#6B6B70]">{t("achievements_label")}</span>
                 </div>
               </GlassCard>
             );

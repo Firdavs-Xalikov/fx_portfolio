@@ -41,7 +41,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["hero", "about", "timeline", "skills", "projects", "achievements", "goals", "contact"];
+    const sectionIds = ["hero", "about", "journey", "skills", "projects", "achievements", "goals", "contact"];
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
@@ -79,73 +79,73 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed top-0 inset-x-0 z-50 flex justify-center px-4 pt-4">
-        <nav className="w-full max-w-6xl flex items-center justify-between gap-2 rounded-2xl border border-white/10 bg-black/75 backdrop-blur-xl px-4 py-3 shadow-2xl">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#FAFAF7]/90 backdrop-blur-md border-b border-[#E4E3DF]">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo / Brand */}
           <div 
             onClick={() => scrollTo("hero")}
-            className="flex items-center gap-2.5 cursor-pointer group shrink-0"
+            className="flex items-center gap-3 cursor-pointer group shrink-0"
           >
-            <div className="font-display font-extrabold text-blue-400 w-8 h-8 rounded-xl border border-blue-500/20 bg-blue-500/10 flex items-center justify-center text-sm transition-all group-hover:scale-105 group-hover:bg-blue-500/20">
+            <div className="font-mono font-bold text-xs text-[#14151A] px-2 py-1 border border-[#14151A] transition-colors group-hover:bg-[#14151A] group-hover:text-[#FAFAF7]">
               FX
             </div>
-            <span className="font-display font-semibold text-sm text-slate-100 tracking-wide hidden sm:inline">Firdavs Xalikov</span>
+            <span className="font-display font-semibold text-sm tracking-tight text-[#14151A] hidden sm:inline">
+              Firdavs Xalikov
+            </span>
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-0.5">
+          <nav className="hidden lg:flex items-center gap-6">
             {NAV_LINKS.map((link) => {
               const isLinkActive = activeSection === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`relative text-[11px] tracking-wider px-2.5 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                    isLinkActive ? "text-blue-400 font-semibold" : "text-slate-400 hover:text-slate-100"
+                  className={`relative font-mono text-[11px] uppercase tracking-wider py-1 transition-colors cursor-pointer whitespace-nowrap ${
+                    isLinkActive ? "text-[#1F4E79] font-bold" : "text-[#6B6B70] hover:text-[#14151A]"
                   }`}
                 >
                   {link.label}
                   {isLinkActive && (
-                    <span className="absolute left-2.5 right-2.5 bottom-1 h-[2px] bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+                    <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-[#1F4E79]" />
                   )}
                 </button>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Right Area: Flag Dropdown + Mobile Menu */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Flag Dropdown Selector — always visible */}
+          {/* Right Area: Language Dropdown + Mobile Toggle */}
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Language Dropdown Selector */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 aria-label={`Select Language. Current language: ${currentLang.label}`}
                 aria-expanded={langDropdownOpen}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all cursor-pointer"
+                className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E3DF] bg-white text-[#14151A] font-mono text-xs hover:border-[#14151A] transition-colors cursor-pointer"
               >
-                <span className="text-lg leading-none">{currentLang.flag}</span>
-                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
+                <span className="text-sm leading-none">{currentLang.flag}</span>
+                <span className="uppercase font-semibold">{currentLang.code}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#6B6B70] transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {/* Dropdown List */}
+              {/* Dropdown Menu */}
               {langDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-white/10 bg-black/95 backdrop-blur-2xl shadow-2xl shadow-black/60 overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
+                <div className="absolute right-0 top-full mt-2 w-44 border border-[#E4E3DF] bg-white shadow-lg overflow-hidden animate-[fadeIn_0.15s_ease-out] z-[60]">
                   {LANG_OPTIONS.map((opt) => (
                     <button
                       key={opt.code}
                       onClick={() => handleSelectLang(opt.code)}
                       aria-label={`Switch language to ${opt.label}`}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 font-mono text-xs transition-colors cursor-pointer ${
                         language === opt.code
-                          ? "bg-blue-500/10 text-blue-400"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#FAFAF7] text-[#1F4E79] font-bold"
+                          : "text-[#14151A] hover:bg-[#FAFAF7]"
                       }`}
                     >
-                      <span className="text-xl leading-none">{opt.flag}</span>
-                      <span className="font-medium text-xs tracking-wide">{opt.label}</span>
-                      {language === opt.code && (
-                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      )}
+                      <span className="text-base leading-none">{opt.flag}</span>
+                      <span>{opt.label}</span>
                     </button>
                   ))}
                 </div>
@@ -158,18 +158,18 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
-                className="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white bg-white/5 cursor-pointer"
+                className="p-1.5 border border-[#E4E3DF] text-[#14151A] hover:border-[#14151A] bg-white cursor-pointer"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </header>
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/97 backdrop-blur-xl flex flex-col justify-center px-8 py-20 lg:hidden">
+        <div className="fixed inset-0 z-30 bg-[#FAFAF7] flex flex-col justify-center px-8 py-20 lg:hidden">
           <div className="flex flex-col gap-6 text-center">
             {NAV_LINKS.map((link) => {
               const isLinkActive = activeSection === link.id;
@@ -177,8 +177,8 @@ export default function Navbar() {
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`text-2xl font-display font-medium tracking-wide transition-colors py-2 cursor-pointer ${
-                    isLinkActive ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
+                  className={`font-display text-2xl font-bold tracking-tight transition-colors py-2 cursor-pointer ${
+                    isLinkActive ? "text-[#1F4E79]" : "text-[#6B6B70] hover:text-[#14151A]"
                   }`}
                 >
                   {link.label}
@@ -186,20 +186,19 @@ export default function Navbar() {
               );
             })}
             <div className="mt-8 flex justify-center flex-col items-center gap-4">
-              {/* Mobile language selector */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 {LANG_OPTIONS.map((opt) => (
                   <button
                     key={opt.code}
                     onClick={() => setLanguage(opt.code)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all cursor-pointer ${
+                    className={`flex items-center gap-2 px-3 py-2 border font-mono text-xs transition-all cursor-pointer ${
                       language === opt.code
-                        ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
-                        : "border-white/5 bg-white/[0.02] text-slate-400 hover:text-white"
+                        ? "border-[#1F4E79] bg-[#1F4E79] text-white font-bold"
+                        : "border-[#E4E3DF] bg-white text-[#6B6B70] hover:text-[#14151A]"
                     }`}
                   >
-                    <span className="text-xl leading-none">{opt.flag}</span>
-                    <span className="text-xs font-medium">{opt.label}</span>
+                    <span>{opt.flag}</span>
+                    <span>{opt.label}</span>
                   </button>
                 ))}
               </div>
@@ -210,4 +209,3 @@ export default function Navbar() {
     </>
   );
 }
-
