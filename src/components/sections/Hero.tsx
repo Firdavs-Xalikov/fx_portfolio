@@ -1,13 +1,16 @@
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, MessageSquare } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 
 export default function Hero() {
   const { t } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -120,7 +123,7 @@ export default function Hero() {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   const handleScrollToAchievements = () => {
     const section = document.getElementById("achievements");
@@ -139,10 +142,12 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black px-6 py-24">
       {/* Background canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-60"
-      />
+      {!shouldReduceMotion && (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-60"
+        />
+      )}
 
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black pointer-events-none z-0" />
@@ -151,9 +156,9 @@ export default function Hero() {
       <div className="relative z-10 max-w-4xl text-center flex flex-col items-center">
         {/* Top Tag */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6 }}
           className="mb-6 px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs font-semibold uppercase tracking-widest text-blue-400"
         >
           {t("hero_tag")}
@@ -161,9 +166,9 @@ export default function Hero() {
 
         {/* Name */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.1 }}
           className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight font-display text-white mb-6"
         >
           {t("hero_title")}
@@ -171,9 +176,9 @@ export default function Hero() {
 
         {/* Title */}
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
           className="text-lg sm:text-2xl font-light text-slate-300 mb-8 max-w-2xl leading-relaxed"
         >
           <span className="text-white font-medium">{t("hero_sub_title_student")}</span>
@@ -185,9 +190,9 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0 }}
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 1, delay: 0.4 }}
           className="text-base sm:text-lg text-slate-400 max-w-xl mb-12 italic font-light font-sans"
         >
           "{t("hero_intro")}"
@@ -195,36 +200,38 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
           <button
             onClick={handleScrollToAchievements}
+            aria-label="Scroll down to View Achievements section"
             className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-medium text-black bg-white hover:bg-slate-200 transition-colors shadow-lg hover:shadow-white/5 cursor-pointer"
           >
             <span>{t("hero_btn_achievements")}</span>
-            <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
+            <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" aria-hidden="true" />
           </button>
           
           <button
             onClick={handleScrollToContact}
+            aria-label="Scroll down to Connect with Me contact section"
             className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-medium text-slate-300 border border-slate-700 hover:border-slate-400 bg-white/5 hover:bg-white/10 transition-all cursor-pointer"
           >
-            <MessageSquare className="w-4 h-4 text-blue-400" />
+            <MessageSquare className="w-4 h-4 text-blue-400" aria-hidden="true" />
             <span>{t("hero_btn_contact")}</span>
           </button>
         </motion.div>
       </div>
 
       {/* Floating scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs tracking-widest uppercase">
-        <span className="animate-pulse">{t("hero_scroll")}</span>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 text-xs tracking-widest uppercase">
+        <span className={shouldReduceMotion ? "" : "animate-pulse"}>{t("hero_scroll")}</span>
         <div className="w-1.5 h-6 rounded-full border border-slate-700 p-0.5 flex justify-center">
           <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            animate={shouldReduceMotion ? undefined : { y: [0, 8, 0] }}
+            transition={shouldReduceMotion ? { duration: 0 } : { repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             className="w-1 h-1.5 bg-blue-500 rounded-full" 
           />
         </div>

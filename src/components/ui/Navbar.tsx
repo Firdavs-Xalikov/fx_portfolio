@@ -119,6 +119,8 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                aria-label={`Select Language. Current language: ${currentLang.label}`}
+                aria-expanded={langDropdownOpen}
                 className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all cursor-pointer"
               >
                 <span className="text-lg leading-none">{currentLang.flag}</span>
@@ -132,6 +134,7 @@ export default function Navbar() {
                     <button
                       key={opt.code}
                       onClick={() => handleSelectLang(opt.code)}
+                      aria-label={`Switch language to ${opt.label}`}
                       className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors cursor-pointer ${
                         language === opt.code
                           ? "bg-blue-500/10 text-blue-400"
@@ -153,6 +156,8 @@ export default function Navbar() {
             <div className="lg:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
                 className="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white bg-white/5 cursor-pointer"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

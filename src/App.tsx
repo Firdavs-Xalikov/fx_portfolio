@@ -20,6 +20,11 @@ export default function App() {
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
       className="relative bg-black min-h-screen selection:bg-blue-500/20 selection:text-blue-300 overflow-hidden font-sans antialiased"
     >
+      {/* Accessible skip link */}
+      <a href="#main-content" className="sr-only focus:not-sr-only">
+        Skip to main content
+      </a>
+
       {/* Interactive cursor follower background glow */}
       <CursorGlow />
 

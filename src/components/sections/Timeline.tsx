@@ -87,6 +87,7 @@ export default function Timeline() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
+                aria-label={`Filter timeline by ${cat.label}`}
                 className={`px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat.id
                     ? "bg-white text-black font-semibold"

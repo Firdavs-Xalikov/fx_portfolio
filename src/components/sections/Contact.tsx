@@ -88,11 +88,11 @@ export default function Contact() {
               <div className="flex flex-col justify-between h-full p-8">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-[10px] uppercase font-semibold text-slate-500 tracking-wider">
+                    <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
                       {option.name}
                     </span>
                     <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-blue-400" />
+                      <Icon className="w-4 h-4 text-blue-400" aria-hidden="true" />
                     </div>
                   </div>
                   <div className="text-lg font-medium text-white break-all mb-8 font-sans">
@@ -101,10 +101,10 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-center justify-between text-xs border-t border-slate-900/80 pt-4">
-                  <span className="text-slate-500 font-light">{t("contact_status")}</span>
+                  <span className="text-slate-400 font-light">{t("contact_status")}</span>
                   <div className="flex items-center gap-1.5 text-blue-400 font-medium group-hover:text-white transition-colors">
                     <span>{option.actionLabel}</span>
-                    <ActionIcon className="w-3.5 h-3.5" />
+                    <ActionIcon className="w-3.5 h-3.5" aria-hidden="true" />
                   </div>
                 </div>
               </div>
@@ -115,6 +115,7 @@ export default function Contact() {
                 <button
                   key={`${language}-${idx}`}
                   onClick={option.action}
+                  aria-label={`Copy email address ${option.value}`}
                   className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
                 >
                   <GlassCard className="h-44 group cursor-pointer" glowColor={option.color}>
@@ -130,6 +131,7 @@ export default function Contact() {
                 href={option.link}
                 target={option.link !== "#" ? "_blank" : "_self"}
                 rel="noopener noreferrer"
+                aria-label={`Open ${option.name} link: ${option.value}`}
                 className="block hover:no-underline cursor-pointer"
               >
                 <GlassCard className="h-44 group" glowColor={option.color}>
@@ -142,10 +144,10 @@ export default function Contact() {
 
         {/* Footer citation */}
         <div className="mt-24 pt-8 border-t border-slate-900 text-center">
-          <p className="text-xs text-slate-600 font-light font-sans tracking-wide">
+          <p className="text-xs text-slate-400 font-light font-sans tracking-wide">
             {t("contact_footer_desc")}
           </p>
-          <p className="text-[10px] text-slate-700 font-light font-sans mt-1">
+          <p className="text-[10px] text-slate-400 font-light font-sans mt-1">
             &copy; {new Date().getFullYear()} {t("contact_footer_copy")}
           </p>
         </div>
