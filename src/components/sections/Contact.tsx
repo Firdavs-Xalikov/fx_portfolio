@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
-import { Mail, Check, Copy, ArrowUpRight } from "lucide-react";
+import { Mail, Check, Copy, ArrowUpRight, Terminal } from "lucide-react";
 import { useLanguage } from "../../context/useLanguage";
 
 import TelegramIcon from "../icons/TelegramIcon";
@@ -83,53 +83,68 @@ export default function Contact() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.1,
         delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="contact" className="py-28 md:py-36 px-6 bg-[#0A2027]">
+    <section id="contact" className="py-28 md:py-36 px-6 bg-[#050505] relative">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.35 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-20"
         >
-          <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-3">
-            {t("contact_tag")}
+          <span className="font-mono text-xs uppercase tracking-[0.15em] text-[#00F0FF] font-bold block mb-3">
+            // OPERATING SYSTEM TERMINAL
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EAF6F6] tracking-tight mb-4">
-            {t("contact_title")}
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 text-cyber-glow">
+            ESTABLISH COMMUNICATION
           </h2>
           <p className="text-[#6B8F94] max-w-md mx-auto font-normal text-base mb-6">
             {t("contact_subtitle")}
           </p>
 
-          {/* Live Tashkent Local Time & Availability Status Bar */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#1C3B42] bg-[#0F2830] font-digital text-xs text-[#6B8F94] tracking-[0.08em]">
-            <motion.span
-              animate={shouldReduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-2 h-2 rounded-full bg-[#00C2D1] glow-chlorine"
-            />
-            <span className="text-[#00C2D1] font-bold">STATUS: AVAILABLE</span>
-            <span className="text-[#1C3B42]">|</span>
+          {/* Live Cyber Status Bar */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 border border-[#00F0FF]/30 bg-[#0A0D14] font-mono text-xs text-[#6B8F94] glow-blue">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] animate-pulse" />
+            <span className="text-[#00F0FF] font-bold">TERMINAL ONLINE</span>
+            <span className="text-[#00F0FF]/30">|</span>
             <span>Tashkent, UZB {localTime ? `· ${localTime}` : ""}</span>
+          </div>
+        </motion.div>
+
+        {/* Cyberpunk Terminal Command Window */}
+        <motion.div
+          variants={shouldReduceMotion ? undefined : containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mb-12 border border-[#00F0FF]/30 bg-[#0A0D14] p-4 font-mono text-xs text-[#00F0FF]"
+        >
+          <div className="flex items-center gap-2 border-b border-[#00F0FF]/20 pb-3 mb-4 text-[#6B8F94]">
+            <Terminal className="w-4 h-4 text-[#00F0FF]" />
+            <span>bash --login firdavs@cyber-os:~</span>
+          </div>
+          <div className="space-y-1">
+            <p>&gt; sys.connect --target=&quot;firdavs.xalikovv@gmail.com&quot;</p>
+            <p className="text-[#9D00FF]">&gt; [OK] CONNECTION_ESTABLISHED // ENCRYPTION_SECURE</p>
+            <p className="text-white">&gt; Select communication channel below:</p>
           </div>
         </motion.div>
 
@@ -149,29 +164,29 @@ export default function Contact() {
               <div className="flex flex-col justify-between h-full p-8">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-digital text-[10px] uppercase font-bold text-[#00C2D1] tracking-[0.12em]">
+                    <span className="font-mono text-[10px] uppercase font-bold text-[#00F0FF] tracking-widest">
                       {option.name}
                     </span>
                     <motion.div
-                      whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
-                      transition={{ duration: 0.15 }}
-                      className="w-9 h-9 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center group-hover:border-[#00C2D1] transition-colors"
+                      whileHover={shouldReduceMotion ? undefined : { scale: 1.15 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      className="w-9 h-9 border border-[#00F0FF]/30 bg-[#050505] flex items-center justify-center group-hover:border-[#9D00FF] transition-colors glow-blue"
                     >
-                      <Icon className="w-4 h-4 text-[#00C2D1]" aria-hidden="true" />
+                      <Icon className="w-4 h-4 text-[#00F0FF]" aria-hidden="true" />
                     </motion.div>
                   </div>
-                  <div className="font-display text-lg font-bold text-[#EAF6F6] break-all mb-8">
+                  <div className="font-display text-lg font-bold text-white break-all mb-8">
                     {option.value}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs border-t border-[#1C3B42] pt-4">
-                  <span className="font-digital text-[10px] text-[#6B8F94] uppercase font-semibold tracking-[0.12em]">
-                    {t("contact_status")}
+                <div className="flex items-center justify-between text-xs border-t border-[#00F0FF]/20 pt-4">
+                  <span className="font-mono text-[10px] text-[#6B8F94] uppercase font-semibold">
+                    STATUS: READY
                   </span>
-                  <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-[#00C2D1] group-hover:underline tracking-[0.08em] transition-colors">
+                  <div className="flex items-center gap-1.5 font-mono text-xs font-bold text-[#00F0FF] group-hover:text-white tracking-wider transition-colors">
                     <span>{option.actionLabel}</span>
-                    <ActionIcon className="w-3.5 h-3.5 text-[#00C2D1]" aria-hidden="true" />
+                    <ActionIcon className="w-3.5 h-3.5 text-[#00F0FF]" aria-hidden="true" />
                   </div>
                 </div>
               </div>
@@ -186,10 +201,10 @@ export default function Contact() {
                     className="w-full text-left bg-transparent border-0 p-0 m-0 cursor-pointer block hover:no-underline"
                   >
                     <motion.div
-                      animate={copied && !shouldReduceMotion ? { scale: [1, 1.03, 1] } : undefined}
+                      animate={copied && !shouldReduceMotion ? { scale: [1, 1.04, 1] } : undefined}
                       transition={{ duration: 0.2 }}
                     >
-                      <GlassCard className="h-48 group cursor-pointer">
+                      <GlassCard className="h-48 group cursor-pointer border-[#00F0FF]/30 hover:border-[#9D00FF]">
                         {CardContent}
                       </GlassCard>
                     </motion.div>
@@ -207,7 +222,7 @@ export default function Contact() {
                   aria-label={`Open ${option.name} link: ${option.value}`}
                   className="block hover:no-underline cursor-pointer"
                 >
-                  <GlassCard className="h-48 group">
+                  <GlassCard className="h-48 group border-[#00F0FF]/30 hover:border-[#9D00FF]">
                     {CardContent}
                   </GlassCard>
                 </a>
@@ -218,16 +233,16 @@ export default function Contact() {
 
         {/* Footer Citation */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: 0.2 }}
-          className="mt-24 pt-8 border-t border-[#1C3B42] text-center font-digital"
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="mt-24 pt-8 border-t border-[#00F0FF]/20 text-center font-mono"
         >
-          <p className="text-xs text-[#6B8F94] font-normal tracking-[0.12em]">
-            Engineered with Swimming Instrumentation Aesthetics.
+          <p className="text-xs text-[#6B8F94] font-normal tracking-widest uppercase">
+            Engineered with Cyberpunk HUD &amp; Futuristic Architecture.
           </p>
-          <p className="text-[10px] text-[#6B8F94] font-normal mt-1 tracking-[0.08em]">
+          <p className="text-[10px] text-[#6B8F94] font-normal mt-1 tracking-widest">
             &copy; {new Date().getFullYear()} {t("contact_footer_copy")}
           </p>
         </motion.div>

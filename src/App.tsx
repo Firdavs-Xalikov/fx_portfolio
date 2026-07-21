@@ -1,17 +1,19 @@
 import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SmoothScroll from "./components/ui/SmoothScroll";
+import CyberWorld3D from "./components/ui/CyberWorld3D";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
-import LaneLine from "./components/ui/LaneLine";
-import SplitClock from "./components/ui/SplitClock";
 import Hero from "./components/sections/Hero";
 
-// Lazy load below-the-fold sections for optimal code-splitting & performance
+// Lazy load below-the-fold sections for optimal performance & code splitting
 const About = lazy(() => import("./components/sections/About"));
 const Timeline = lazy(() => import("./components/sections/Timeline"));
 const Skills = lazy(() => import("./components/sections/Skills"));
 const Projects = lazy(() => import("./components/sections/Projects"));
+const AiLab = lazy(() => import("./components/sections/AiLab"));
+const MoneyBusiness = lazy(() => import("./components/sections/MoneyBusiness"));
+const Cybersecurity = lazy(() => import("./components/sections/Cybersecurity"));
 const Achievements = lazy(() => import("./components/sections/Achievements"));
 const FutureGoals = lazy(() => import("./components/sections/FutureGoals"));
 const Contact = lazy(() => import("./components/sections/Contact"));
@@ -19,7 +21,7 @@ const Contact = lazy(() => import("./components/sections/Contact"));
 function SectionFallback() {
   return (
     <div className="py-24 px-6 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
-      <div className="w-8 h-8 rounded-full border-2 border-[#00C2D1]/20 border-t-[#00C2D1] animate-spin" />
+      <div className="w-8 h-8 rounded-full border-2 border-[#00F0FF]/20 border-t-[#00F0FF] animate-spin" />
     </div>
   );
 }
@@ -33,27 +35,24 @@ export default function App() {
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeOut" }}
-        className="relative text-[#EAF6F6] min-h-screen selection:bg-[#00C2D1]/30 selection:text-[#EAF6F6] overflow-x-hidden font-sans antialiased bg-[#0A2027]"
+        className="relative text-white min-h-screen selection:bg-[#00F0FF]/30 selection:text-white overflow-x-hidden font-sans antialiased bg-[#050505] cyber-scanlines"
       >
         {/* Accessible skip link */}
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to main content
         </a>
 
-        {/* Signature Swim Meet Split Clock Chronometer */}
-        <SplitClock />
+        {/* Enormous Animated 3D Cyberpunk World */}
+        <CyberWorld3D />
 
-        {/* Lane Line Spine */}
-        <LaneLine />
+        {/* Electric Blue / Purple Cursor Glow */}
+        <CursorGlow color="radial-gradient(circle 260px at center, rgba(0,240,255,0.12) 0%, transparent 80%)" />
 
-        {/* Re-themed Chlorine Cyan Cursor Glow */}
-        <CursorGlow />
-
-        {/* Sticky minimalist navigation header */}
+        {/* Sticky HUD navigation header */}
         <Navbar />
 
         {/* Page Sections */}
-        <main id="main-content" className="relative z-10 lg:pl-16">
+        <main id="main-content" className="relative z-10">
           <div id="hero">
             <Hero />
           </div>
@@ -73,6 +72,18 @@ export default function App() {
             
             <div id="projects">
               <Projects />
+            </div>
+
+            <div id="ailab">
+              <AiLab />
+            </div>
+
+            <div id="business">
+              <MoneyBusiness />
+            </div>
+
+            <div id="cyber">
+              <Cybersecurity />
             </div>
             
             <div id="achievements">

@@ -1,108 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-depth: #0A2027;
-  --color-depth-2: #0F2830;
-  --color-foam: #EAF6F6;
-  --color-mist: #6B8F94;
-  --color-hairline: #1C3B42;
-  --color-chlorine: #00C2D1;
-  --color-gold-medal: #D4A017;
+  --color-cyber-black: #050505;
+  --color-cyber-dark: #0A0D14;
+  --color-cyber-panel: rgba(10, 13, 20, 0.75);
+  --color-electric-blue: #00F0FF;
+  --color-neon-purple: #9D00FF;
+  --color-cyber-cyan: #00F0FF;
+  --color-cyber-gold: #FFD700;
   
-  --font-display: "Geist", "Inter", -apple-system, sans-serif;
-  --font-sans: "Inter", -apple-system, sans-serif;
-  --font-digital: "Space Mono", monospace;
-  --font-mono: "Space Mono", monospace;
+  --font-display: "Orbitron", sans-serif;
+  --font-hud: "Rajdhani", sans-serif;
+  --font-mono: "Share Tech Mono", monospace;
 }
 
 :root {
-  --depth: #0A2027;
-  --depth-2: #0F2830;
-  --foam: #EAF6F6;
-  --mist: #6B8F94;
-  --hairline: #1C3B42;
-  --chlorine: #00C2D1;
-  --gold-medal: #D4A017;
+  --cyber-black: #050505;
+  --cyber-dark: #0A0D14;
+  --electric-blue: #00F0FF;
+  --neon-purple: #9D00FF;
 }
 
-/* Custom Scrollbar */
+/* Custom Cyberpunk Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A2027;
+  background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1C3B42;
+  background: linear-gradient(180deg, #00F0FF, #9D00FF);
   border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #00C2D1;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #0A2027;
-  color: var(--foam);
+  background-color: #050505;
+  color: #FFFFFF;
 }
 
 body {
-  background-color: #0A2027;
-  color: var(--foam);
-  font-family: var(--font-sans);
+  background-color: #050505;
+  color: #FFFFFF;
+  font-family: var(--font-hud);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
 
-/* Digital Scoreboard LED Numeral Utility */
-.font-digital {
-  font-family: var(--font-digital);
-  letter-spacing: 0.08em;
+/* Futuristic Scanline Overlay */
+.cyber-scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0.3;
 }
 
-/* Chlorine Cyan Scoreboard Glow */
-.glow-chlorine {
-  box-shadow: 0 0 12px rgba(0, 194, 209, 0.35);
+/* Glowing Neon HUD Shadows & Borders */
+.glow-blue {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.2);
 }
 
-.text-chlorine-glow {
-  color: #00C2D1;
-  text-shadow: 0 0 8px rgba(0, 194, 209, 0.4);
+.glow-purple {
+  box-shadow: 0 0 15px rgba(157, 0, 255, 0.5), inset 0 0 10px rgba(157, 0, 255, 0.2);
 }
 
-/* Split-Timer Section Divider */
-.split-divider {
-  border-top: 1px dashed rgba(0, 194, 209, 0.2);
+.text-cyber-glow {
+  color: #00F0FF;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(157, 0, 255, 0.5);
 }
 
-/* Scoreboard Card Surface */
-.flat-panel {
-  background-color: #0F2830;
-  border: 1px solid #1C3B42;
-  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+.text-purple-glow {
+  color: #9D00FF;
+  text-shadow: 0 0 10px rgba(157, 0, 255, 0.7);
 }
 
-.flat-panel:hover {
-  border-color: rgba(0, 194, 209, 0.4);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+/* Cyberpunk Glass Hologram Panel */
+.cyber-panel {
+  background: rgba(10, 13, 20, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Perspective rules for tilt card */
+.cyber-panel:hover {
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+}
+
+/* Perspective rules */
 .perspective-1000 {
   perspective: 1000px;
 }
 
-/* Accessibility Focus Rings */
+/* Focus Visible */
 :focus-visible {
-  outline: 2px solid #00C2D1;
+  outline: 2px solid #00F0FF;
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
-/* Screen reader utility classes */
+/* Screen reader utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -113,22 +120,4 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-.focus\:not-sr-only:focus {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  width: auto;
-  height: auto;
-  padding: 0.75rem 1.25rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
-  z-index: 100;
-  background-color: #00C2D1;
-  color: #0A2027;
-  font-weight: 700;
-  border-radius: 0.25rem;
 }

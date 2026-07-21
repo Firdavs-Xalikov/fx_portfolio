@@ -1,9 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { ArrowDown, MessageSquare } from "lucide-react";
+import { ArrowDown, Cpu, Shield, Zap, Terminal } from "lucide-react";
 import { useLanguage } from "../../context/useLanguage";
 import MagneticButton from "../ui/MagneticButton";
-import SplitText from "../ui/SplitText";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -36,74 +35,84 @@ export default function Hero() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 border-b border-[#1C3B42]">
+    <section className="relative min-h-[95vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 border-b border-[#00F0FF]/20">
       <motion.div
         variants={shouldReduceMotion ? undefined : containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-4xl text-center flex flex-col items-center"
+        className="relative z-10 max-w-5xl text-center flex flex-col items-center"
       >
-        {/* Eyebrow Role Statement in Monospace with Split-Timer score badge */}
+        {/* HUD Target Reticle Badge */}
         <motion.div
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="mb-8 font-digital text-xs md:text-sm tracking-[0.12em] text-[#00C2D1] font-bold uppercase inline-flex items-center gap-2 px-4 py-1.5 border border-[#1C3B42] bg-[#0F2830]"
+          className="mb-8 font-mono text-xs md:text-sm tracking-[0.15em] text-[#00F0FF] font-bold uppercase inline-flex items-center gap-2 px-4 py-1.5 border border-[#00F0FF]/40 bg-[#0A0D14]/80 glow-blue"
         >
-          <span className="w-2 h-2 rounded-full bg-[#00C2D1] glow-chlorine" />
-          <span>STUDENT · FRONTEND DEVELOPER · CS &amp; AI</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] animate-pulse" />
+          <span>CYBERNETIC INTERFACE // ACTIVE PROTOCOL</span>
         </motion.div>
 
-        {/* Hero Name with SplitText Character/Word Animation */}
-        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-8">
-          <SplitText
-            text={t("hero_title")}
-            as="h1"
-            mode="words"
-            className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EAF6F6] tracking-tighter leading-none"
-          />
+        {/* Massive Hero Name in Cyberpunk Orbitron Display */}
+        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-6">
+          <h1 className="font-display font-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white tracking-tight leading-none text-cyber-glow">
+            {t("hero_title")}
+          </h1>
         </motion.div>
 
-        {/* Scoreboard Split-Stat Badges */}
+        {/* Subtitle Statements */}
         <motion.div
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="flex flex-wrap justify-center gap-4 mb-8 font-digital text-xs uppercase tracking-[0.12em]"
+          className="font-hud font-bold text-lg sm:text-2xl md:text-3xl text-[#00F0FF] tracking-wider uppercase mb-8 flex flex-wrap justify-center gap-3"
         >
-          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
-            SWIM DISCIPLINE <span className="text-[#00C2D1] font-bold ml-1">06 YEARS</span>
+          <span className="flex items-center gap-1.5">
+            <Zap className="w-5 h-5 text-[#00F0FF]" /> FRONTEND DEVELOPER
+          </span>
+          <span className="text-[#9D00FF]">•</span>
+          <span className="flex items-center gap-1.5">
+            <Cpu className="w-5 h-5 text-[#9D00FF]" /> AI BUILDER
+          </span>
+          <span className="text-[#00F0FF]">•</span>
+          <span className="flex items-center gap-1.5">
+            <Shield className="w-5 h-5 text-[#00F0FF]" /> CYBERSECURITY ENTHUSIAST
+          </span>
+        </motion.div>
+
+        {/* HUD Diagnostic Telemetry Panel */}
+        <motion.div
+          variants={shouldReduceMotion ? undefined : itemVariants}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 w-full max-w-3xl font-mono text-xs uppercase"
+        >
+          <div className="p-3 border border-[#00F0FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
+            <span className="text-[#6B8F94]">SYSTEM_CORE</span>
+            <span className="text-[#00F0FF] font-bold">ONLINE [99.9%]</span>
           </div>
-          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
-            LANGUAGES <span className="text-[#00C2D1] font-bold ml-1">03 ACTIVE</span>
+          <div className="p-3 border border-[#9D00FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
+            <span className="text-[#6B8F94]">QUANTUM_ENCRYPTION</span>
+            <span className="text-[#9D00FF] font-bold">ACTIVE [256-BIT]</span>
           </div>
-          <div className="px-3 py-1.5 border border-[#1C3B42] bg-[#0F2830] text-[#6B8F94]">
-            FOCUS <span className="text-[#00C2D1] font-bold ml-1">REACT &amp; AI</span>
+          <div className="p-3 border border-[#00F0FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
+            <span className="text-[#6B8F94]">SWIM_DISCIPLINE</span>
+            <span className="text-[#00F0FF] font-bold">06 YEARS</span>
           </div>
         </motion.div>
 
-        {/* Subtitle / Discipline Statement */}
+        {/* Subtitle Narrative */}
         <motion.p
           variants={shouldReduceMotion ? undefined : itemVariants}
           className="text-base sm:text-xl text-[#6B8F94] max-w-2xl font-normal leading-relaxed mb-10"
         >
-          Carrying 6 years of competitive swimming discipline into software engineering — building scalable web applications with structural precision and focus.
+          Carrying 6 years of competitive swimming discipline into software engineering — engineering high-performance WebGL interfaces &amp; AI architectures with structural precision.
         </motion.p>
 
-        {/* Motto Citation */}
-        <motion.p
-          variants={shouldReduceMotion ? undefined : itemVariants}
-          className="font-mono text-xs tracking-[0.08em] text-[#6B8F94] max-w-lg mb-12 italic"
-        >
-          "{t("hero_intro")}"
-        </motion.p>
-
-        {/* CTA Buttons with Magnetic Pull */}
+        {/* CTA Buttons */}
         <motion.div
           variants={shouldReduceMotion ? undefined : itemVariants}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center"
@@ -112,8 +121,8 @@ export default function Hero() {
             onClick={handleScrollToAchievements}
             ariaLabel="Scroll down to View Achievements section"
           >
-            <div className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#00C2D1] text-[#0A2027] font-digital text-xs font-bold uppercase tracking-[0.12em] hover:bg-[#EAF6F6] transition-colors cursor-pointer glow-chlorine">
-              <span>{t("hero_btn_achievements")}</span>
+            <div className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#00F0FF] text-[#050505] font-display text-xs font-black uppercase tracking-wider hover:bg-white transition-colors cursor-pointer glow-blue">
+              <span>INITIALIZE PROTOCOL</span>
               <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
             </div>
           </MagneticButton>
@@ -122,18 +131,18 @@ export default function Hero() {
             onClick={handleScrollToContact}
             ariaLabel="Scroll down to Connect with Me contact section"
           >
-            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0F2830] border border-[#1C3B42] text-[#EAF6F6] hover:border-[#00C2D1] font-digital text-xs font-bold uppercase tracking-[0.12em] transition-colors cursor-pointer">
-              <MessageSquare className="w-4 h-4 text-[#00C2D1]" aria-hidden="true" />
-              <span>{t("hero_btn_contact")}</span>
+            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0A0D14] border border-[#00F0FF]/40 text-white hover:border-[#9D00FF] font-display text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer">
+              <Terminal className="w-4 h-4 text-[#00F0FF]" aria-hidden="true" />
+              <span>ACCESS CYBER LAB</span>
             </div>
           </MagneticButton>
         </motion.div>
       </motion.div>
 
       {/* Subtle Scroll Hint */}
-      <div className="mt-16 flex flex-col items-center gap-2 font-digital text-[10px] text-[#6B8F94] uppercase tracking-[0.12em]">
-        <span>{t("hero_scroll")}</span>
-        <div className="w-[1px] h-6 bg-[#1C3B42]" />
+      <div className="mt-16 flex flex-col items-center gap-2 font-mono text-[10px] text-[#6B8F94] uppercase tracking-widest">
+        <span>SCROLL TO ENGAGE</span>
+        <div className="w-[1px] h-6 bg-[#00F0FF]/40" />
       </div>
     </section>
   );
