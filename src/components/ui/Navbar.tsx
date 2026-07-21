@@ -41,17 +41,18 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const sectionIds = ["hero", "about", "timeline", "skills", "projects", "achievements", "goals", "contact"];
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
-      for (const link of NAV_LINKS) {
-        const section = document.getElementById(link.id);
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
         if (section) {
           const top = section.offsetTop;
           const height = section.offsetHeight;
 
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.id);
+            setActiveSection(id);
             break;
           }
         }
@@ -61,7 +62,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [language]);
+  }, []);
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);

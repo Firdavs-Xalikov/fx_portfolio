@@ -1,74 +1,19 @@
 import GlassCard from "../ui/GlassCard";
-import { Code2, Cpu, Wrench, Globe } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-
-interface SkillItem {
-  name: string;
-  level?: string;
-}
-
-interface SkillCategory {
-  title: string;
-  description: string;
-  icon: any;
-  skills: SkillItem[];
-  accentColor: string;
-}
+import { SKILLS_CATEGORIES } from "../../data/skills";
 
 export default function Skills() {
   const { t, language } = useLanguage();
 
-  const categories: SkillCategory[] = [
-    {
-      title: t("skills_prog_title"),
-      description: t("skills_prog_desc"),
-      icon: Code2,
-      accentColor: "rgba(59, 130, 246, 0.15)",
-      skills: [
-        { name: "HTML" },
-        { name: "CSS" },
-        { name: "JavaScript" },
-        { name: "React" },
-        { name: "Tailwind CSS" },
-        { name: "Node.js" },
-      ],
-    },
-    {
-      title: t("skills_tech_title"),
-      description: t("skills_tech_desc"),
-      icon: Cpu,
-      accentColor: "rgba(6, 182, 212, 0.15)",
-      skills: [
-        { name: "Artificial Intelligence tools" },
-        { name: "AI-assisted development" },
-        { name: "Prompt engineering" },
-        { name: "Learning modern technologies" },
-      ],
-    },
-    {
-      title: t("skills_lang_title"),
-      description: t("skills_lang_desc"),
-      icon: Globe,
-      accentColor: "rgba(59, 130, 246, 0.12)",
-      skills: [
-        { name: language === "uz" ? "O'zbekcha (Ona tili)" : language === "ru" ? "Узбекский (Родной)" : "Uzbek (Native)" },
-        { name: language === "uz" ? "Ruscha (Erkin)" : language === "ru" ? "Русский (Свободно)" : "Russian (Fluent)" },
-        { name: language === "uz" ? "Inglizcha (IELTS 6.5)" : language === "ru" ? "Английский (IELTS 6.5)" : "English (IELTS 6.5)" },
-      ],
-    },
-    {
-      title: t("skills_other_title"),
-      description: t("skills_other_desc"),
-      icon: Wrench,
-      accentColor: "rgba(226, 232, 240, 0.15)",
-      skills: [
-        { name: language === "uz" ? "Muammoni hal qilish" : language === "ru" ? "Решение задач" : "Problem solving" },
-        { name: language === "uz" ? "Muloqot" : language === "ru" ? "Коммуникация" : "Communication" },
-        { name: language === "uz" ? "Logistika" : language === "ru" ? "Логистика" : "Logistics" },
-        { name: language === "uz" ? "Mustaqil o'rganish" : language === "ru" ? "Самообучение" : "Self-learning" },
-      ],
-    },
-  ];
+  const categories = SKILLS_CATEGORIES.map((cat) => ({
+    title: t(cat.titleKey),
+    description: t(cat.descriptionKey),
+    icon: cat.icon,
+    accentColor: cat.accentColor,
+    skills: cat.skills.map((s) => ({
+      name: s.name[language] || s.name["en"],
+    })),
+  }));
 
   return (
     <section id="skills" className="py-28 px-6 bg-black relative overflow-hidden">
