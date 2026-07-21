@@ -1,7 +1,64 @@
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+
 interface CursorGlowProps {
   color?: string;
 }
 
-export default function CursorGlow(_props: CursorGlowProps) {
-  return null;
+export default function CursorGlow({
+  color = "radial-gradient(circle 280px at center, rgba(47,175,131,0.10) 0%, transparent 80%)"
+}: CursorGlowProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  const mouseX = useMotionValue(-500);
+  const mouseY = useMotionValue(-500);
+
+  const springConfig = { damping: 28, stiffness: 200, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    // Disable cursor glow on touch screens or if reduced motion is requested
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch || shouldReduceMotion) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
+    };
+
+    const handleMouseLeave = () => setIsVisible(false);
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.body.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [mouseX, mouseY, isVisible, shouldReduceMotion]);
+
+  if (shouldReduceMotion) return null;
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="fixed inset-0 pointer-events-none z-[2]"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.5s ease",
+      }}
+    >
+      <motion.div
+        className="absolute w-[560px] h-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+        style={{
+          left: smoothX,
+          top: smoothY,
+          background: color,
+        }}
+      />
+    </motion.div>
+  );
 }

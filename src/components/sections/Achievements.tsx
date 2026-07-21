@@ -1,4 +1,5 @@
 import GlassCard from "../ui/GlassCard";
+import CountUp from "../ui/CountUp";
 import { 
   Award, 
   BookOpen, 
@@ -71,12 +72,12 @@ export default function Achievements() {
                     </span>
                   </div>
 
-                  {/* Primary Metric Callout with Metallic Gold Text-Fill */}
+                  {/* Primary Metric Callout with Count-Up and Gold Text-Fill */}
                   <div className="mb-6">
                     <div className={`font-display text-3xl font-extrabold tracking-tight ${
                       isGoldHighlighted ? "text-gold-gradient inline-block pb-1" : "text-[#F5F1E8]"
                     }`}>
-                      {item.metric}
+                      <CountUp value={item.metric} />
                     </div>
                     {item.subMetric && (
                       <div className="font-mono text-xs text-[#9198A5] font-medium mt-2 tracking-[0.06em]">

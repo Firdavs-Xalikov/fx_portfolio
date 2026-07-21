@@ -3,9 +3,7 @@
 
 @theme {
   --color-abyss: #05070C;
-  --color-[#0A1220]: #0A1220;
-  --color-[#0D131F]: #0D131F;
-  --color-[#0A0F19]: #0A0F19;
+  --color-midnight: #0B0F18;
   --color-ivory: #F5F1E8;
   --color-slate: #9198A5;
   --color-hairline-gold: rgba(251, 245, 183, 0.08);
@@ -44,15 +42,37 @@ html {
   color: var(--ivory);
 }
 
+/* Ambient Background Motion */
+@keyframes backgroundDrift {
+  0% { background-position: 50% -10%; }
+  50% { background-position: 54% -5%; }
+  100% { background-position: 50% -10%; }
+}
+
 body {
   background: radial-gradient(ellipse 120% 80% at 50% -10%, #0A1220 0%, #05070C 45%, #000000 100%);
   background-attachment: fixed;
+  background-size: 100% 100%;
+  animation: backgroundDrift 25s ease-in-out infinite;
   color: var(--ivory);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+}
+
+/* Gold Shimmer Sweep Animation */
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 /* Metallic Gold Text Gradient */
@@ -62,9 +82,16 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  /* Fallback color for legacy renderers */
+  animation: goldShimmer 8s ease-in-out infinite;
+  
   @supports not (-webkit-background-clip: text) {
     color: #BF9B30;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gold-gradient {
+    animation: none;
   }
 }
 
@@ -92,6 +119,15 @@ body {
 .flat-panel:hover {
   border-color: rgba(251, 245, 183, 0.25);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Perspective rules for tilt card */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
 }
 
 /* Accessibility Focus Rings */

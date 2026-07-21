@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const SECTIONS = [
   { id: "hero", num: "01", label: "HERO" },
@@ -15,6 +15,7 @@ const SECTIONS = [
 export default function LaneLine() {
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
+  const [pulsingSection, setPulsingSection] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -33,7 +34,14 @@ export default function LaneLine() {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section.id);
+            if (activeSection !== section.id) {
+              setActiveSection(section.id);
+              // Trigger brief glow pulse animation on section activation
+              if (!shouldReduceMotion) {
+                setPulsingSection(section.id);
+                setTimeout(() => setPulsingSection(null), 600);
+              }
+            }
             break;
           }
         }
@@ -43,7 +51,7 @@ export default function LaneLine() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [activeSection, shouldReduceMotion]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -76,6 +84,8 @@ export default function LaneLine() {
         <div className="absolute inset-y-0 left-0 w-max flex flex-col justify-between py-24 pointer-events-auto">
           {SECTIONS.map((sec) => {
             const isActive = activeSection === sec.id;
+            const isPulsing = pulsingSection === sec.id;
+
             return (
               <button
                 key={sec.id}
@@ -83,8 +93,21 @@ export default function LaneLine() {
                 aria-label={`Jump to ${sec.num} · ${sec.label}`}
                 className="group flex items-center gap-3 py-1 cursor-pointer focus:outline-none"
               >
-                {/* Tick Mark */}
-                <div
+                {/* Tick Mark with Active Glow Pulse Animation */}
+                <motion.div
+                  animate={
+                    isPulsing && !shouldReduceMotion
+                      ? {
+                          scale: [1, 1.4, 1],
+                          boxShadow: [
+                            "0 0 4px rgba(47,175,131,0.4)",
+                            "0 0 16px rgba(47,175,131,0.9)",
+                            "0 0 6px rgba(47,175,131,0.5)",
+                          ],
+                        }
+                      : undefined
+                  }
+                  transition={{ duration: 0.6 }}
                   className={`h-[2px] transition-all duration-300 ${
                     isActive
                       ? "w-4 bg-jewel-emerald emerald-bioluminescent-glow"
@@ -92,7 +115,7 @@ export default function LaneLine() {
                   }`}
                 />
                 
-                {/* Signature Numeral (Gold Gradient when active) & Mono Label */}
+                {/* Signature Numeral & Mono Label with 0.12em tracking */}
                 <div
                   className={`font-mono text-[11px] tracking-[0.12em] uppercase transition-all duration-200 flex items-center gap-1.5 ${
                     isActive
