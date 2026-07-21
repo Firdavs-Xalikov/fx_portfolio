@@ -23,55 +23,66 @@ export default function LaneLine() {
   const shouldReduceMotion = useReducedMotion();
   const fillLineRef = useRef<HTMLDivElement>(null);
 
-  // Frame-accurate GSAP ScrollTrigger fill animation
+  // Frame-accurate GSAP ScrollTrigger fill animation & active section detection
   useEffect(() => {
-    if (shouldReduceMotion || !fillLineRef.current) return;
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 250;
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
 
+      if (isAtBottom) {
+        setActiveSection((prev) => {
+          if (prev !== "contact") {
+            if (!shouldReduceMotion) {
+              setPulsingSection("contact");
+              setTimeout(() => setPulsingSection(null), 600);
+            }
+            return "contact";
+          }
+          return prev;
+        });
+        return;
+      }
+
+      for (const section of SECTIONS) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection((prev) => {
+              if (prev !== section.id) {
+                if (!shouldReduceMotion) {
+                  setPulsingSection(section.id);
+                  setTimeout(() => setPulsingSection(null), 600);
+                }
+                return section.id;
+              }
+              return prev;
+            });
+            break;
+          }
+        }
+      }
+    };
+
+    // Frame-accurate GSAP ScrollTrigger for smooth fill progress
     const st = ScrollTrigger.create({
       start: "top top",
       end: "bottom bottom",
       onUpdate: (self) => {
         const progress = self.progress * 100;
         setScrollPercent(progress);
+        handleScroll();
       },
     });
 
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => {
       st.kill();
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [shouldReduceMotion]);
-
-  // Section observer with IntersectionObserver
-  useEffect(() => {
-    const sectionElements = SECTIONS.map((sec) => document.getElementById(sec.id)).filter(
-      Boolean
-    ) as HTMLElement[];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const newActiveId = entry.target.id;
-            setActiveSection((prev) => {
-              if (prev !== newActiveId) {
-                if (!shouldReduceMotion) {
-                  setPulsingSection(newActiveId);
-                  setTimeout(() => setPulsingSection(null), 600);
-                }
-                return newActiveId;
-              }
-              return prev;
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.3,
-      }
-    );
-
-    sectionElements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
   }, [shouldReduceMotion]);
 
   const scrollToSection = (id: string) => {
