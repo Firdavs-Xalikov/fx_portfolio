@@ -90,7 +90,7 @@ const baseTranslations = {
     contact_tag: "Inquire",
     contact_title: "Connect With Me",
     contact_subtitle: "Reach out for academic collaborations, software engineering opportunities, or professional discussions.",
-    contact_pochta: "Pochta Address",
+    contact_pochta: "Email Address",
     contact_telegram: "Telegram Signal",
     contact_github: "GitHub Profile",
     contact_instagram: "Instagram Account",
