@@ -1,7 +1,7 @@
 import { useState } from "react";
 import GlassCard from "../ui/GlassCard";
 import { Mail, Check, Copy, ArrowUpRight } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 
 import TelegramIcon from "../icons/TelegramIcon";
 import GitHubIcon from "../icons/GitHubIcon";

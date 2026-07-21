@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import GlassCard from "../ui/GlassCard";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 import GitHubIcon from "../icons/GitHubIcon";
 
 interface ProjectItem {

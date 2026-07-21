@@ -1,5 +1,5 @@
 import GlassCard from "../ui/GlassCard";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 import { SKILLS_CATEGORIES } from "../../data/skills";
 
 export default function Skills() {

@@ -1,5 +1,5 @@
 import { Compass, Cpu, TrendingUp } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 
 export default function FutureGoals() {
   const { t, language } = useLanguage();

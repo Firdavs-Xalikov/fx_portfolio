@@ -7,7 +7,7 @@ import {
   Trophy, 
   Globe
 } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 
 const iconMap: Record<string, any> = {
   Award,

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 import type { Language } from "../../context/LanguageContext";
 
 const LANG_OPTIONS: { code: Language; flag: string; label: string }[] = [

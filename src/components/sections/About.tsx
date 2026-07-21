@@ -1,6 +1,6 @@
 import GlassCard from "../ui/GlassCard";
 import { User, Shield, Target, Compass } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/useLanguage";
 
 export default function About() {
   const { t } = useLanguage();

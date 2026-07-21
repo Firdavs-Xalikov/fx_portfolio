@@ -1,16 +1,12 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
+import { LanguageContext } from "./languageContextInstance";
+import type { Language } from "./languageContextInstance";
 import { PROJECTS_DATA } from "../data/projects";
 import { TIMELINE_EVENTS_DATA } from "../data/timeline";
 import { ACHIEVEMENTS_DATA } from "../data/achievements";
 
-export type Language = "en" | "uz" | "ru";
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => any;
-}
+export type { Language };
 
 const baseTranslations = {
   en: {
@@ -335,8 +331,6 @@ const translations = {
   ru: getDynamicTranslations("ru"),
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
@@ -363,12 +357,4 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       {children}
     </LanguageContext.Provider>
   );
-}
-
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context;
 }

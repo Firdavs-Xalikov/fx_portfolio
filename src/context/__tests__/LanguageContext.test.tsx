@@ -1,6 +1,7 @@
 import { render, screen, act } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { LanguageProvider, useLanguage } from "../LanguageContext";
+import { LanguageProvider } from "../LanguageContext";
+import { useLanguage } from "../useLanguage";
 
 function TestConsumer() {
   const { language, setLanguage, t } = useLanguage();
