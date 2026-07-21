@@ -1,14 +1,25 @@
+import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import CursorGlow from "./components/ui/CursorGlow";
 import Navbar from "./components/ui/Navbar";
 import Hero from "./components/sections/Hero";
-import About from "./components/sections/About";
-import Timeline from "./components/sections/Timeline";
-import Skills from "./components/sections/Skills";
-import Projects from "./components/sections/Projects";
-import Achievements from "./components/sections/Achievements";
-import FutureGoals from "./components/sections/FutureGoals";
-import Contact from "./components/sections/Contact";
+
+// Lazy load below-the-fold sections for optimal code-splitting & performance
+const About = lazy(() => import("./components/sections/About"));
+const Timeline = lazy(() => import("./components/sections/Timeline"));
+const Skills = lazy(() => import("./components/sections/Skills"));
+const Projects = lazy(() => import("./components/sections/Projects"));
+const Achievements = lazy(() => import("./components/sections/Achievements"));
+const FutureGoals = lazy(() => import("./components/sections/FutureGoals"));
+const Contact = lazy(() => import("./components/sections/Contact"));
+
+function SectionFallback() {
+  return (
+    <div className="py-24 px-6 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
+      <div className="w-12 h-12 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
+    </div>
+  );
+}
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion();
@@ -40,33 +51,35 @@ export default function App() {
           <Hero />
         </div>
         
-        <div id="about">
-          <About />
-        </div>
-        
-        <div id="journey">
-          <Timeline />
-        </div>
-        
-        <div id="skills">
-          <Skills />
-        </div>
-        
-        <div id="projects">
-          <Projects />
-        </div>
-        
-        <div id="achievements">
-          <Achievements />
-        </div>
-        
-        <div id="goals">
-          <FutureGoals />
-        </div>
-        
-        <div id="contact">
-          <Contact />
-        </div>
+        <Suspense fallback={<SectionFallback />}>
+          <div id="about">
+            <About />
+          </div>
+          
+          <div id="journey">
+            <Timeline />
+          </div>
+          
+          <div id="skills">
+            <Skills />
+          </div>
+          
+          <div id="projects">
+            <Projects />
+          </div>
+          
+          <div id="achievements">
+            <Achievements />
+          </div>
+          
+          <div id="goals">
+            <FutureGoals />
+          </div>
+          
+          <div id="contact">
+            <Contact />
+          </div>
+        </Suspense>
       </main>
     </motion.div>
   );
