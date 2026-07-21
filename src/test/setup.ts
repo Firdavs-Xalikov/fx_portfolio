@@ -43,6 +43,25 @@ if (typeof window !== "undefined" && !window.IntersectionObserver) {
   });
 }
 
+// Mock ResizeObserver for embla-carousel and react-wrap-balancer in jsdom
+if (typeof window !== "undefined" && !window.ResizeObserver) {
+  class MockResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  Object.defineProperty(window, "ResizeObserver", {
+    writable: true,
+    configurable: true,
+    value: MockResizeObserver,
+  });
+  Object.defineProperty(global, "ResizeObserver", {
+    writable: true,
+    configurable: true,
+    value: MockResizeObserver,
+  });
+}
+
 // Mock canvas.getContext and requestAnimationFrame for jsdom
 if (typeof window !== "undefined") {
   HTMLCanvasElement.prototype.getContext = (() => {

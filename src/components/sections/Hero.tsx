@@ -3,6 +3,7 @@ import type { Variants } from "framer-motion";
 import { ArrowDown, MessageSquare } from "lucide-react";
 import { useLanguage } from "../../context/useLanguage";
 import MagneticButton from "../ui/MagneticButton";
+import SplitText from "../ui/SplitText";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -22,7 +23,7 @@ export default function Hero() {
     }
   };
 
-  // Staggered reveal variants typed with Variants
+  // Staggered reveal variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -59,13 +60,15 @@ export default function Hero() {
           STUDENT · FRONTEND DEVELOPER · CS &amp; AI
         </motion.div>
 
-        {/* Hero Name in Gold Gradient Text-Fill with Confident Weight (600) */}
-        <motion.h1
-          variants={shouldReduceMotion ? undefined : itemVariants}
-          className="font-display font-semibold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gold-gradient tracking-tighter leading-none mb-8"
-        >
-          {t("hero_title")}
-        </motion.h1>
+        {/* Hero Name with SplitText Character/Word Animation & Gold Gradient Text-Fill */}
+        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-8">
+          <SplitText
+            text={t("hero_title")}
+            as="h1"
+            mode="words"
+            className="font-display font-semibold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gold-gradient tracking-tighter leading-none"
+          />
+        </motion.div>
 
         {/* Subtitle / Discipline Statement */}
         <motion.p

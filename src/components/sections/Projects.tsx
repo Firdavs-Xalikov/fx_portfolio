@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 import GlassCard from "../ui/GlassCard";
 import MagneticButton from "../ui/MagneticButton";
 import { useLanguage } from "../../context/useLanguage";
@@ -56,6 +57,7 @@ function ProjectImage({ project }: { project: ProjectItem }) {
 export default function Projects() {
   const { t, language } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
+  const [emblaRef] = useEmblaCarousel({ loop: false, align: "start" });
 
   const projects = t("projects_list") as ProjectItem[];
 
@@ -102,86 +104,92 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Projects Grid with Staggered Scroll Entrance */}
-        <motion.div
-          variants={shouldReduceMotion ? undefined : containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 gap-12"
-        >
-          {projects.map((project, idx) => (
-            <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
-              <GlassCard className="p-0 overflow-hidden">
-                <ProjectImage project={project} />
+        {/* Mobile Embla Carousel / Desktop Grid */}
+        <div className="overflow-hidden md:overflow-visible" ref={emblaRef}>
+          <motion.div
+            variants={shouldReduceMotion ? undefined : containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className="flex md:grid md:grid-cols-1 gap-8 md:gap-12"
+          >
+            {projects.map((project, idx) => (
+              <motion.div
+                key={`${language}-${idx}`}
+                variants={shouldReduceMotion ? undefined : itemVariants}
+                className="flex-[0_0_100%] min-w-0 md:flex-none"
+              >
+                <GlassCard className="p-0 overflow-hidden">
+                  <ProjectImage project={project} />
 
-                {/* Project Info */}
-                <div className="p-8 md:p-10">
-                  {/* Title */}
-                  <h3 className="font-display text-2xl md:text-3xl font-bold text-[#F5F1E8] tracking-tight mb-4">
-                    {project.title}
-                  </h3>
+                  {/* Project Info */}
+                  <div className="p-8 md:p-10">
+                    {/* Title */}
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-[#F5F1E8] tracking-tight mb-4">
+                      {project.title}
+                    </h3>
 
-                  {/* Description */}
-                  <p className="text-base text-[#9198A5] font-normal leading-relaxed mb-6 max-w-3xl">
-                    {project.description}
-                  </p>
+                    {/* Description */}
+                    <p className="text-base text-[#9198A5] font-normal leading-relaxed mb-6 max-w-3xl">
+                      {project.description}
+                    </p>
 
-                  {/* Mono Tech Tag Chips with Micro-Interactions */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map((tag, tIdx) => (
-                      <motion.span
-                        key={tIdx}
-                        whileHover={
-                          shouldReduceMotion
-                            ? undefined
-                            : {
-                                y: -2,
-                                borderColor: "rgba(251, 245, 183, 0.25)",
-                                backgroundColor: "#0D131F",
-                              }
-                        }
-                        transition={{ duration: 0.2 }}
-                        className="font-mono text-xs border border-[rgba(251,245,183,0.08)] bg-[#05070C] text-[#9198A5] px-2.5 py-1 tracking-[0.06em] cursor-default transition-colors"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
+                    {/* Mono Tech Tag Chips with Micro-Interactions */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.tags.map((tag, tIdx) => (
+                        <motion.span
+                          key={tIdx}
+                          whileHover={
+                            shouldReduceMotion
+                              ? undefined
+                              : {
+                                  y: -2,
+                                  borderColor: "rgba(251, 245, 183, 0.25)",
+                                  backgroundColor: "#0D131F",
+                                }
+                          }
+                          transition={{ duration: 0.2 }}
+                          className="font-mono text-xs border border-[rgba(251,245,183,0.08)] bg-[#05070C] text-[#9198A5] px-2.5 py-1 tracking-[0.06em] cursor-default transition-colors"
+                        >
+                          {tag}
+                        </motion.span>
+                      ))}
+                    </div>
 
-                  {/* Action Buttons with Magnetic Pull */}
-                  <div className="flex items-center gap-4 pt-6 border-t border-[rgba(251,245,183,0.08)]">
-                    <MagneticButton ariaLabel={`Visit live website for ${project.title}`}>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-jewel-emerald text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_12px_rgba(47,175,131,0.2)]"
-                      >
-                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                        <span>{t("projects_visit")}</span>
-                      </a>
-                    </MagneticButton>
-
-                    {project.github && (
-                      <MagneticButton ariaLabel={`View GitHub repository for ${project.title}`}>
+                    {/* Action Buttons with Magnetic Pull */}
+                    <div className="flex items-center gap-4 pt-6 border-t border-[rgba(251,245,183,0.08)]">
+                      <MagneticButton ariaLabel={`Visit live website for ${project.title}`}>
                         <a
-                          href={project.github}
+                          href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-[#0A0F19] border border-[rgba(251,245,183,0.15)] text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:border-[#2FAF83] hover:text-[#2FAF83] transition-all cursor-pointer"
+                          className="flex items-center gap-2 px-6 py-3 bg-jewel-emerald text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:opacity-90 transition-opacity cursor-pointer shadow-[0_0_12px_rgba(47,175,131,0.2)]"
                         >
-                          <GitHubIcon className="w-4 h-4" aria-hidden="true" />
-                          <span>GitHub</span>
+                          <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                          <span>{t("projects_visit")}</span>
                         </a>
                       </MagneticButton>
-                    )}
+
+                      {project.github && (
+                        <MagneticButton ariaLabel={`View GitHub repository for ${project.title}`}>
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-6 py-3 bg-[#0A0F19] border border-[rgba(251,245,183,0.15)] text-[#F5F1E8] font-mono text-xs font-semibold uppercase tracking-[0.12em] hover:border-[#2FAF83] hover:text-[#2FAF83] transition-all cursor-pointer"
+                          >
+                            <GitHubIcon className="w-4 h-4" aria-hidden="true" />
+                            <span>GitHub</span>
+                          </a>
+                        </MagneticButton>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </GlassCard>
-            </motion.div>
-          ))}
-        </motion.div>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

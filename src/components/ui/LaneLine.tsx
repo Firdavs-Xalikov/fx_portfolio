@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SECTIONS = [
   { id: "hero", num: "01", label: "HERO" },
@@ -17,41 +21,58 @@ export default function LaneLine() {
   const [activeSection, setActiveSection] = useState("hero");
   const [pulsingSection, setPulsingSection] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const fillLineRef = useRef<HTMLDivElement>(null);
 
+  // Frame-accurate GSAP ScrollTrigger fill animation
   useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const currentProgress = (window.scrollY / totalHeight) * 100;
-        setScrollPercent(Math.min(100, Math.max(0, currentProgress)));
-      }
+    if (shouldReduceMotion || !fillLineRef.current) return;
 
-      // Check active section
-      const scrollPosition = window.scrollY + 250;
-      for (const section of SECTIONS) {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            if (activeSection !== section.id) {
-              setActiveSection(section.id);
-              // Trigger brief glow pulse animation on section activation
-              if (!shouldReduceMotion) {
-                setPulsingSection(section.id);
-                setTimeout(() => setPulsingSection(null), 600);
-              }
-            }
-            break;
-          }
-        }
-      }
+    const st = ScrollTrigger.create({
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const progress = self.progress * 100;
+        setScrollPercent(progress);
+      },
+    });
+
+    return () => {
+      st.kill();
     };
+  }, [shouldReduceMotion]);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSection, shouldReduceMotion]);
+  // Section observer with IntersectionObserver
+  useEffect(() => {
+    const sectionElements = SECTIONS.map((sec) => document.getElementById(sec.id)).filter(
+      Boolean
+    ) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const newActiveId = entry.target.id;
+            setActiveSection((prev) => {
+              if (prev !== newActiveId) {
+                if (!shouldReduceMotion) {
+                  setPulsingSection(newActiveId);
+                  setTimeout(() => setPulsingSection(null), 600);
+                }
+                return newActiveId;
+              }
+              return prev;
+            });
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    sectionElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [shouldReduceMotion]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -70,13 +91,14 @@ export default function LaneLine() {
         {/* Background Track Rule in Hairline Gold */}
         <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[rgba(251,245,183,0.08)]" />
 
-        {/* Jewel Emerald Fill Line with Bioluminescent Glow */}
+        {/* Jewel Emerald Fill Line with GSAP ScrollTrigger Sync */}
         <div
+          ref={fillLineRef}
           className="absolute top-0 left-[6.5px] w-[2px] bg-jewel-emerald"
           style={{
             height: `${scrollPercent}%`,
             boxShadow: shouldReduceMotion ? "none" : "0 0 12px 1px rgba(47, 175, 131, 0.35)",
-            transition: shouldReduceMotion ? "none" : "height 0.1s linear",
+            transition: shouldReduceMotion ? "none" : "height 0.05s linear",
           }}
         />
 
@@ -146,7 +168,7 @@ export default function LaneLine() {
           style={{
             width: `${scrollPercent}%`,
             boxShadow: shouldReduceMotion ? "none" : "0 0 10px rgba(47, 175, 131, 0.4)",
-            transition: shouldReduceMotion ? "none" : "width 0.1s linear",
+            transition: shouldReduceMotion ? "none" : "width 0.05s linear",
           }}
         />
       </div>
