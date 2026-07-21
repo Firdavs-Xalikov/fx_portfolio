@@ -79,6 +79,13 @@ const translations = {
         tags: ["Node.js", "Express", "Gemini AI", "SQLite", "Capacitor", "JavaScript"],
         image: "/readforge-preview.png",
         link: "https://readforge.uz"
+      },
+      {
+        title: "FX Biography",
+        description: "An interactive story-driven digital biography structured around abstract visual metaphors and emotional questions. Built with a 3D WebGL particle space, custom terminal commands, and an interactive dialogue agent to present academic and engineering milestones.",
+        tags: ["Next.js", "React", "Three.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
+        image: "/biography-preview.png",
+        link: "https://fx-biography.vercel.app"
       }
     ],
     
@@ -332,6 +339,13 @@ const translations = {
         tags: ["Node.js", "Express", "Gemini AI", "SQLite", "Capacitor", "JavaScript"],
         image: "/readforge-preview.png",
         link: "https://readforge.uz"
+      },
+      {
+        title: "FX Biography",
+        description: "Mavhum vizual metaforalar va hissiy savollar asosida yaratilgan interaktiv raqamli biografiya. Akademik va muhandislik yutuqlarini taqdim etish uchun 3D WebGL zarralar fazosi, maxsus terminal buyruqlari va interaktiv muloqot agenti bilan jihozlangan.",
+        tags: ["Next.js", "React", "Three.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
+        image: "/biography-preview.png",
+        link: "https://fx-biography.vercel.app"
       }
     ],
     
@@ -585,6 +599,13 @@ const translations = {
         tags: ["Node.js", "Express", "Gemini AI", "SQLite", "Capacitor", "JavaScript"],
         image: "/readforge-preview.png",
         link: "https://readforge.uz"
+      },
+      {
+        title: "FX Biography",
+        description: "Интерактивная цифровая автобиография, построенная на абстрактных визуальных метафорах и вопросах. Включает трехмерное космическое пространство частиц WebGL, кастомные терминальные команды и диалогового агента для презентации академических и инженерных вех.",
+        tags: ["Next.js", "React", "Three.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
+        image: "/biography-preview.png",
+        link: "https://fx-biography.vercel.app"
       }
     ],
     
