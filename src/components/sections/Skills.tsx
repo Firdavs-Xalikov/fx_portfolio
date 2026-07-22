@@ -49,7 +49,6 @@ export default function Skills() {
   return (
     <section id="skills" className="py-32 md:py-44 px-8 border-b border-white/[0.06] relative">
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -58,13 +57,13 @@ export default function Skills() {
           transition={{ duration: 0.45 }}
           className="mb-20 text-center md:text-left"
         >
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             {t("skills_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             {t("skills_title")}
           </h2>
-          <p className="text-zinc-400 max-w-xl font-light text-base">
+          <p className="text-[#A8B8CC] max-w-xl font-light text-base">
             {t("skills_subtitle")}
           </p>
         </motion.div>
@@ -81,7 +80,7 @@ export default function Skills() {
             <motion.div key={idx} variants={shouldReduceMotion ? undefined : cardVariants}>
               <GlassCard className="p-8 flex flex-col justify-between h-full">
                 <div>
-                  <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 mb-6">
+                  <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#71839A] mb-6">
                     {orbit.category}
                   </h3>
 
@@ -89,7 +88,7 @@ export default function Skills() {
                     {orbit.skills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className="font-sans text-xs border border-white/10 bg-[#08111F]/60 text-zinc-300 px-3 py-1.5 rounded-full tracking-wide"
+                        className="font-sans text-xs border border-white/10 bg-white/[0.03] text-[#A8B8CC] px-3 py-1.5 rounded-full tracking-wide hover:text-[#D8E6F5] hover:border-white/20 transition-colors"
                       >
                         {skill}
                       </span>
@@ -100,7 +99,6 @@ export default function Skills() {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

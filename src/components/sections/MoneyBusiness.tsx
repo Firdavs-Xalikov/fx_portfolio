@@ -46,7 +46,6 @@ export default function MoneyBusiness() {
   return (
     <section id="business" className="py-32 md:py-44 px-8 border-b border-white/[0.06] relative">
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -55,13 +54,13 @@ export default function MoneyBusiness() {
           transition={{ duration: 0.45 }}
           className="mb-20 text-center md:text-left"
         >
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             BUSINESS &amp; VENTURES
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             DIGITAL ECONOMY
           </h2>
-          <p className="text-zinc-400 max-w-xl font-light text-base">
+          <p className="text-[#A8B8CC] max-w-xl font-light text-base">
             Logistics operational discipline, financial analytics, and scalable digital product engineering.
           </p>
         </motion.div>
@@ -78,15 +77,15 @@ export default function MoneyBusiness() {
             <motion.div key={idx} variants={shouldReduceMotion ? undefined : itemVariants}>
               <GlassCard className="p-8 h-full flex flex-col justify-between">
                 <div>
-                  <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-zinc-400 block mb-3">
+                  <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#71839A] block mb-3">
                     {metric.title}
                   </span>
-                  
-                  <div className="font-display text-2xl font-medium text-[#F5F5F7] mb-3">
+
+                  <div className="font-display text-2xl font-medium text-[#D8E6F5] mb-3">
                     {metric.value}
                   </div>
 
-                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  <p className="text-xs text-[#A8B8CC] font-light leading-relaxed">
                     {metric.subtext}
                   </p>
                 </div>
@@ -94,7 +93,6 @@ export default function MoneyBusiness() {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

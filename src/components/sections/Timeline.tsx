@@ -106,7 +106,6 @@ export default function Timeline() {
       ref={containerRef}
     >
       <div className="max-w-5xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -116,10 +115,10 @@ export default function Timeline() {
           className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6"
         >
           <div>
-            <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
               {t("journey_tag")}
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight">
               {t("journey_title")}
             </h2>
           </div>
@@ -137,8 +136,8 @@ export default function Timeline() {
                 aria-label={`Filter timeline by ${cat.label}`}
                 className={`font-sans text-xs uppercase tracking-wider px-4 py-2 rounded-full border transition-all cursor-pointer ${
                   selectedCategory === cat.id
-                    ? "bg-[#F5F5F7] text-[#050505] border-[#F5F5F7] font-semibold"
-                    : "bg-[#08111F]/60 text-zinc-400 border-white/10 hover:border-white/30 hover:text-[#F5F5F7]"
+                    ? "bg-[#0B1424] text-[#F0F7FF] border-[#4DA3FF] font-semibold shadow-[0_0_16px_rgba(77,163,255,0.3)]"
+                    : "bg-white/[0.03] text-[#A8B8CC] border-white/10 hover:border-white/30 hover:text-[#D8E6F5]"
                 }`}
               >
                 {cat.label}
@@ -149,13 +148,12 @@ export default function Timeline() {
 
         {/* Minimal Timeline */}
         <div className="relative mt-12">
-          
           {/* Central Track Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-[0.5px] hidden md:block" />
-          
-          <motion.div 
+
+          <motion.div
             style={shouldReduceMotion ? undefined : { height: progressTransform, originY: 0 }}
-            className="absolute left-4 md:left-1/2 top-0 w-[1px] bg-[#F5F5F7] -translate-x-[0.5px] hidden md:block"
+            className="absolute left-4 md:left-1/2 top-0 w-[1px] bg-[#4DA3FF] -translate-x-[0.5px] hidden md:block"
           />
 
           {/* Timeline Nodes */}
@@ -170,7 +168,7 @@ export default function Timeline() {
               const isEven = idx % 2 === 0;
 
               return (
-                <motion.div 
+                <motion.div
                   key={idx}
                   variants={shouldReduceMotion ? undefined : itemVariants}
                   className={`flex flex-col md:flex-row items-start md:items-center relative w-full ${
@@ -178,15 +176,15 @@ export default function Timeline() {
                   }`}
                 >
                   {/* Spine Node Dot */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#050505] border border-white/40 flex items-center justify-center z-20 shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#F5F5F7]" />
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#05070A] border border-[#4DA3FF]/60 flex items-center justify-center z-20 shrink-0 shadow-[0_0_10px_rgba(77,163,255,0.4)]">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#D8E6F5]" />
                   </div>
 
                   {/* Year Tag */}
                   <div className={`pl-12 md:pl-0 w-full md:w-1/2 flex mb-2 md:mb-0 ${
                     isEven ? "md:justify-start md:pl-16" : "md:justify-end md:pr-16"
                   }`}>
-                    <span className="font-mono text-sm md:text-base text-zinc-400 tracking-widest uppercase">
+                    <span className="font-mono text-sm md:text-base text-[#71839A] tracking-widest uppercase">
                       {event.year}
                     </span>
                   </div>
@@ -196,18 +194,18 @@ export default function Timeline() {
                     isEven ? "md:pr-16" : "md:pl-16"
                   }`}>
                     <GlassCard className="p-8">
-                      <h3 className="font-display text-xl font-medium text-[#F5F5F7] mb-2 tracking-tight">
+                      <h3 className="font-display text-xl font-medium text-[#D8E6F5] mb-2 tracking-tight">
                         {event.title}
                       </h3>
-                      
-                      <p className="text-sm text-zinc-400 mb-4 leading-relaxed font-light">
+
+                      <p className="text-sm text-[#A8B8CC] mb-4 leading-relaxed font-light">
                         {event.description}
                       </p>
 
                       <ul className="space-y-2 border-t border-white/10 pt-4">
                         {event.details.map((detail, dIdx) => (
-                          <li key={dIdx} className="text-xs text-zinc-400 flex items-start gap-2 leading-relaxed">
-                            <span className="w-1 h-1 rounded-full bg-white/40 mt-1.5 shrink-0" />
+                          <li key={dIdx} className="text-xs text-[#A8B8CC] flex items-start gap-2 leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-[#4DA3FF] mt-1.5 shrink-0" />
                             <span>{detail}</span>
                           </li>
                         ))}
@@ -219,7 +217,6 @@ export default function Timeline() {
             })}
           </motion.div>
         </div>
-
       </div>
     </section>
   );

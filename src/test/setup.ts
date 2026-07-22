@@ -1,20 +1,45 @@
 import "@testing-library/jest-dom";
+import { afterEach } from "vitest";
+import { gsap } from "gsap";
 
-// Mock matchMedia for jsdom environment
-if (typeof window !== "undefined" && !window.matchMedia) {
-  Object.defineProperty(window, "matchMedia", {
-    writable: true,
-    value: (query: string) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: () => {},
-      removeListener: () => {},
-      addEventListener: () => {},
-      removeEventListener: () => {},
-      dispatchEvent: () => false,
-    }),
-  });
+const safeRaf = (callback: FrameRequestCallback): number => {
+  return Number(setTimeout(() => {
+    try {
+      callback(performance.now());
+    } catch {
+      // Catch post-teardown callback invocations
+    }
+  }, 0));
+};
+
+const safeCaf = (id: number): void => {
+  clearTimeout(id);
+};
+
+if (typeof globalThis !== "undefined") {
+  (globalThis as any).requestAnimationFrame = safeRaf;
+  (globalThis as any).cancelAnimationFrame = safeCaf;
+}
+
+if (typeof window !== "undefined") {
+  window.requestAnimationFrame = safeRaf;
+  window.cancelAnimationFrame = safeCaf;
+
+  if (!window.matchMedia) {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: (query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+  }
 }
 
 // Mock IntersectionObserver for Framer Motion in jsdom
@@ -62,7 +87,7 @@ if (typeof window !== "undefined" && !window.ResizeObserver) {
   });
 }
 
-// Mock canvas.getContext and requestAnimationFrame for jsdom
+// Mock canvas.getContext for jsdom
 if (typeof window !== "undefined") {
   HTMLCanvasElement.prototype.getContext = (() => {
     return {
@@ -78,11 +103,8 @@ if (typeof window !== "undefined") {
       lineWidth: 1,
     } as any;
   }) as any;
-
-  window.requestAnimationFrame = (callback: FrameRequestCallback): number => {
-    return Number(setTimeout(() => callback(performance.now()), 0));
-  };
-  window.cancelAnimationFrame = (id: number): void => {
-    clearTimeout(id);
-  };
 }
+
+afterEach(() => {
+  gsap.ticker.sleep();
+});

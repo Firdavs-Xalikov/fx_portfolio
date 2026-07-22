@@ -58,9 +58,8 @@ export default function Achievements() {
   };
 
   return (
-    <section id="achievements" className="py-28 md:py-36 px-6 border-b border-[#1C3B42]">
+    <section id="achievements" className="py-28 md:py-36 px-6 border-b border-white/[0.06]">
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -69,13 +68,13 @@ export default function Achievements() {
           transition={{ duration: 0.35 }}
           className="mb-20"
         >
-          <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             {t("achievements_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EAF6F6] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             {t("achievements_title")}
           </h2>
-          <p className="text-[#6B8F94] max-w-xl font-normal text-base">
+          <p className="text-[#A8B8CC] max-w-xl font-light text-base">
             {t("achievements_subtitle")}
           </p>
         </motion.div>
@@ -91,7 +90,7 @@ export default function Achievements() {
           {achievements.map((item, idx) => {
             const Icon = iconMap[item.iconName] || Award;
             const isPbGold = idx === 0 || idx === 3;
-            
+
             return (
               <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
                 <GlassCard className="p-8 flex flex-col justify-between h-full group">
@@ -101,65 +100,64 @@ export default function Achievements() {
                       <motion.div
                         whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
                         transition={{ duration: 0.15 }}
-                        className="w-10 h-10 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center group-hover:border-[#00C2D1] transition-colors"
+                        className="w-10 h-10 border border-white/10 bg-white/[0.04] flex items-center justify-center group-hover:border-[#4DA3FF]/50 transition-colors"
                       >
-                        <Icon className="w-5 h-5 text-[#00C2D1]" />
+                        <Icon className="w-5 h-5 text-[#4DA3FF]" />
                       </motion.div>
                       <div className="flex items-center gap-2">
                         {isPbGold && (
-                          <span className="font-digital text-[10px] font-bold text-[#D4A017] border border-[#D4A017]/40 bg-[#0A2027] px-2 py-0.5 tracking-[0.12em]">
+                          <span className="font-mono text-[10px] font-semibold text-[#D4AF37] border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-2 py-0.5 tracking-wider">
                             PB / GOLD MEDAL
                           </span>
                         )}
-                        <span className="font-digital text-xs text-[#6B8F94] font-semibold border border-[#1C3B42] px-2.5 py-0.5 tracking-[0.08em]">
+                        <span className="font-mono text-xs text-[#71839A] font-medium border border-white/10 px-2.5 py-0.5 tracking-wider">
                           {item.year}
                         </span>
                       </div>
                     </div>
 
-                    {/* Primary Metric Callout with Count-Up in Digital LED Font */}
+                    {/* Primary Metric Callout */}
                     <div className="mb-6">
-                      <div className={`font-digital text-3xl font-extrabold tracking-tight ${
-                        isPbGold ? "text-[#D4A017] inline-block pb-1" : "text-[#00C2D1] text-chlorine-glow"
+                      <div className={`font-display text-3xl font-bold tracking-tight ${
+                        isPbGold ? "text-[#D4AF37] inline-block pb-1" : "text-[#4DA3FF]"
                       }`}>
                         <CountUp value={item.metric} />
                       </div>
                       {item.subMetric && (
-                        <div className="font-digital text-xs text-[#6B8F94] font-medium mt-2 tracking-[0.06em]">
+                        <div className="font-mono text-xs text-[#71839A] font-medium mt-2 tracking-wide">
                           {item.subMetric}
                         </div>
                       )}
                     </div>
 
                     {/* Achievement Title */}
-                    <h3 className="font-display text-lg font-bold text-[#EAF6F6] mb-3">
+                    <h3 className="font-display text-lg font-medium text-[#D8E6F5] mb-3">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs text-[#6B8F94] font-normal leading-relaxed mb-8">
+                    <p className="text-xs text-[#A8B8CC] font-light leading-relaxed mb-8">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Footer validation tag */}
-                  <div className="pt-4 border-t border-[#1C3B42] flex items-center justify-between font-digital text-[10px] uppercase font-bold tracking-[0.12em]">
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[10px] uppercase font-medium tracking-wider">
                     <span className="flex items-center gap-1.5">
                       <span className={`w-1.5 h-1.5 rounded-full ${
-                        isPbGold ? "bg-[#D4A017]" : "bg-[#00C2D1]"
+                        isPbGold ? "bg-[#D4AF37]" : "bg-[#4DA3FF]"
                       }`} />
-                      <span className={isPbGold ? "text-[#D4A017] font-bold" : "text-[#00C2D1]"}>
+                      <span className={isPbGold ? "text-[#D4AF37] font-semibold" : "text-[#4DA3FF]"}>
                         {t("achievements_verified")}
                       </span>
                     </span>
-                    <span className="text-[#6B8F94]">{t("achievements_label")}</span>
+                    <span className="text-[#71839A]">{t("achievements_label")}</span>
                   </div>
                 </GlassCard>
               </motion.div>
             );
           })}
         </motion.div>
-
       </div>
     </section>
   );

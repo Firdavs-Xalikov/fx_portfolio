@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { LanguageProvider } from "../../../context/LanguageContext";
+import { ThemeProvider } from "../../../context/ThemeContext";
 import Hero from "../Hero";
 import About from "../About";
 import Skills from "../Skills";
@@ -9,13 +10,16 @@ import Achievements from "../Achievements";
 import FutureGoals from "../FutureGoals";
 import Contact from "../Contact";
 
+const renderWithProviders = (component: React.ReactElement) =>
+  render(
+    <ThemeProvider>
+      <LanguageProvider>{component}</LanguageProvider>
+    </ThemeProvider>
+  );
+
 describe("Section Components Render Tests", () => {
   it("renders Hero section without crashing", () => {
-    const { container } = render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>
-    );
+    const { container } = renderWithProviders(<Hero />);
     expect(container).toBeDefined();
     expect(container.textContent).toContain("Firdavs Xalikov");
   });

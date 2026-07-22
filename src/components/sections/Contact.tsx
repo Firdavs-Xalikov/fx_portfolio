@@ -98,9 +98,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 md:py-44 px-8 bg-[#050505] relative">
+    <section id="contact" className="py-32 md:py-44 px-8 relative">
       <div className="max-w-4xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -109,21 +108,21 @@ export default function Contact() {
           transition={{ duration: 0.45 }}
           className="text-center mb-20"
         >
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             {t("contact_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             LET'S WORK TOGETHER
           </h2>
-          <p className="text-zinc-400 max-w-md mx-auto font-light text-base mb-6">
+          <p className="text-[#A8B8CC] max-w-md mx-auto font-light text-base mb-6">
             {t("contact_subtitle")}
           </p>
 
           {/* Live Tashkent Time Status */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full bg-[#08111F]/60 font-sans text-xs text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full bg-white/[0.03] font-sans text-xs text-[#A8B8CC]">
+            <span className="w-2 h-2 rounded-full bg-[#34D399] animate-pulse" />
             <span>Available for new projects</span>
-            <span className="text-zinc-600">|</span>
+            <span className="text-[#71839A]">|</span>
             <span>Tashkent {localTime ? `· ${localTime}` : ""}</span>
           </div>
         </motion.div>
@@ -144,25 +143,25 @@ export default function Contact() {
               <div className="flex flex-col justify-between h-full p-8">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
+                    <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#71839A] font-medium">
                       {option.name}
                     </span>
-                    <div className="w-8 h-8 border border-white/10 rounded-full bg-[#08111F] flex items-center justify-center group-hover:border-white/30 transition-colors">
-                      <Icon className="w-4 h-4 text-zinc-300" aria-hidden="true" />
+                    <div className="w-8 h-8 border border-white/10 rounded-full bg-white/[0.04] flex items-center justify-center group-hover:border-[#4DA3FF] group-hover:shadow-[0_0_12px_rgba(77,163,255,0.4)] transition-all">
+                      <Icon className="w-4 h-4 text-[#4DA3FF] group-hover:text-[#F0F7FF] transition-colors" aria-hidden="true" />
                     </div>
                   </div>
-                  <div className="font-display text-lg font-medium text-[#F5F5F7] break-all mb-8">
+                  <div className="font-display text-lg font-medium text-[#D8E6F5] break-all mb-8">
                     {option.value}
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-xs border-t border-white/10 pt-4">
-                  <span className="font-sans text-[11px] text-zinc-500 uppercase">
+                  <span className="font-sans text-[11px] text-[#71839A] uppercase">
                     Channel
                   </span>
-                  <div className="flex items-center gap-1.5 font-sans text-xs font-medium text-[#F5F5F7] group-hover:underline tracking-wide transition-colors">
+                  <div className="flex items-center gap-1.5 font-sans text-xs font-medium text-[#F0F7FF] group-hover:text-[#4DA3FF] tracking-wide transition-colors">
                     <span>{option.actionLabel}</span>
-                    <ActionIcon className="w-3.5 h-3.5 text-zinc-300" aria-hidden="true" />
+                    <ActionIcon className="w-3.5 h-3.5 text-[#4DA3FF]" aria-hidden="true" />
                   </div>
                 </div>
               </div>
@@ -215,14 +214,13 @@ export default function Contact() {
           transition={{ duration: 0.45, delay: 0.2 }}
           className="mt-28 pt-8 border-t border-white/10 text-center font-sans"
         >
-          <p className="text-xs text-zinc-500 font-light tracking-widest uppercase">
+          <p className="text-xs text-[#71839A] font-light tracking-widest uppercase">
             Designed with Luxury Minimalist Philosophy.
           </p>
-          <p className="text-[11px] text-zinc-600 font-light mt-1 tracking-wider">
+          <p className="text-[11px] text-[#71839A]/80 font-light mt-1 tracking-wider">
             &copy; {new Date().getFullYear()} {t("contact_footer_copy")}
           </p>
         </motion.div>
-
       </div>
     </section>
   );

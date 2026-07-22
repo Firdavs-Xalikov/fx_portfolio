@@ -22,10 +22,10 @@ function ProjectImage({ project }: { project: ProjectItem }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative group overflow-hidden bg-[#050505] border-b border-white/10 aspect-[16/9] max-h-[480px] w-full">
+    <div className="relative group overflow-hidden bg-[#05070A] border-b border-white/10 aspect-[16/9] max-h-[480px] w-full">
       {!loaded && (
-        <div className="absolute inset-0 bg-[#08111F]/80 animate-pulse flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+        <div className="absolute inset-0 bg-[#0B1424]/80 animate-pulse flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-[#4DA3FF] animate-spin" />
         </div>
       )}
 
@@ -83,13 +83,13 @@ export default function Projects() {
           transition={{ duration: 0.45 }}
           className="mb-20"
         >
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             {t("projects_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             {t("projects_title")}
           </h2>
-          <p className="text-zinc-400 max-w-xl font-light text-base">
+          <p className="text-[#A8B8CC] max-w-xl font-light text-base">
             {t("projects_subtitle")}
           </p>
         </motion.div>
@@ -113,11 +113,11 @@ export default function Projects() {
                   <ProjectImage project={project} />
 
                   <div className="p-8 md:p-12">
-                    <h3 className="font-display text-2xl md:text-3xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+                    <h3 className="font-display text-2xl md:text-3xl font-medium text-[#D8E6F5] tracking-tight mb-4">
                       {project.title}
                     </h3>
 
-                    <p className="text-base text-zinc-400 font-light leading-relaxed mb-8 max-w-3xl">
+                    <p className="text-base text-[#A8B8CC] font-light leading-relaxed mb-8 max-w-3xl">
                       {project.description}
                     </p>
 
@@ -125,7 +125,7 @@ export default function Projects() {
                       {project.tags.map((tag, tIdx) => (
                         <span
                           key={tIdx}
-                          className="font-sans text-xs border border-white/10 bg-[#08111F]/60 text-zinc-300 px-3.5 py-1.5 rounded-full"
+                          className="font-sans text-xs border border-white/10 bg-white/[0.03] text-[#A8B8CC] px-3.5 py-1.5 rounded-full"
                         >
                           {tag}
                         </span>
@@ -138,9 +138,9 @@ export default function Projects() {
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-[#F5F5F7] text-[#050505] font-sans text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-white transition-colors cursor-pointer"
+                          className="flex items-center gap-2 px-6 py-3 bg-[#0B1424] border border-[#4DA3FF]/40 text-[#F0F7FF] font-sans text-xs font-semibold uppercase tracking-wider rounded-full hover:border-[#4DA3FF] hover:shadow-[0_0_20px_rgba(77,163,255,0.3)] transition-all cursor-pointer"
                         >
-                          <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                          <ExternalLink className="w-4 h-4 text-[#4DA3FF]" aria-hidden="true" />
                           <span>{t("projects_visit")}</span>
                         </a>
                       </MagneticButton>
@@ -151,9 +151,9 @@ export default function Projects() {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-[#08111F]/80 border border-white/10 text-white font-sans text-xs font-medium uppercase tracking-wider rounded-full hover:border-white/30 transition-all cursor-pointer"
+                            className="flex items-center gap-2 px-6 py-3 bg-white/[0.03] border border-white/10 text-[#F0F7FF] font-sans text-xs font-medium uppercase tracking-wider rounded-full hover:border-white/30 hover:shadow-[0_0_16px_rgba(77,163,255,0.2)] transition-all cursor-pointer"
                           >
-                            <GitHubIcon className="w-4 h-4" aria-hidden="true" />
+                            <GitHubIcon className="w-4 h-4 text-[#4DA3FF]" aria-hidden="true" />
                             <span>GitHub</span>
                           </a>
                         </MagneticButton>

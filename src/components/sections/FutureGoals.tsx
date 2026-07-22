@@ -48,16 +48,15 @@ export default function FutureGoals() {
   };
 
   return (
-    <section id="goals" className="py-28 md:py-36 px-6 border-b border-[#1C3B42]">
+    <section id="goals" className="py-28 md:py-36 px-6 border-b border-white/[0.06]">
       <div className="max-w-[720px] mx-auto text-center">
-        
         {/* Section tag */}
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.35 }}
-          className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-4"
+          className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-4"
         >
           {t("goals_tag")}
         </motion.span>
@@ -69,13 +68,13 @@ export default function FutureGoals() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.35, delay: 0.05 }}
-          className="font-display text-2xl md:text-3xl font-semibold text-[#EAF6F6] leading-relaxed tracking-tight mb-10"
+          className="font-display text-2xl md:text-3xl font-medium text-gradient-heading leading-relaxed tracking-tight mb-10"
         >
           "{t("goals_quote")}"
         </motion.h2>
 
         {/* Split-Timer Hairline Divider */}
-        <div className="w-16 h-[1px] bg-[#00C2D1] mx-auto mb-12 glow-chlorine" />
+        <div className="w-16 h-[1px] bg-[#4DA3FF] mx-auto mb-12 shadow-[0_0_12px_rgba(77,163,255,0.5)]" />
 
         {/* Pillars Grid with Staggered Scroll Entrance */}
         <motion.div
@@ -87,7 +86,7 @@ export default function FutureGoals() {
         >
           {goalPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
-            
+
             return (
               <motion.div key={`${language}-${idx}`} variants={shouldReduceMotion ? undefined : itemVariants}>
                 <GlassCard className="p-6 h-full flex flex-col justify-between group">
@@ -95,14 +94,14 @@ export default function FutureGoals() {
                     <motion.div
                       whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
                       transition={{ duration: 0.15 }}
-                      className="w-8 h-8 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center mb-4 group-hover:border-[#00C2D1] transition-colors"
+                      className="w-8 h-8 border border-white/10 bg-white/[0.04] flex items-center justify-center mb-4 group-hover:border-[#4DA3FF]/50 transition-colors"
                     >
-                      <Icon className="w-4 h-4 text-[#00C2D1]" />
+                      <Icon className="w-4 h-4 text-[#4DA3FF]" />
                     </motion.div>
-                    <h3 className="font-display text-base font-bold text-[#EAF6F6] mb-2">
+                    <h3 className="font-display text-base font-medium text-[#D8E6F5] mb-2">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-[#6B8F94] leading-relaxed font-normal">
+                    <p className="text-xs text-[#A8B8CC] leading-relaxed font-light">
                       {pillar.description}
                     </p>
                   </div>
@@ -111,7 +110,6 @@ export default function FutureGoals() {
             );
           })}
         </motion.div>
-
       </div>
     </section>
   );

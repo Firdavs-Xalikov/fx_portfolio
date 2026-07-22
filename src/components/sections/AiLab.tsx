@@ -52,7 +52,6 @@ export default function AiLab() {
   return (
     <section id="ailab" className="py-32 md:py-44 px-8 border-b border-white/[0.06] relative">
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -61,13 +60,13 @@ export default function AiLab() {
           transition={{ duration: 0.45 }}
           className="mb-20 text-center md:text-left"
         >
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#71839A] font-medium block mb-3">
             ARTIFICIAL INTELLIGENCE
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-gradient-heading tracking-tight mb-4">
             AI RESEARCH &amp; AGENT LAB
           </h2>
-          <p className="text-zinc-400 max-w-xl font-light text-base">
+          <p className="text-[#A8B8CC] max-w-xl font-light text-base">
             Autonomous agent pipelines, LLM benchmarks, and neural model orchestration.
           </p>
         </motion.div>
@@ -85,23 +84,23 @@ export default function AiLab() {
               <GlassCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+                    <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#71839A]">
                       {model.provider}
                     </span>
-                    <span className="font-mono text-[10px] text-zinc-400 border border-white/10 px-2 py-0.5 rounded-full">
+                    <span className="font-mono text-[10px] text-[#A8B8CC] border border-white/10 px-2 py-0.5 rounded-full">
                       {model.latency}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-xl font-medium text-[#F5F5F7] mb-2">
+                  <h3 className="font-display text-xl font-medium text-[#D8E6F5] mb-2">
                     {model.name}
                   </h3>
-                  
-                  <div className="font-sans text-xs text-[#0066FF] mb-4 font-medium">
+
+                  <div className="font-sans text-xs text-[#4DA3FF] mb-4 font-medium">
                     {model.status}
                   </div>
 
-                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                  <p className="text-xs text-[#A8B8CC] font-light leading-relaxed">
                     {model.useCase}
                   </p>
                 </div>
@@ -109,7 +108,6 @@ export default function AiLab() {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
