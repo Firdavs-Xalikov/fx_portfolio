@@ -10,7 +10,7 @@ interface GlassCardProps {
 export default function GlassCard({
   children,
   className = "",
-  tiltStrength = 8,
+  tiltStrength = 6,
 }: GlassCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -19,8 +19,8 @@ export default function GlassCard({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 180, damping: 22 });
-  const mouseYSpring = useSpring(y, { stiffness: 180, damping: 22 });
+  const mouseXSpring = useSpring(x, { stiffness: 180, damping: 24 });
+  const mouseYSpring = useSpring(y, { stiffness: 180, damping: 24 });
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [tiltStrength, -tiltStrength]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-tiltStrength, tiltStrength]);
@@ -70,24 +70,15 @@ export default function GlassCard({
               transformStyle: "preserve-3d",
             }
       }
-      className={`perspective-1000 relative bg-[#0F2830] border border-[#1C3B42] p-6 transition-all duration-200 hover:border-[#00C2D1]/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] ${className}`}
+      className={`perspective-1000 relative luxury-panel p-8 transition-all duration-300 ${className}`}
     >
-      {/* Sheen sweep overlay */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 overflow-hidden"
-        style={{ opacity: isHovered ? 1 : 0 }}
-      >
-        <div className="absolute -inset-[100%] bg-gradient-to-tr from-transparent via-[rgba(234,246,246,0.04)] to-transparent transform -rotate-45" />
-      </motion.div>
-
-      {/* Spot glow radial spotlight following cursor */}
+      {/* Soft spotlight overlay */}
       {!shouldReduceMotion && isHovered && (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute -inset-px z-0 opacity-100 transition-opacity duration-200"
+          className="pointer-events-none absolute -inset-px z-0 opacity-100 transition-opacity duration-300 rounded-[12px]"
           style={{
-            background: `radial-gradient(350px circle at ${spotX.get()}% ${spotY.get()}%, rgba(0, 194, 209, 0.12), transparent 80%)`,
+            background: `radial-gradient(400px circle at ${spotX.get()}% ${spotY.get()}%, rgba(255, 255, 255, 0.06), transparent 80%)`,
           }}
         />
       )}

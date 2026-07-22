@@ -1,15 +1,16 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { ArrowDown, Cpu, Shield, Zap, Terminal } from "lucide-react";
+import { ArrowDown, MessageSquare } from "lucide-react";
 import { useLanguage } from "../../context/useLanguage";
 import MagneticButton from "../ui/MagneticButton";
+import Luxury3DCanvas from "../ui/Luxury3DCanvas";
 
 export default function Hero() {
   const { t } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
 
-  const handleScrollToAchievements = () => {
-    const section = document.getElementById("achievements");
+  const handleScrollToProjects = () => {
+    const section = document.getElementById("projects");
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
@@ -28,88 +29,54 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.05,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
-    <section className="relative min-h-[95vh] flex flex-col justify-center items-center px-6 pt-32 pb-20 border-b border-[#00F0FF]/20">
+    <section className="relative min-h-screen flex flex-col justify-center items-center px-8 pt-32 pb-24 border-b border-white/[0.06] overflow-hidden">
+      {/* 3D Glass Studio Sculpture Object */}
+      <Luxury3DCanvas />
+
       <motion.div
         variants={shouldReduceMotion ? undefined : containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 max-w-5xl text-center flex flex-col items-center"
       >
-        {/* HUD Target Reticle Badge */}
+        {/* Minimal Category Pill */}
         <motion.div
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="mb-8 font-mono text-xs md:text-sm tracking-[0.15em] text-[#00F0FF] font-bold uppercase inline-flex items-center gap-2 px-4 py-1.5 border border-[#00F0FF]/40 bg-[#0A0D14]/80 glow-blue"
+          className="mb-8 font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full bg-[#08111F]/60 backdrop-blur-md"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] animate-pulse" />
-          <span>CYBERNETIC INTERFACE // ACTIVE PROTOCOL</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF]" />
+          <span>FRONTEND DEVELOPER &amp; AI ENGINEER</span>
         </motion.div>
 
-        {/* Massive Hero Name in Cyberpunk Orbitron Display */}
-        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-6">
-          <h1 className="font-display font-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white tracking-tight leading-none text-cyber-glow">
+        {/* Large Luxury Title */}
+        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-8">
+          <h1 className="font-display font-medium text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F5F5F7] tracking-tight leading-none">
             {t("hero_title")}
           </h1>
         </motion.div>
 
-        {/* Subtitle Statements */}
-        <motion.div
-          variants={shouldReduceMotion ? undefined : itemVariants}
-          className="font-hud font-bold text-lg sm:text-2xl md:text-3xl text-[#00F0FF] tracking-wider uppercase mb-8 flex flex-wrap justify-center gap-3"
-        >
-          <span className="flex items-center gap-1.5">
-            <Zap className="w-5 h-5 text-[#00F0FF]" /> FRONTEND DEVELOPER
-          </span>
-          <span className="text-[#9D00FF]">•</span>
-          <span className="flex items-center gap-1.5">
-            <Cpu className="w-5 h-5 text-[#9D00FF]" /> AI BUILDER
-          </span>
-          <span className="text-[#00F0FF]">•</span>
-          <span className="flex items-center gap-1.5">
-            <Shield className="w-5 h-5 text-[#00F0FF]" /> CYBERSECURITY ENTHUSIAST
-          </span>
-        </motion.div>
-
-        {/* HUD Diagnostic Telemetry Panel */}
-        <motion.div
-          variants={shouldReduceMotion ? undefined : itemVariants}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 w-full max-w-3xl font-mono text-xs uppercase"
-        >
-          <div className="p-3 border border-[#00F0FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
-            <span className="text-[#6B8F94]">SYSTEM_CORE</span>
-            <span className="text-[#00F0FF] font-bold">ONLINE [99.9%]</span>
-          </div>
-          <div className="p-3 border border-[#9D00FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
-            <span className="text-[#6B8F94]">QUANTUM_ENCRYPTION</span>
-            <span className="text-[#9D00FF] font-bold">ACTIVE [256-BIT]</span>
-          </div>
-          <div className="p-3 border border-[#00F0FF]/30 bg-[#0A0D14]/70 flex items-center justify-between">
-            <span className="text-[#6B8F94]">SWIM_DISCIPLINE</span>
-            <span className="text-[#00F0FF] font-bold">06 YEARS</span>
-          </div>
-        </motion.div>
-
-        {/* Subtitle Narrative */}
+        {/* Subtitle Statement */}
         <motion.p
           variants={shouldReduceMotion ? undefined : itemVariants}
-          className="text-base sm:text-xl text-[#6B8F94] max-w-2xl font-normal leading-relaxed mb-10"
+          className="text-lg sm:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed mb-12"
         >
-          Carrying 6 years of competitive swimming discipline into software engineering — engineering high-performance WebGL interfaces &amp; AI architectures with structural precision.
+          Engineering refined digital experiences, scalable web applications, and artificial intelligence interfaces with structural discipline.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -118,31 +85,31 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center"
         >
           <MagneticButton
-            onClick={handleScrollToAchievements}
-            ariaLabel="Scroll down to View Achievements section"
+            onClick={handleScrollToProjects}
+            ariaLabel="Scroll down to View Work projects section"
           >
-            <div className="group flex items-center justify-center gap-2 px-8 py-4 bg-[#00F0FF] text-[#050505] font-display text-xs font-black uppercase tracking-wider hover:bg-white transition-colors cursor-pointer glow-blue">
-              <span>INITIALIZE PROTOCOL</span>
+            <div className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#F5F5F7] text-[#050505] font-sans text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-white transition-colors cursor-pointer shadow-lg">
+              <span>VIEW WORK</span>
               <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
             </div>
           </MagneticButton>
           
           <MagneticButton
             onClick={handleScrollToContact}
-            ariaLabel="Scroll down to Connect with Me contact section"
+            ariaLabel="Scroll down to Connect contact section"
           >
-            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0A0D14] border border-[#00F0FF]/40 text-white hover:border-[#9D00FF] font-display text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer">
-              <Terminal className="w-4 h-4 text-[#00F0FF]" aria-hidden="true" />
-              <span>ACCESS CYBER LAB</span>
+            <div className="flex items-center justify-center gap-2 px-8 py-4 bg-[#08111F]/80 border border-white/10 text-[#F5F5F7] hover:border-white/30 font-sans text-xs font-medium uppercase tracking-wider rounded-full transition-colors cursor-pointer">
+              <MessageSquare className="w-4 h-4 text-zinc-400" aria-hidden="true" />
+              <span>CONNECT</span>
             </div>
           </MagneticButton>
         </motion.div>
       </motion.div>
 
-      {/* Subtle Scroll Hint */}
-      <div className="mt-16 flex flex-col items-center gap-2 font-mono text-[10px] text-[#6B8F94] uppercase tracking-widest">
-        <span>SCROLL TO ENGAGE</span>
-        <div className="w-[1px] h-6 bg-[#00F0FF]/40" />
+      {/* Minimal Scroll Indicator */}
+      <div className="absolute bottom-10 inset-x-0 flex flex-col items-center gap-2 font-sans text-[10px] text-zinc-500 uppercase tracking-[0.2em]">
+        <span>SCROLL</span>
+        <div className="w-[1px] h-8 bg-gradient-to-b from-zinc-500 to-transparent" />
       </div>
     </section>
   );

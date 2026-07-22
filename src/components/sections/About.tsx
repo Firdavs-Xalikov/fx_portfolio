@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { User, Shield, Compass } from "lucide-react";
 import GlassCard from "../ui/GlassCard";
 import { useLanguage } from "../../context/useLanguage";
 
@@ -8,7 +7,6 @@ export default function About() {
   const { t } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
 
-  // Staggered reveal variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,128 +23,88 @@ export default function About() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
-    <section id="about" className="py-28 md:py-36 px-6 border-b border-[#1C3B42]">
+    <section id="about" className="py-32 md:py-44 px-8 border-b border-white/[0.06]">
       <motion.div
         variants={shouldReduceMotion ? undefined : containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
-        className="max-w-[720px] mx-auto"
+        className="max-w-[800px] mx-auto"
       >
-        {/* Section Header */}
+        {/* Section Tag */}
         <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="text-center mb-16">
-          <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-3">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-4">
             {t("about_tag")}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#EAF6F6] tracking-tight inline-flex items-center justify-center gap-3">
-            <User className="w-8 h-8 md:w-9 md:h-9 text-[#00C2D1] shrink-0" aria-hidden="true" />
-            <span>{t("about_title")}</span>
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight">
+            {t("about_title")}
           </h2>
         </motion.div>
 
-        {/* Primary Narrative Biography Panel */}
-        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-10">
-          <GlassCard className="p-8 md:p-10 space-y-6">
-            <p className="text-[#EAF6F6]/90 text-base md:text-lg leading-[1.7] font-normal">
+        {/* Narrative Card */}
+        <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="mb-12">
+          <GlassCard className="p-10 md:p-12 space-y-8">
+            <p className="text-[#F5F5F7] text-lg md:text-xl leading-relaxed font-light">
               {t("about_journey_p1")}
             </p>
             
-            {/* Pull Quote Line with Chlorine Cyan Left Border */}
-            <div className="border-l-[3px] border-[#00C2D1] pl-6 py-1 my-6">
-              <blockquote className="font-display font-semibold text-xl md:text-2xl text-[#EAF6F6] leading-snug tracking-tight">
+            <div className="border-l-2 border-white/20 pl-8 py-2 my-8">
+              <blockquote className="font-display text-xl md:text-2xl text-[#F5F5F7] font-medium leading-snug tracking-tight">
                 "{t("about_quote")}"
               </blockquote>
             </div>
 
-            <p className="text-[#6B8F94] text-sm leading-relaxed italic border-t border-[#1C3B42] pt-4">
+            <p className="text-zinc-400 text-sm leading-relaxed font-light">
               {t("about_journey_p2")}
             </p>
           </GlassCard>
         </motion.div>
 
-        {/* Pillars / Key Metadata Grid */}
+        {/* Pillars / Metadata Grid */}
         <motion.div variants={shouldReduceMotion ? undefined : itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left Column: Current Focus & Language Chips */}
-          <GlassCard className="p-6 flex flex-col justify-between">
-            <div>
-              <span className="font-digital text-xs uppercase tracking-[0.12em] text-[#00C2D1] font-bold block mb-2">
-                {t("about_focus_label")}
-              </span>
-              <p className="font-display font-semibold text-lg text-[#EAF6F6] mb-4">
-                {t("about_focus_val")}
-              </p>
-            </div>
+          <GlassCard className="p-8">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+              {t("about_focus_label")}
+            </span>
+            <p className="font-display font-medium text-xl text-[#F5F5F7] mb-6">
+              {t("about_focus_val")}
+            </p>
             
-            <div className="mt-6 pt-4 border-t border-[#1C3B42]">
-              <span className="font-digital text-[11px] uppercase tracking-[0.12em] text-[#6B8F94] block mb-3">
+            <div className="pt-6 border-t border-white/10">
+              <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-zinc-500 block mb-3">
                 {t("about_languages_label")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {["Uzbek", "Russian", "English"].map((lang) => (
-                  <motion.span
+                  <span
                     key={lang}
-                    whileHover={
-                      shouldReduceMotion
-                        ? undefined
-                        : {
-                            y: -2,
-                            borderColor: "#00C2D1",
-                            backgroundColor: "#0A2027",
-                          }
-                    }
-                    transition={{ duration: 0.15 }}
-                    className="font-digital text-xs uppercase tracking-[0.08em] px-3 py-1.5 border border-[#1C3B42] bg-[#0A2027] text-[#EAF6F6] cursor-default transition-colors"
+                    className="font-sans text-xs px-3.5 py-1.5 border border-white/10 rounded-full bg-[#08111F]/60 text-zinc-300"
                   >
                     {lang}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </div>
           </GlassCard>
 
-          {/* Right Column: Values & Credentials */}
-          <div className="space-y-4 flex flex-col">
-            <GlassCard className="p-6 flex items-start gap-4 group">
-              <motion.div
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
-                transition={{ duration: 0.15 }}
-                className="w-10 h-10 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center shrink-0 group-hover:border-[#00C2D1] transition-colors"
-              >
-                <Shield className="w-5 h-5 text-[#00C2D1]" />
-              </motion.div>
-              <div>
-                <h3 className="font-display font-bold text-base text-[#EAF6F6] mb-1">
-                  {t("about_val1_title")}
-                </h3>
-                <p className="text-xs text-[#6B8F94] leading-relaxed">
-                  {t("about_val1_desc")}
-                </p>
-              </div>
-            </GlassCard>
-
-            <GlassCard className="p-6 flex items-start gap-4 group">
-              <motion.div
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
-                transition={{ duration: 0.15 }}
-                className="w-10 h-10 border border-[#1C3B42] bg-[#0A2027] flex items-center justify-center shrink-0 group-hover:border-[#00C2D1] transition-colors"
-              >
-                <Compass className="w-5 h-5 text-[#00C2D1]" />
-              </motion.div>
-              <div>
-                <h3 className="font-display font-bold text-base text-[#EAF6F6] mb-1">
-                  {t("about_val2_title")}
-                </h3>
-                <p className="text-xs text-[#6B8F94] leading-relaxed">
-                  {t("about_val2_desc")}
-                </p>
-              </div>
-            </GlassCard>
-          </div>
+          <GlassCard className="p-8 flex flex-col justify-between">
+            <div>
+              <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+                PHILOSOPHY
+              </span>
+              <p className="font-display font-medium text-xl text-[#F5F5F7] mb-3">
+                Precision &amp; Structural Simplicity
+              </p>
+              <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                Crafting minimalist software that solves complex problems with elegance, speed, and zero superfluous clutter.
+              </p>
+            </div>
+          </GlassCard>
         </motion.div>
       </motion.div>
     </section>

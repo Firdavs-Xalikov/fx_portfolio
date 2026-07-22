@@ -1,27 +1,26 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { Bot, Network } from "lucide-react";
 import GlassCard from "../ui/GlassCard";
 
-const AI_MODELS = [
+const LUXURY_AI_MODELS = [
   {
-    name: "GPT-4o PROTOCOL",
+    name: "GPT-4o Protocol",
     provider: "OpenAI",
-    status: "STREAMING // 120 TOKENS/SEC",
+    status: "Active // 120 t/s",
     latency: "18ms",
-    useCase: "Multimodal Reasoner & Code Synthesizer",
+    useCase: "Multimodal Reasoning & Code Synthesis",
   },
   {
-    name: "CLAUDE 3.5 SONNET",
+    name: "Claude 3.5 Sonnet",
     provider: "Anthropic",
-    status: "ACTIVE // HIGH PRECISION",
+    status: "Active // High Precision",
     latency: "22ms",
     useCase: "Complex System Architecture & Refactoring",
   },
   {
-    name: "GEMINI 1.5 PRO",
+    name: "Gemini 1.5 Pro",
     provider: "Google AI",
-    status: "ONLINE // 2M CONTEXT WINDOW",
+    status: "Active // 2M Context",
     latency: "15ms",
     useCase: "Large Codebase Retrieval & RAG Indexing",
   },
@@ -42,34 +41,34 @@ export default function AiLab() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
-    <section id="ailab" className="py-28 md:py-36 px-6 border-b border-[#00F0FF]/20 relative">
+    <section id="ailab" className="py-32 md:py-44 px-8 border-b border-white/[0.06] relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.45 }}
           className="mb-20 text-center md:text-left"
         >
-          <span className="font-mono text-xs uppercase tracking-[0.15em] text-[#9D00FF] font-bold block mb-3">
-            // EXPERIMENTAL RESEARCH &amp; AI
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-zinc-400 font-medium block mb-3">
+            ARTIFICIAL INTELLIGENCE
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 text-purple-glow">
-            INTERACTIVE AI LABORATORY
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-[#F5F5F7] tracking-tight mb-4">
+            AI RESEARCH &amp; AGENT LAB
           </h2>
-          <p className="text-[#6B8F94] max-w-xl font-normal text-base">
-            Autonomous agent pipelines, LLM fine-tuning benchmarks, and real-time neural model orchestration.
+          <p className="text-zinc-400 max-w-xl font-light text-base">
+            Autonomous agent pipelines, LLM benchmarks, and neural model orchestration.
           </p>
         </motion.div>
 
@@ -81,40 +80,30 @@ export default function AiLab() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {AI_MODELS.map((model, idx) => (
+          {LUXURY_AI_MODELS.map((model, idx) => (
             <motion.div key={idx} variants={shouldReduceMotion ? undefined : itemVariants}>
-              <GlassCard className="p-8 h-full flex flex-col justify-between border-[#9D00FF]/40 hover:border-[#00F0FF]">
+              <GlassCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-10 h-10 border border-[#9D00FF]/40 bg-[#050505] flex items-center justify-center glow-purple">
-                      <Bot className="w-5 h-5 text-[#9D00FF]" />
-                    </div>
-                    <span className="font-mono text-[10px] text-[#00F0FF] border border-[#00F0FF]/30 px-2 py-0.5">
-                      LATENCY: {model.latency}
+                    <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+                      {model.provider}
+                    </span>
+                    <span className="font-mono text-[10px] text-zinc-400 border border-white/10 px-2 py-0.5 rounded-full">
+                      {model.latency}
                     </span>
                   </div>
 
-                  <span className="font-mono text-[10px] uppercase font-bold text-[#6B8F94] tracking-widest block mb-1">
-                    {model.provider}
-                  </span>
-                  <h3 className="font-display text-xl font-bold text-white mb-2">
+                  <h3 className="font-display text-xl font-medium text-[#F5F5F7] mb-2">
                     {model.name}
                   </h3>
                   
-                  <div className="font-mono text-xs text-[#00F0FF] mb-4 font-bold">
+                  <div className="font-sans text-xs text-[#0066FF] mb-4 font-medium">
                     {model.status}
                   </div>
 
-                  <p className="text-xs text-[#6B8F94] leading-relaxed">
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
                     {model.useCase}
                   </p>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-[#9D00FF]/20 flex items-center justify-between font-mono text-[10px] text-[#9D00FF] uppercase font-bold">
-                  <span className="flex items-center gap-1">
-                    <Network className="w-3 h-3 animate-spin" /> SYNAPSE_LINK
-                  </span>
-                  <span>READY</span>
                 </div>
               </GlassCard>
             </motion.div>
